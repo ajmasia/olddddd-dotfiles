@@ -1,6 +1,6 @@
 <p align="center">
   <a href="http://github.com/kamranahmedse/developer-roadmap">
-    <img src="https://w7.pngwing.com/pngs/750/566/png-transparent-nix-package-manager-nixos-linux-distribution-gnu-guix-logo-watercolor-blue-angle-text-thumbnail.png" alt="Developer Roadmap" weight="96">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/NixOS_logo.svg/640px-NixOS_logo.svg.png" alt="Developer Roadmap" weight="96">
   </a>
   <h2 align="center">NixOS</h2>
   <p align="center">System config</p>
