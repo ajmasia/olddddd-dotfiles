@@ -1,0 +1,65 @@
+#!/bin/sh
+
+# autostart
+pkill sxhkd
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+pkill picom
+picom --experimental-backends &
+
+pkill dunst
+dunst -conf ~/.config/dunst/dunstrc &
+
+pkill xautolock
+xautolock -time 10 -locker "betterlockscreen -l" -notify 15 -notifier "notify-send 'Locker' 'Locking screen in 15 seconds'" -killtime 5 -killer "systemctl suspend" &
+
+~/.config/polybar/launch.sh &
+feh --bg-fill ~/.config/wallpapers/wallpaper_001.jpg &
+
+pkill insync
+rm /tmp/insync1000.sock &
+insync start &
+
+pkill -f cloud-drive-con &
+pkill -f cloud-drive* &
+synology-drive &
+
+xsetroot -cursor_name left_ptr &
+
+# monitors
+is_external_monitor_connected=$(xrandr --query | grep 'HDMI-A-0 connected')
+
+if [[ $is_external_monitor_connected == "" ]]; then
+  bspc monitor eDP -d I II III IV V VI 
+else
+  bspc monitor eDP -d VII VIII IX X
+  bspc monitor HDMI-A-0 -f -d I II III IV V VI
+  bspc rule -a Slack desktop='^1'
+  bspc rule -a TelegramDesktop desktop='^2'
+fi
+
+# window information
+bspc config border_width 0
+bspc config window_gap 6
+
+bspc config ignore_ewmh_struts
+
+bspc config focus_follows_pointer true
+
+bspc config remove_disabled_monitors true
+bspc config merge_overlapping_monitors true
+
+bspc config focus_follows_pointer      true
+bspc config pointer_follows_monitor    true
+bspc config pointer_modifier           mod4
+
+# Mice bindings
+bspc config pointer_action1 move
+bspc config pointer_action2 resize_side
+bspc config pointer_action2 resize_corner
+
+# rules
+# bspc rule -a mumble state=floating follow=on focus=on
+bspc rule -a Zathura state=tiled
+bspc rule -a Todoist state=floating follow=on focus=on
+

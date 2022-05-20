@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+
+MONO_REPO_PATH=~/projects/genially/mono/
+export SLACK_CLI_TOKEN=$(source ~/.env; echo $SLACK_CLI_TOKEN)
+
+run_slack() {
+  nix-shell \
+    --packages slack-cli jq fzy rofi \
+    --run "slack $* | jq .ok"
+}
+
+clear_status() {
+  run_slack "status" "clear"
+}
+
+set_status() {
+  result=$(run_slack "status" "edit" "\"$1\"" "\"$2\"")
+  [ "$result" = "true" ] && notify-send "Slack status set to: $1 $2"
+  [ "$result" != "true" ] && notify-send -u critical "Slack status set failed"
+}
+
+send_slack_message() {
+  result=$(run_slack "chat" "send" "\"$1\"" "\"$2\"")
+  [ "$result" = "true" ] && notify-send "Slack message sent to: $2"
+  [ "$result" != "true" ] && notify-send -u critical "Slack message send failed"
+}
+
+set_active() {
+  run_slack "presence" "active"
+}
+
+set_away() {
+  run_slack "presence" "away"
+}
+
+tm_checkin() {
+  timew start "genially"
+}
+
+tm_pause() {
+  timew stop "genially"
+  timew start "pause"
+}
+
+tm_back() {
+  timew stop "pause"
+  timew continue "genially"
+}
+
+tm_checkout() {
+  timew stop "genially"
+}
+
+
+SELECTED=$(echo -e "Check in\nWorking on\nReviewing PRs\nBreakfast\nCooking\nLunch\nMeeting\nPause\nCheck out\nBack" | rofi -dmenu -matching fuzzy -p 'Set your Slack status to' -sort -levenshtein-sort)
+
+case $SELECTED in
+  "Check in") 
+    set_active
+    set_status "Comenzando" ":rocket:"
+    tm_checkin
+    send_slack_message "Buenos días por la mañana :smile::muscle:" "#development"
+    ;;
+
+  "Working on") 
+    set_status "Trabajando en: $(git -C $MONO_REPO_PATH branch --show-current)" ":git-branch:"
+    ;;
+
+  "Reviewing PRs")
+    set_status "Revisando PRs" ":bulb:"
+    ;;
+
+  "Breakfast")
+    set_status "Desayunando" ":sandwich:"
+    tm_pause
+    ;;
+
+  "Cooking")
+    set_status "Cocinando" ":cook:"
+    tm_pause
+    ;;
+
+  "Lunch")
+    set_status "Almorzando" ":yum:"
+    send_slack_message "Paro a comer, regreso en un rato :yum::yum:" "#development"
+    tm_pause
+    ;;
+
+  "Meeting")
+    set_status "Reunido" ":calendar:"
+    ;;
+
+  "Pause") 
+    set_away
+    set_status "Parada técnica" ":stopwatch:"
+    send_slack_message "Paro un rato, regreso pronto :stopwatch:" "#development"
+    tm_pause 
+    ;;
+
+  "Check out")
+    set_status "Mañana más y mejor" ":wave:"
+    tm_checkout
+    send_slack_message "Cierro por hoy :wave:" "#development"
+    set_away
+    ;;
+
+  "Back") 
+    clear_status
+    set_active
+    tm_back 
+    send_slack_message "De vuelta :smile::muscle:" "#development"
+    ;;
+
+  # more cases...
+  "") 
+    clear_status 
+    ;;
+
+  *) 
+    echo "Options: Check in | Working on | breakfast | Cooking | Lunch | Meeting | Pause | Check out | Back | Out"
+    ;;
+esac
+

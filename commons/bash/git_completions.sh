@@ -1,0 +1,19 @@
+_xfunc git __git_complete g __git_main
+_xfunc git __git_complete ga _git_add
+_xfunc git __git_complete gco _git_checkout
+_xfunc git __git_complete gr _git_restore
+_xfunc git __git_complete gcl _git_clone
+_xfunc git __git_complete gp _git_pull
+_xfunc git __git_complete gf _git_fetch
+_xfunc git __git_complete gps _git_push
+_xfunc git __git_complete gc _git_commit
+_xfunc git __git_complete gcm _git_commit
+_xfunc git __git_complete gd _git_diff
+_xfunc git __git_complete gds _git_diff
+_xfunc git __git_complete gb _git_branch
+_xfunc git __git_complete gm _git_merge
+_xfunc git __git_complete grb _git_rebase
+_xfunc git __git_complete glg _git_log
+_xfunc git __git_complete gl _git_log
+_xfunc git __git_complete gshw _git_show
+

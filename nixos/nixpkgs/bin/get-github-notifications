@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+USER="ajmasia"
+TOKEN=$(source ~/.env; echo $GH_TOKEN)
+
+echo "user = \"$USER:$TOKEN\"" | curl -sf -K- https://api.github.com/notifications | jq ".[].unread" | wc -l
