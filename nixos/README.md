@@ -2,8 +2,7 @@
   <a href="http://github.com/kamranahmedse/developer-roadmap">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/NixOS_logo.svg/640px-NixOS_logo.svg.png" alt="Developer Roadmap" weight="96">
   </a>
-  <h2 align="center">NixOS</h2>
-  <p align="center">System config</p>
+  <h2 align="center">System configuration</h2>
 </p>
 
 # Directory structure
