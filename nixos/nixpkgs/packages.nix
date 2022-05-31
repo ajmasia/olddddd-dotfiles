@@ -47,6 +47,9 @@ with pkgs; [
   openvpn
   bpytop
   woeusb
+  sox
+  qsudo
+  qt5ct
 
   # Useless
   cmatrix

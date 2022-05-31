@@ -53,6 +53,10 @@ with pkgs; {
     "wallpapers" = {
       source = ../../wallpapers;
     };
+
+    "sounds" = {
+      source = ../../sounds;
+    };
   };
 }
 

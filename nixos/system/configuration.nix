@@ -43,6 +43,7 @@
 
     networkmanager = {
       enable = true;
+      # dns = "dnsmasq";
     };
 
     interfaces = {
@@ -122,6 +123,23 @@
         SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2201", GROUP="users", MODE="0666"
       '';
     };
+
+    # dnsmasq = {
+    #   enable = true;
+    #   extraConfig = ''
+    #     server=/genially.com/10.1.0.2
+    #   '';
+    # };
+
+    openvpn = {
+      servers = {
+        genially = {
+          autoStart = false;
+          config = ''config /home/ajmasia/.config/vpn/genially_dev.ovpn'';
+          updateResolvConf = true;
+        };
+      };
+    };
   };
 
   sound = {
@@ -178,6 +196,7 @@
 
     variables = {
       EDITOR = "vim";
+      QT_QPA_PLATFORMTHEME = "qt5ct";
     };
 
     systemPackages = with pkgs; [

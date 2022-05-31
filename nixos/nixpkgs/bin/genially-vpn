@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+check_genially_vpn_status() {
+  echo "$(systemctl is-active openvpn-genially.service)"
+}
+
+show_vpn_status() {
+  vpn_status=$(check_genially_vpn_status)
+
+  if [[ $vpn_status = "active" ]]; then
+    echo "%{B#21252b}%{F#fbd065}歷%{B- F-}"
+  else
+    echo "%{B#21252b}%{F#868686}歷%{B- F-}"
+  fi
+}
+
+connect_genially_vpn() {
+  qsudo systemctl start openvpn-genially.service
+  notify-send "Genially VPN $(check_genially_vpn_status) 🟢"
+}
+
+disconnect_genially_vpn() {
+  qsudo systemctl stop openvpn-genially.service
+  notify-send "Genially VPN $(check_genially_vpn_status) ⛔"
+}
+
+
+case "$1" in
+  --toggle)
+    vpn_status=$(check_genially_vpn_status)
+
+    if [[ $vpn_status = "inactive" ]]; then
+      connect_genially_vpn
+      sleep 5 && xdg-open https://dashboard-sorrycypress.genially.com/
+    else
+      disconnect_genially_vpn
+    fi
+
+    ;;
+  *)
+    show_vpn_status 
+    ;;
+esac
+
+

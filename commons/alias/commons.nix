@@ -18,5 +18,8 @@
   hm = "home-manager";
 
   swd = "cd $(find ~/ -type d -print | fzf)";
+
+  mdisk = "udisksctl mount -b /dev/disk/by-label/$(ls /dev/disk/by-label | fzf | awk -F'->' '{print $1}')";
+  udisk = "udisksctl unmount -b /dev/disk/by-label/$(ls /dev/disk/by-label | fzf | awk -F'->' '{print $1}')";
 }
 

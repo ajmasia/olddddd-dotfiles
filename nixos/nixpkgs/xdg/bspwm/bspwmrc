@@ -38,6 +38,8 @@ else
   bspc rule -a TelegramDesktop desktop='^2'
 fi
 
+play ~/.config/sounds/startup_01.wav
+
 # window information
 bspc config border_width 0
 bspc config window_gap 6

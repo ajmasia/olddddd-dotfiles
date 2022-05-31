@@ -52,14 +52,25 @@ tm_checkout() {
 }
 
 
-SELECTED=$(echo -e "Check in\nWorking on\nReviewing PRs\nBreakfast\nCooking\nLunch\nMeeting\nPause\nCheck out\nBack" | rofi -dmenu -matching fuzzy -p 'Set your Slack status to' -sort -levenshtein-sort)
+SELECTED=$(echo -e "Check in\nWorking on\nReviewing PRs\nBreakfast\nCooking\nLunch\nMeeting\nPause\nCheck out\nBack\nCheck out weekend\nWorking out\nDoctor\nFamily" | rofi -dmenu -matching fuzzy -p 'Set your Slack status to' -sort -levenshtein-sort)
 
 case $SELECTED in
   "Check in") 
     set_active
     set_status "Comenzando" ":rocket:"
     tm_checkin
-    send_slack_message "Buenos días por la mañana :smile::muscle:" "#development"
+    ;;
+
+  "Check out")
+    set_status "Mañana más y mejor" ":wave:"
+    tm_checkout
+    set_away
+    ;;
+
+  "Check out weekend")
+    set_status "Buen fin de semana" ":wave:"
+    tm_checkout
+    set_away
     ;;
 
   "Working on") 
@@ -70,45 +81,50 @@ case $SELECTED in
     set_status "Revisando PRs" ":bulb:"
     ;;
 
-  "Breakfast")
-    set_status "Desayunando" ":sandwich:"
-    tm_pause
-    ;;
-
-  "Cooking")
-    set_status "Cocinando" ":cook:"
-    tm_pause
-    ;;
-
-  "Lunch")
-    set_status "Almorzando" ":yum:"
-    send_slack_message "Paro a comer, regreso en un rato :yum::yum:" "#development"
-    tm_pause
-    ;;
-
   "Meeting")
     set_status "Reunido" ":calendar:"
     ;;
 
   "Pause") 
     set_away
-    set_status "Parada técnica" ":stopwatch:"
-    send_slack_message "Paro un rato, regreso pronto :stopwatch:" "#development"
+    set_status "Estoy un rato ausente" ":stopwatch:"
     tm_pause 
     ;;
 
-  "Check out")
-    set_status "Mañana más y mejor" ":wave:"
-    tm_checkout
-    send_slack_message "Cierro por hoy :wave:" "#development"
+  "Breakfast")
+    set_status "Desayunando" ":sandwich:"
+    tm_pause
+    ;;
+
+  "Working out")
     set_away
+    set_status "Entrenando" ":man-cartwheeling:"
+    tm_pause
+    ;;
+
+  "Lunch")
+    set_status "Almorzando" ":yum:"
+    set_away
+    tm_pause
+    ;;
+    
+  "Doctor")
+    set_status "En el médico" ":stethoscope:"
+    set_away
+    tm_pause
+    ;;
+
+  "Family")
+    set_status "Resolviendo un asunto familiar" ":family:"
+    set_away
+    tm_pause
     ;;
 
   "Back") 
     clear_status
     set_active
+    set_status "Trabajando en: $(git -C $MONO_REPO_PATH branch --show-current)" ":git-branch:"
     tm_back 
-    send_slack_message "De vuelta :smile::muscle:" "#development"
     ;;
 
   # more cases...
@@ -117,7 +133,7 @@ case $SELECTED in
     ;;
 
   *) 
-    echo "Options: Check in | Working on | breakfast | Cooking | Lunch | Meeting | Pause | Check out | Back | Out"
+    echo "Options: Check in | Check out | Check out weekend | Working on | Working out | Breakfast | Doctor | Family | Lunch | Meeting | Pause | Back"
     ;;
 esac
 

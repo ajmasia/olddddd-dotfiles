@@ -80,7 +80,7 @@ local conditions = {
 		return vim.fn.empty(vim.fn.expand("%:t")) ~= 1
 	end,
 	hide_in_width = function()
-		return vim.fn.winwidth(0) > 250
+		return vim.fn.winwidth(0) > 150
 	end,
 	check_git_workspace = function()
 		local filepath = vim.fn.expand("%:p:h")
@@ -97,13 +97,13 @@ local config = {
 		component_separators = "",
 		section_separators = "",
 		-- theme = {
-			-- We are going to use lualine_c an lualine_x as left and
-			-- right section. Both are highlighted by c theme .  So we
-			-- are just setting default looks o statusline
+		-- We are going to use lualine_c an lualine_x as left and
+		-- right section. Both are highlighted by c theme .  So we
+		-- are just setting default looks o statusline
 		-- 	normal = { c = { fg = colors.fg, bg = colors.bg } },
 		-- 	inactive = { c = { fg = colors.fg, bg = colors.bg } },
 		-- },
-    theme = 'onedark'
+		theme = "onedark",
 	},
 	sections = {
 		-- these are to remove the defaults
@@ -222,12 +222,12 @@ ins_right({
 ins_right({
 	-- Lsp server name .
 	function(msg)
-		msg = msg or "LS Inactive"
+		msg = msg or icons.lsp.disconnect .. " LSP"
 		local buf_clients = vim.lsp.buf_get_clients()
 		if next(buf_clients) == nil then
 			-- TODO: clean up this if statement
 			if type(msg) == "boolean" or #msg == 0 then
-				return "LS Inactive"
+				return icons.lsp.disconnect .. " LSP"
 			end
 			return msg
 		end
@@ -237,9 +237,14 @@ ins_right({
 		-- add client
 		for _, client in pairs(buf_clients) do
 			if client.name ~= "null-ls" then
-				table.insert(buf_client_names, client.name)
+				if client.name == "eslint" then
+					table.insert(buf_client_names, icons.lsp.linter .. " " .. client.name)
+					break
+				end
+				table.insert(buf_client_names, icons.lsp.lang .. client.name)
 			end
 		end
+
 		local sources = require("null-ls.sources")
 		local available_sources = sources.get_available(buf_ft)
 		local registered = {}
@@ -247,17 +252,28 @@ ins_right({
 		for _, source in ipairs(available_sources) do
 			for method in pairs(source.methods) do
 				registered[method] = registered[method] or {}
+
+				if method == "NULL_LS_FORMATTING" then
+					table.insert(registered[method], icons.lsp.formatter .. " " .. source.name)
+					break
+				end
+
+				if method == "NULL_LS_DIAGNOSTICS" then
+					table.insert(registered[method], icons.lsp.linter .. " " .. source.name)
+					break
+				end
+
 				table.insert(registered[method], source.name)
 			end
 		end
 
 		local formatters = registered[require("null-ls").methods.FORMATTING] or {}
-		local linters = registered[require("null-ls").methods.LINTERS] or {}
+		local linters = registered[require("null-ls").methods.DIAGNOSTICS] or {}
 
 		vim.list_extend(buf_client_names, formatters)
 		vim.list_extend(buf_client_names, linters)
 
-		return "[" .. table.concat(buf_client_names, ", ") .. "]"
+		return table.concat(buf_client_names, " ")
 	end,
 	-- function()
 	-- 	local msg = "Inactive"
@@ -306,7 +322,7 @@ ins_right({
 
 	-- 	return "[" .. table.concat(buf_client_names, ", ") .. "]"
 	-- end,
-	icon = " ",
+	-- icon = " ",
 	color = { fg = colors.green, gui = "bold" },
 })
 
