@@ -9,19 +9,9 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
 endif
 let s:shortmess_save = &shortmess
 set shortmess=aoO
-badd +48 commons/nvim/lua/core/lualine.lua
+badd +51 ~/repos/dotfiles/nixos/nixpkgs/packages.nix
 argglobal
 %argdel
-$argadd .config/nvim
-edit commons/nvim/lua/core/lualine.lua
-argglobal
-let s:l = 151 - ((23 * winheight(0) + 16) / 33)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 151
-normal! 0
-lcd ~/repos/dotfiles
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
