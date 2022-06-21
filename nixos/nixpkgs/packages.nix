@@ -6,15 +6,15 @@ let
       nodejs-16_x
     ];
   });
-  nixpkgs_for_insync3 = with pkgs; callPackage
-    (fetchFromGitHub {
-      name = "nixpkgs";
-      owner = "NixOS";
-      repo = "nixpkgs";
-      rev = "b49473e6679c733f917254b786bfac42339875eb";
-      sha256 = "1yan995h228v18b6hcjgvkbnaxwbbrink5if4ggvdans9mczcgfw";
-    })
-    { };
+  # nixpkgs_for_insync3 = with pkgs; callPackage
+  #   (fetchFromGitHub {
+  #     name = "nixpkgs";
+  #     owner = "NixOS";
+  #     repo = "nixpkgs";
+  #     rev = "b49473e6679c733f917254b786bfac42339875eb";
+  #     sha256 = "1yan995h228v18b6hcjgvkbnaxwbbrink5if4ggvdans9mczcgfw";
+  #   })
+  #   { };
 in
 with pkgs; [
   # System
@@ -50,6 +50,10 @@ with pkgs; [
   sox
   qsudo
   qt5ct
+  i3lock-fancy
+  galculator
+  system-config-printer
+  direnv
 
   # Useless
   cmatrix
@@ -103,18 +107,18 @@ with pkgs; [
   # Productivity
   timewarrior
   calibre
-  todoist-electron
-  todoist
-  bitwarden
-  bitwarden-cli
+  # todoist-electron
+  # todoist
+  # bitwarden
+  # bitwarden-cli
   obsidian
   pdfarranger
   _1password
   _1password-gui
   # unstablePackages.synology-drive-client
   synology_drive_client_12920
-  nixpkgs_for_insync3.insync-v3
-  inkdrop
+  # nixpkgs_for_insync3.insync-v3
+  # inkdrop
 
   # Development
   # editors
@@ -127,6 +131,9 @@ with pkgs; [
   python3
   nodejs-16_x
   yarnWithNode16
+
+  # python packages
+  python39Packages.pyqt5
 
   # tools
   gsh
@@ -145,6 +152,7 @@ with pkgs; [
   selene
   black
   sumneko-lua-language-server
+  python39Packages.flake8
 
   # packages managers
   cargo

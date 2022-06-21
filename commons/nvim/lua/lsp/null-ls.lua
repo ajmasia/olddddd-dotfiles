@@ -14,7 +14,7 @@ null_ls.setup({
 		formatting.stylua,
 		formatting.black,
 		diagnostics.flake8,
-		diagnostics.selene,
+		-- diagnostics.selene,
 		code_actions.refactoring,
 	},
 })

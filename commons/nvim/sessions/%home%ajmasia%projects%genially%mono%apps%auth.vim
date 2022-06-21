@@ -3,25 +3,24 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/repos/dotfiles
+cd ~/projects/genially/mono/apps/auth
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 let s:shortmess_save = &shortmess
 set shortmess=aoO
-badd +48 commons/nvim/lua/core/lualine.lua
+badd +43 .env
 argglobal
 %argdel
-$argadd .config/nvim
-edit commons/nvim/lua/core/lualine.lua
+$argadd .env
+edit .env
 argglobal
-let s:l = 151 - ((23 * winheight(0) + 16) / 33)
+let s:l = 43 - ((42 * winheight(0) + 24) / 49)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 151
-normal! 0
-lcd ~/repos/dotfiles
+keepjumps 43
+normal! 016|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

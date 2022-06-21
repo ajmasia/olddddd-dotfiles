@@ -3,25 +3,27 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/repos/dotfiles
+cd ~
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 let s:shortmess_save = &shortmess
 set shortmess=aoO
-badd +48 commons/nvim/lua/core/lualine.lua
+badd +0 /nix/store/lynrsi2kpyla2vz3qk7xvj46si5kk40f-dbus-1/system.conf
+badd +0 cd
 argglobal
 %argdel
-$argadd .config/nvim
-edit commons/nvim/lua/core/lualine.lua
+$argadd /nix/store/lynrsi2kpyla2vz3qk7xvj46si5kk40f-dbus-1/system.conf
+$argadd cd
+edit /nix/store/lynrsi2kpyla2vz3qk7xvj46si5kk40f-dbus-1/system.conf
 argglobal
-let s:l = 151 - ((23 * winheight(0) + 16) / 33)
+let s:l = 1 - ((0 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 151
+keepjumps 1
 normal! 0
-lcd ~/repos/dotfiles
+lcd /nix/store/lynrsi2kpyla2vz3qk7xvj46si5kk40f-dbus-1
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

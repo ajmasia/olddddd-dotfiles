@@ -103,7 +103,8 @@ local config = {
 		-- 	normal = { c = { fg = colors.fg, bg = colors.bg } },
 		-- 	inactive = { c = { fg = colors.fg, bg = colors.bg } },
 		-- },
-		theme = "onedark",
+		disabled_filetypes = { "packer", "NvimTree" },
+	  theme = "tokyonight",
 	},
 	sections = {
 		-- these are to remove the defaults
@@ -179,7 +180,7 @@ ins_left({
 	end,
 	icon = "",
 	color = { fg = colors.violet, gui = "bold" },
-	cond = conditions.hide_in_width,
+	-- cond = conditions.hide_in_width,
 })
 
 ins_left({

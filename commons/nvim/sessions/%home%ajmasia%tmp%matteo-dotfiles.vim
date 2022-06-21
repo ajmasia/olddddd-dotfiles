@@ -3,25 +3,17 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/repos/dotfiles
+cd ~/tmp/matteo-dotfiles
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 let s:shortmess_save = &shortmess
 set shortmess=aoO
-badd +48 commons/nvim/lua/core/lualine.lua
+badd +138 ~/repos/dotfiles/nixos/nixpkgs/packages.nix
+badd +0 nixpkgs/modules/bluetooth.nix
 argglobal
 %argdel
-$argadd .config/nvim
-edit commons/nvim/lua/core/lualine.lua
-argglobal
-let s:l = 151 - ((23 * winheight(0) + 16) / 33)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 151
-normal! 0
-lcd ~/repos/dotfiles
+$argadd .config/nixpkgs
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -35,7 +27,6 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
-nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :

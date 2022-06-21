@@ -16,6 +16,8 @@ with builtins; {
       export PATH="$HOME/.local/bin:$PATH"
       export SLACK_CLI_TOKEN=$(source ~/.env; echo $SLACK_CLI_TOKEN)
 
+      export DIRENV_LOG_FORMAT=
+      eval "$(direnv hook bash)"
     '';
 
     profileExtra = ''
@@ -79,9 +81,44 @@ with builtins; {
         };
       };
 
+      # colors = {
+      #   primary = {
+      #     background = "#282c34";
+      #   };
+      # };
+
       colors = {
         primary = {
           background = "#282c34";
+          foreground = "#c5c8c6";
+        };
+        selection = {
+          background = "#444444";
+          text = "#c5c8c6";
+        };
+        cursor = {
+          cursor = "#d0d0d0";
+          text = "#151515";
+        };
+        normal = {
+          black = "#dadada";
+          blue = "#85befd";
+          cyan = "#85befd";
+          green = "#87c38a";
+          magenta = "#b9b6fc";
+          red = "#fd5ff1";
+          white = "#e0e0e0";
+          yellow = "#ffd7b1";
+        };
+        bright = {
+          black = "#dadada";
+          blue = "#96cbfe";
+          cyan = "#85befd";
+          green = "#94fa36";
+          magenta = "#b9b6fc";
+          red = "#fd5ff1";
+          white = "#e0e0e0";
+          yellow = "#f5ffa8";
         };
       };
 
@@ -113,8 +150,11 @@ with builtins; {
       };
 
       nix_shell = {
-        impure_msg = "i";
-        pure_msg = "p";
+        style = "bold blue";
+        symbol = "❄️ ";
+        impure_msg = "[impure](bold red)";
+        pure_msg = "[pure](bold green)";
+        format = "via [$symbol$state( \($name)\)]($style) ";
       };
     };
   };
@@ -142,7 +182,7 @@ with builtins; {
 
   rofi = {
     enable = true;
-    theme = "themes/launcher.rasi";
+    theme = "themes/spotlight-dark.rasi";
     extraConfig = {
       "show-icons" = true;
       "icon-theme" = "Papirus";

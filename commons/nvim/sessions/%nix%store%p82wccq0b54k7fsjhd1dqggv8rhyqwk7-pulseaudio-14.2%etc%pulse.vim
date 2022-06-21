@@ -3,25 +3,25 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/repos/dotfiles
+cd ~
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 let s:shortmess_save = &shortmess
 set shortmess=aoO
-badd +48 commons/nvim/lua/core/lualine.lua
+badd +0 /nix/store/p82wccq0b54k7fsjhd1dqggv8rhyqwk7-pulseaudio-14.2/etc/pulse/default.pa
 argglobal
 %argdel
-$argadd .config/nvim
-edit commons/nvim/lua/core/lualine.lua
+$argadd /nix/store/p82wccq0b54k7fsjhd1dqggv8rhyqwk7-pulseaudio-14.2/etc/pulse/default.pa
+edit /nix/store/p82wccq0b54k7fsjhd1dqggv8rhyqwk7-pulseaudio-14.2/etc/pulse/default.pa
 argglobal
-let s:l = 151 - ((23 * winheight(0) + 16) / 33)
+let s:l = 128 - ((40 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 151
-normal! 0
-lcd ~/repos/dotfiles
+keepjumps 128
+normal! 059|
+lcd /nix/store/p82wccq0b54k7fsjhd1dqggv8rhyqwk7-pulseaudio-14.2/etc/pulse
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

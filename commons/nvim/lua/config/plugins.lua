@@ -71,11 +71,12 @@ return packer.startup(function(use)
 	-- use({ "feline-nvim/feline.nvim", branch = "develop" })
 	-- use("findango/vim-mdx")
 	-- use("sheerun/vim-polyglot")
-  use("jxnblk/vim-mdx-js")
+	use("jxnblk/vim-mdx-js")
 
 	-- colorschemas
 	use("lunarvim/colorschemes") -- A bunch of colorschemes you can try out
 	use("navarasu/onedark.nvim")
+	use("folke/tokyonight.nvim")
 
 	-- comletion plugins
 	use({

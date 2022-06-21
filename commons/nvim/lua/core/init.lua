@@ -1,4 +1,4 @@
-require "core.colorschema"
+-- require "core.colorschema"
 require "core.completions"
 require "lsp"
 require "core.illuminate"

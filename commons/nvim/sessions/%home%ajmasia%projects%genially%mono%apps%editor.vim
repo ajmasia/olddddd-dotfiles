@@ -9,19 +9,18 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
 endif
 let s:shortmess_save = &shortmess
 set shortmess=aoO
-badd +28 ~/projects/genially/mono/ui/src/components/DownloadModal/components/DownloadOption.tsx
-badd +0 src/app/components/menu/components/DownloadAsVideoOption.jsx
+badd +0 src/app/components/header/Header.jsx
 argglobal
 %argdel
-edit src/app/components/menu/components/DownloadAsVideoOption.jsx
+edit src/app/components/header/Header.jsx
 argglobal
-balt ~/projects/genially/mono/ui/src/components/DownloadModal/components/DownloadOption.tsx
-let s:l = 35 - ((34 * winheight(0) + 34) / 69)
+balt src/app/components/header/Header.jsx
+let s:l = 63 - ((35 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 35
-normal! 037|
+keepjumps 63
+normal! 075|
 lcd ~/projects/genially/mono/apps/editor
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

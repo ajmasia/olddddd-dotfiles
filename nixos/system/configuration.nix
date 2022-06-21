@@ -40,6 +40,10 @@
   networking = {
     hostName = "genially-dev";
     useDHCP = false;
+    # firewall = {
+    #   enable = true;
+    #   allowedTCPPorts = [ 3000 4242 5001 ];
+    # };
 
     networkmanager = {
       enable = true;
@@ -80,6 +84,9 @@
 
       windowManager = {
         bspwm = {
+          enable = true;
+        };
+        qtile = {
           enable = true;
         };
       };
@@ -208,6 +215,12 @@
     ];
   };
 
+  nixpkgs = {
+    config = {
+      allowUnfree = true;
+    };
+  };
+
   programs = {
     gnupg = {
       agent = {
@@ -216,6 +229,9 @@
     };
     vim = {
       defaultEditor = true;
+    };
+    steam = {
+      enable = true;
     };
   };
 

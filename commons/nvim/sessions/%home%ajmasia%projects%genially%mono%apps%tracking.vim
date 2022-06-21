@@ -3,25 +3,25 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/repos/dotfiles
+cd ~/projects/genially/mono/apps/tracking
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 let s:shortmess_save = &shortmess
 set shortmess=aoO
-badd +48 commons/nvim/lua/core/lualine.lua
+badd +1 test/GetAllTrackingDataOfGenially.test.ts
 argglobal
 %argdel
-$argadd .config/nvim
-edit commons/nvim/lua/core/lualine.lua
+edit test/GetAllTrackingDataOfGenially.test.ts
 argglobal
-let s:l = 151 - ((23 * winheight(0) + 16) / 33)
+balt test/GetAllTrackingDataOfGenially.test.ts
+let s:l = 53 - ((52 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 151
-normal! 0
-lcd ~/repos/dotfiles
+keepjumps 53
+normal! 03|
+lcd ~/projects/genially/mono/apps/tracking
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

@@ -30,7 +30,7 @@ M.setup = function()
       border = "rounded",
       source = "always",
       header = "",
-      prefix = "",
+      prefix = ""
     },
   }
 
