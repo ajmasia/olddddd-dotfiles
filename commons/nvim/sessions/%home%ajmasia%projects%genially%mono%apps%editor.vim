@@ -8,19 +8,24 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 let s:shortmess_save = &shortmess
-set shortmess=aoO
-badd +0 src/app/components/header/Header.jsx
+if &shortmess =~ 'A'
+  set shortmess=aoOA
+else
+  set shortmess=aoO
+endif
+badd +1 src/app/components/window-modes/LayerGroupedItem.jsx
+badd +161 src/app/components/window-modes/LayerItem.jsx
 argglobal
 %argdel
-edit src/app/components/header/Header.jsx
+edit src/app/components/window-modes/LayerItem.jsx
 argglobal
-balt src/app/components/header/Header.jsx
-let s:l = 63 - ((35 * winheight(0) + 34) / 69)
+balt src/app/components/window-modes/LayerGroupedItem.jsx
+let s:l = 41 - ((40 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 63
-normal! 075|
+keepjumps 41
+normal! 0
 lcd ~/projects/genially/mono/apps/editor
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

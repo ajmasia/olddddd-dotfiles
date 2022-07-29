@@ -8,19 +8,20 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 let s:shortmess_save = &shortmess
-set shortmess=aoO
-badd +9 default.nix
+if &shortmess =~ 'A'
+  set shortmess=aoOA
+else
+  set shortmess=aoO
+endif
+badd +10 app.py
+badd +22 ~/learning/python/routes/user.py
+badd +12 ~/learning/python/schemas/user.py
+badd +3 ~/learning/python/config/db.py
+badd +3 ~/learning/python/docker-compose.yml
+badd +9 ~/learning/python/models/user.py
 argglobal
 %argdel
-$argadd default.nix
-edit default.nix
-argglobal
-let s:l = 23 - ((22 * winheight(0) + 16) / 33)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 23
-normal! 0
+$argadd app.py
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -34,7 +35,6 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
-nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :

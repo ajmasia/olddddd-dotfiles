@@ -13,6 +13,12 @@
 
   boot = {
     kernel.sysctl."kernel.sysrq" = 1;
+    # extraModulePackages =
+    #   with config.boot.kernelPackages; [
+    #     rtl8812au
+    #   ];
+
+    # initrd.kernelModules = [ "8812au" ];
     loader = {
       timeout = 1;
       systemd-boot = {
@@ -86,7 +92,7 @@
         bspwm = {
           enable = true;
         };
-        qtile = {
+        awesome = {
           enable = true;
         };
       };
@@ -114,6 +120,8 @@
     blueman.enable = true;
     cron.enable = true;
     geoclue2.enable = true;
+    # ofono.enable = true;
+    # ofono.plugings = [ pkgs. ofono-phonesim-unstable ];
 
     printing = {
       enable = true;
@@ -145,6 +153,11 @@
           config = ''config /home/ajmasia/.config/vpn/genially_dev.ovpn'';
           updateResolvConf = true;
         };
+        proton = {
+          autoStart = false;
+          config = ''config /home/ajmasia/.config/vpn/ch-lt-01.protonvpn.net.udp.ovpn'';
+          updateResolvConf = true;
+        };
       };
     };
   };
@@ -161,6 +174,7 @@
     pulseaudio = {
       enable = true;
       package = pkgs.pulseaudioFull;
+      # extraModules = [ pkgs.pulseaudio-modules-bt ];
     };
 
     bluetooth = {
@@ -168,6 +182,7 @@
       settings = {
         General = {
           ControllerMode = "bredr";
+          # Enable = "Source,Sink,Media,Socket";
         };
       };
     };
@@ -175,14 +190,21 @@
     opengl = {
       enable = true;
     };
+    # enableAllFirmware = true;
   };
 
   virtualisation = {
     docker = {
       enable = true;
     };
+
+    virtualbox = {
+      host = {
+        enable = true;
+        enableExtensionPack = true;
+      };
+    };
   };
-  virtualisation.virtualbox.host.enable = true;
 
   users = {
     users = {
@@ -211,6 +233,7 @@
       wget
       vim
       git
+      # ofono-phonesim
       home-manager
     ];
   };

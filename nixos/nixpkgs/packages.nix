@@ -6,15 +6,15 @@ let
       nodejs-16_x
     ];
   });
-  # nixpkgs_for_insync3 = with pkgs; callPackage
-  #   (fetchFromGitHub {
-  #     name = "nixpkgs";
-  #     owner = "NixOS";
-  #     repo = "nixpkgs";
-  #     rev = "b49473e6679c733f917254b786bfac42339875eb";
-  #     sha256 = "1yan995h228v18b6hcjgvkbnaxwbbrink5if4ggvdans9mczcgfw";
-  #   })
-  #   { };
+  nixpkgs_for_insync3 = with pkgs; callPackage
+    (fetchFromGitHub {
+      name = "nixpkgs";
+      owner = "NixOS";
+      repo = "nixpkgs";
+      rev = "b49473e6679c733f917254b786bfac42339875eb";
+      sha256 = "1yan995h228v18b6hcjgvkbnaxwbbrink5if4ggvdans9mczcgfw";
+    })
+    { };
 in
 with pkgs; [
   # System
@@ -54,6 +54,11 @@ with pkgs; [
   galculator
   system-config-printer
   direnv
+  conky
+  kubectl
+  kubectx
+  polkit
+  etcher
 
   # Useless
   cmatrix
@@ -73,16 +78,16 @@ with pkgs; [
   # Fonst
   font-manager
   nerdfonts
-  font-awesome
+  font-awesome_5
   fira-code
 
   # UI
-  dragon-drop
+  xdragon
   kazam
   dunst
   feh
   # sxhkd
-  polybar
+  polybarFull
   picom
   xautolock
   betterlockscreen
@@ -103,6 +108,7 @@ with pkgs; [
   spotify
   pamix
   cava
+  vlc
 
   # Productivity
   timewarrior
@@ -117,15 +123,15 @@ with pkgs; [
   _1password-gui
   # unstablePackages.synology-drive-client
   synology_drive_client_12920
-  # nixpkgs_for_insync3.insync-v3
+  nixpkgs_for_insync3.insync-v3
   # inkdrop
 
   # Development
   # editors
   (emacsWithPackages (epkgs: [ epkgs.emacsql-sqlite ]))
   unstablePackages.neovim
-  # vscode
-  vscode_1_67
+  vscode
+  # vscode_1_67
 
   # interprets
   python3
@@ -152,7 +158,6 @@ with pkgs; [
   selene
   black
   sumneko-lua-language-server
-  python39Packages.flake8
 
   # packages managers
   cargo
@@ -167,5 +172,12 @@ with pkgs; [
 
   # python packages
   # python39Packages.flake8
+
+  # db
+  sqlite
+  pgcli
+
+  # playgorund
+  rpiplay
 ]
 

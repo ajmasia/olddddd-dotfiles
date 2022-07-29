@@ -39,7 +39,7 @@ let
       icon = "code";
       startupNotify = "true";
       categories = "Utility;TextEditor;Development;IDE;";
-      mimeType = "text/plain;inode/directory;";
+      mimeTypes = "text/plain;inode/directory;";
       extraEntries = ''
         StartupWMClass=${shortName}
         Actions=new-empty-window;

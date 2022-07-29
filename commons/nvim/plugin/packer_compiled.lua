@@ -89,6 +89,11 @@ _G.packer_plugins = {
     path = "/home/ajmasia/.local/share/nvim/site/pack/packer/start/SchemaStore.nvim",
     url = "https://github.com/b0o/SchemaStore.nvim"
   },
+  ["alpha-nvim"] = {
+    loaded = true,
+    path = "/home/ajmasia/.local/share/nvim/site/pack/packer/start/alpha-nvim",
+    url = "https://github.com/goolord/alpha-nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/ajmasia/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -140,11 +145,6 @@ _G.packer_plugins = {
     path = "/home/ajmasia/.local/share/nvim/site/pack/packer/start/conflict-marker.vim",
     url = "https://github.com/rhysd/conflict-marker.vim"
   },
-  ["copilot.vim"] = {
-    loaded = true,
-    path = "/home/ajmasia/.local/share/nvim/site/pack/packer/start/copilot.vim",
-    url = "https://github.com/github/copilot.vim"
-  },
   ["diffview.nvim"] = {
     loaded = true,
     path = "/home/ajmasia/.local/share/nvim/site/pack/packer/start/diffview.nvim",
@@ -176,8 +176,10 @@ _G.packer_plugins = {
     url = "https://github.com/lewis6991/impatient.nvim"
   },
   ["indent-blankline.nvim"] = {
-    loaded = true,
-    path = "/home/ajmasia/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/ajmasia/.local/share/nvim/site/pack/packer/opt/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
   ["iswap.nvim"] = {
@@ -241,6 +243,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ajmasia/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-notify"] = {
+    loaded = true,
+    path = "/home/ajmasia/.local/share/nvim/site/pack/packer/start/nvim-notify",
+    url = "https://github.com/rcarriga/nvim-notify"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
@@ -320,11 +327,6 @@ _G.packer_plugins = {
     path = "/home/ajmasia/.local/share/nvim/site/pack/packer/start/sessions.nvim",
     url = "https://github.com/natecraddock/sessions.nvim"
   },
-  ["surround.nvim"] = {
-    loaded = true,
-    path = "/home/ajmasia/.local/share/nvim/site/pack/packer/start/surround.nvim",
-    url = "https://github.com/Mephistophiles/surround.nvim"
-  },
   ["symbols-outline.nvim"] = {
     loaded = true,
     path = "/home/ajmasia/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim",
@@ -362,6 +364,7 @@ _G.packer_plugins = {
   },
   ["trouble.nvim"] = {
     commands = { "TroubleToggle" },
+    config = { "\27LJ\2\nÜ\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\nsigns\1\0\0\1\0\5\nother\bÔÅò\16information\bÔÅö\thint\bÔ†¥\fwarning\bÔÅ±\nerror\bÔÅó\nsetup\ftrouble\frequire\0" },
     loaded = false,
     needs_bufread = false,
     only_cond = false,
@@ -382,6 +385,14 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/ajmasia/.local/share/nvim/site/pack/packer/start/vim-mdx-js",
     url = "https://github.com/jxnblk/vim-mdx-js"
+  },
+  ["vim-surround"] = {
+    keys = { { "", "c" }, { "", "d" }, { "", "y" } },
+    loaded = false,
+    needs_bufread = false,
+    only_cond = false,
+    path = "/home/ajmasia/.local/share/nvim/site/pack/packer/opt/vim-surround",
+    url = "https://github.com/tpope/vim-surround"
   },
   ["which-key.nvim"] = {
     loaded = true,
@@ -424,6 +435,18 @@ if not vim.g.packer_custom_loader_enabled then
   vim.g.packer_custom_loader_enabled = true
 end
 
+-- Setup for: vim-surround
+time([[Setup for vim-surround]], true)
+try_loadstring("\27LJ\2\n,\0\0\2\0\3\0\0056\0\0\0009\0\1\0)\1Ù\1=\1\2\0K\0\1\0\15timeoutlen\6o\bvim\0", "setup", "vim-surround")
+time([[Setup for vim-surround]], false)
+-- Setup for: indent-blankline.nvim
+time([[Setup for indent-blankline.nvim]], true)
+try_loadstring("\27LJ\2\n©\2\0\0\2\0\t\0\0176\0\0\0009\0\1\0'\1\3\0=\1\2\0006\0\0\0009\0\1\0005\1\5\0=\1\4\0006\0\0\0009\0\1\0005\1\a\0=\1\6\0006\0\0\0009\0\1\0+\1\2\0=\1\b\0K\0\1\0*indent_blankline_show_current_context\1\3\0\0\rterminal\vnofile%indent_blankline_buftype_exclude\1\b\0\0\thelp\rterminal\14dashboard\vpacker\fLspInfo\19LspInstallInfo\fTrouble&indent_blankline_filetype_exclude\a¬¶\26indent_blankline_char\6g\bvim\0", "setup", "indent-blankline.nvim")
+time([[Setup for indent-blankline.nvim]], false)
+-- Setup for: markdown-preview.nvim
+time([[Setup for markdown-preview.nvim]], true)
+try_loadstring("\27LJ\2\n=\0\0\2\0\4\0\0056\0\0\0009\0\1\0005\1\3\0=\1\2\0K\0\1\0\1\2\0\0\rmarkdown\19mkdp_filetypes\6g\bvim\0", "setup", "markdown-preview.nvim")
+time([[Setup for markdown-preview.nvim]], false)
 -- Config for: cmp-tabnine
 time([[Config for cmp-tabnine]], true)
 try_loadstring("\27LJ\2\n∫\1\0\0\6\0\5\0\n6\0\0\0'\2\1\0B\0\2\2\18\3\0\0009\1\2\0005\4\3\0004\5\0\0=\5\4\4B\1\3\1K\0\1\0\23ignored_file_types\1\0\5\tsort\2\24snippet_placeholder\a..\27run_on_every_keystroke\2\20max_num_results\3\20\14max_lines\3Ë\a\nsetup\23cmp_tabnine.config\frequire\0", "config", "cmp-tabnine")
@@ -434,6 +457,13 @@ time([[Defining lazy-load commands]], true)
 pcall(vim.cmd, [[command -nargs=* -range -bang -complete=file TroubleToggle lua require("packer.load")({'trouble.nvim'}, { cmd = "TroubleToggle", l1 = <line1>, l2 = <line2>, bang = <q-bang>, args = <q-args>, mods = "<mods>" }, _G.packer_plugins)]])
 time([[Defining lazy-load commands]], false)
 
+-- Keymap lazy-loads
+time([[Defining lazy-load keymaps]], true)
+vim.cmd [[noremap <silent> d <cmd>lua require("packer.load")({'vim-surround'}, { keys = "d", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> y <cmd>lua require("packer.load")({'vim-surround'}, { keys = "y", prefix = "" }, _G.packer_plugins)<cr>]]
+vim.cmd [[noremap <silent> c <cmd>lua require("packer.load")({'vim-surround'}, { keys = "c", prefix = "" }, _G.packer_plugins)<cr>]]
+time([[Defining lazy-load keymaps]], false)
+
 vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
@@ -442,6 +472,7 @@ vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-prev
 time([[Defining lazy-load filetype autocommands]], false)
   -- Event lazy-loads
 time([[Defining lazy-load event autocommands]], true)
+vim.cmd [[au BufRead * ++once lua require("packer.load")({'indent-blankline.nvim'}, { event = "BufRead *" }, _G.packer_plugins)]]
 vim.cmd [[au BufReadPre * ++once lua require("packer.load")({'persistence.nvim'}, { event = "BufReadPre *" }, _G.packer_plugins)]]
 time([[Defining lazy-load event autocommands]], false)
 vim.cmd("augroup END")

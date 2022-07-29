@@ -8,19 +8,22 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 let s:shortmess_save = &shortmess
-set shortmess=aoO
-badd +0 projects/shared/en.json
+if &shortmess =~ 'A'
+  set shortmess=aoOA
+else
+  set shortmess=aoO
+endif
+badd +0 projects/shared/es.json
 argglobal
 %argdel
-edit projects/shared/en.json
+edit projects/shared/es.json
 argglobal
-balt projects/shared/en.json
-let s:l = 132 - ((26 * winheight(0) + 34) / 69)
+let s:l = 198 - ((50 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 132
-normal! 0
+keepjumps 198
+normal! 08|
 lcd ~/projects/genially/mono/lang
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

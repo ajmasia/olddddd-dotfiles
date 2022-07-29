@@ -9,32 +9,14 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
 endif
 let s:shortmess_save = &shortmess
 set shortmess=aoO
-badd +1 src/business/permissions/policies/genially/DownloadPolicy.ts
-badd +0 src/business/permissions/policies/index.ts
+badd +24 src/business/permissions/policies/genially/DownloadPolicy.ts
+badd +1 src/business/permissions/policies/genially/DownloadVideoPolicy.ts
+badd +53 src/business/permissions/policies/index.ts
+badd +1 ~/projects/genially/mono/ui/src/utils/permissions/PermissionsManager.ts
+badd +56 ~/projects/genially/mono/ui/src/utils/permissions/genially/GeniallyPermissionsManager.ts
+badd +0 src/business/permissions/policies/constants.ts
 argglobal
 %argdel
-edit src/business/permissions/policies/index.ts
-let s:save_splitbelow = &splitbelow
-let s:save_splitright = &splitright
-set splitbelow splitright
-let &splitbelow = s:save_splitbelow
-let &splitright = s:save_splitright
-wincmd t
-let s:save_winminheight = &winminheight
-let s:save_winminwidth = &winminwidth
-set winminheight=0
-set winheight=1
-set winminwidth=0
-set winwidth=1
-argglobal
-balt src/business/permissions/policies/genially/DownloadPolicy.ts
-let s:l = 8 - ((7 * winheight(0) + 34) / 69)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 8
-normal! 042|
-lcd ~/projects/genially/mono/commons
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -42,8 +24,6 @@ endif
 unlet! s:wipebuf
 set winheight=1 winwidth=20
 let &shortmess = s:shortmess_save
-let &winminheight = s:save_winminheight
-let &winminwidth = s:save_winminwidth
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)

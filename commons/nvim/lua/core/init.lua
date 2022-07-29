@@ -1,24 +1,26 @@
 -- require "core.colorschema"
-require "core.completions"
-require "lsp"
-require "core.illuminate"
-require "core.telescope"
-require "core.treesiter"
-require "core.autopairs"
-require "core.comments"
-require "core.lualine"
-require "core.whichkey"
-require "core.nvim-tree"
-require "core.projects"
-require "core.impatient"
-require "core.indentline"
-require "core.gps"
-require "core.surround"
-require "core.gitsigns"
-require "core.git-blame"
-require "core.git-fugitive"
-require "core.sessions"
-require "core.workspaces"
-require "core.git-conflict"
+require("core.completions")
+require("lsp")
+require("core.notify")
+require("core.illuminate")
+require("core.telescope")
+require("core.treesiter")
+require("core.autopairs")
+require("core.comments")
+require("core.lualine")
+require("core.whichkey")
+require("core.nvim-tree")
+require("core.projects")
+require("core.impatient")
+-- require "core.indentline"
+require("core.gps")
+require("core.surround")
+require("core.gitsigns")
+require("core.git-blame")
+require("core.git-fugitive")
+require("core.sessions")
+require("core.workspaces")
+require("core.git-conflict")
+require("core.alpha")
 
 -- require "core.feline"

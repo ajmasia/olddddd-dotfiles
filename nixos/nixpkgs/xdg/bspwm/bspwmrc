@@ -17,6 +17,9 @@ xautolock -time 20 -locker 'i3lock-fancy -n' -notify 15 -notifier "notify-send '
 ~/.config/polybar/launch.sh &
 feh --bg-fill ~/.config/wallpapers/wallpaper_001.jpg &
 
+pkill Conky
+conky -d -c ~/.config/nixpkgs/xdg/conky/config
+
 # pkill insync
 # rm /tmp/insync1000.sock &
 # insync start &

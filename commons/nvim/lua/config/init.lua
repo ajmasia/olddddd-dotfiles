@@ -9,7 +9,7 @@ for k, v in pairs(options) do
     vim.opt[k] = v
 end
 
-require "config.keymaps"
 require "config.plugins"
+require "config.keymaps"
 require "config.autocommands"
 

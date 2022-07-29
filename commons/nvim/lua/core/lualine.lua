@@ -103,7 +103,7 @@ local config = {
 		-- 	normal = { c = { fg = colors.fg, bg = colors.bg } },
 		-- 	inactive = { c = { fg = colors.fg, bg = colors.bg } },
 		-- },
-		disabled_filetypes = { "packer", "NvimTree" },
+		disabled_filetypes = { "packer", "NvimTree", "alpha" },
 	  theme = "tokyonight",
 	},
 	sections = {

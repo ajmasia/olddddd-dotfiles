@@ -93,7 +93,6 @@ case $SELECTED in
 
   "Breakfast")
     set_status "Desayunando" ":sandwich:"
-    tm_pause
     ;;
 
   "Working out")

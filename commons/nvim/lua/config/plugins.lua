@@ -41,6 +41,7 @@ packer.init({
 -- Install your plugins here
 return packer.startup(function(use)
 	-- core plugins
+	use("goolord/alpha-nvim")
 	use("wbthomason/packer.nvim") -- Have packer manage itself
 	use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
 	use("kyazdani42/nvim-web-devicons")
@@ -50,6 +51,7 @@ return packer.startup(function(use)
 	use("JoosepAlviste/nvim-ts-context-commentstring")
 	use("numToStr/Comment.nvim")
 	use("folke/which-key.nvim")
+	use("rcarriga/nvim-notify")
 	use({
 		"folke/persistence.nvim",
 		event = "BufReadPre", -- this will only start session saving when an actual file was opened
@@ -61,11 +63,34 @@ return packer.startup(function(use)
 	use({ "kyazdani42/nvim-tree.lua", commit = "f183c7f31197ae499c3420341fb8b275636a49b8" })
 	use("ahmedkhalf/project.nvim")
 	use("lewis6991/impatient.nvim")
-	use("lukas-reineke/indent-blankline.nvim")
-	use("Mephistophiles/surround.nvim")
+	use({
+		"lukas-reineke/indent-blankline.nvim",
+		event = "BufRead",
+		setup = function()
+			vim.g.indent_blankline_char = "¦"
+			vim.g.indent_blankline_filetype_exclude = {
+				"help",
+				"terminal",
+				"dashboard",
+				"packer",
+				"LspInfo",
+				"LspInstallInfo",
+				"Trouble",
+			}
+			vim.g.indent_blankline_buftype_exclude = { "terminal", "nofile" }
+			vim.g.indent_blankline_show_current_context = true
+		end,
+	})
+	use({
+		"tpope/vim-surround",
+		keys = { "c", "d", "y" },
+		-- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
+		setup = function()
+			vim.o.timeoutlen = 500
+		end,
+	})
 	use("antoinemadec/FixCursorHold.nvim") -- This is needed to fix lsp doc highlight
 	use("br1anchen/nvim-colorizer.lua")
-	use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", ft = "markdown" })
 	use("natecraddock/sessions.nvim")
 	use("natecraddock/workspaces.nvim")
 	-- use({ "feline-nvim/feline.nvim", branch = "develop" })
@@ -128,8 +153,19 @@ return packer.startup(function(use)
 	use({
 		"folke/trouble.nvim",
 		cmd = "TroubleToggle",
+		config = function()
+			require("trouble").setup({
+				signs = {
+					error = "",
+					warning = "",
+					hint = "",
+					information = "",
+					other = "",
+				},
+			})
+		end,
 	})
-	use("github/copilot.vim")
+	-- use("github/copilot.vim")
 	use("RRethy/vim-illuminate")
 
 	-- Telescope
@@ -157,6 +193,16 @@ return packer.startup(function(use)
 	use("tpope/vim-fugitive")
 	use({ "sindrets/diffview.nvim", evet = "BufRead" })
 	use("akinsho/git-conflict.nvim") -- https://github.com/akinsho/git-conflict.nvim
+
+	-- markdown
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = "cd app && npm install",
+		setup = function()
+			vim.g.mkdp_filetypes = { "markdown" }
+		end,
+		ft = { "markdown" },
+	})
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

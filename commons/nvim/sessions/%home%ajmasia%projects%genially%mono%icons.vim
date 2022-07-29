@@ -8,22 +8,15 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 let s:shortmess_save = &shortmess
-set shortmess=aoO
-badd +1 src/premium/PremiumIcon.jsx
-badd +1 src/premium/PremiumIcon.d.ts
-badd +0 src/premium/index.js
+if &shortmess =~ 'A'
+  set shortmess=aoOA
+else
+  set shortmess=aoO
+endif
+badd +1 svg/item-align-vert-center.svg
+badd +66 src/index.js
 argglobal
 %argdel
-edit src/premium/index.js
-argglobal
-balt src/premium/PremiumIcon.d.ts
-let s:l = 1 - ((0 * winheight(0) + 34) / 69)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 1
-normal! 0
-lcd ~/projects/genially/mono/icons
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

@@ -26,6 +26,26 @@ with pkgs; {
   xdg = (import ./xdg.nix) { pkgs = pkgs; };
   programs = (import ./programs.nix) { pkgs = pkgs; builtins = builtins; };
   services = (import ./services.nix) { };
+
+  # systemd.user = {
+  #   services = {
+  #     conky = {
+  #       Unit = {
+  #         Description = "A conky service";
+  #       };
+
+  #       Install = {
+  #         WantedBy = [ "default.target" ];
+  #       };
+
+  #       Service = {
+  #         Type = "forking";
+  #         ExecStart = "${pkgs.conky}/bin/conky -d -c ${./xdg/conky/config}";
+  #       };
+  #     };
+
+  #   };
+  # };
 }
 
 
