@@ -62,7 +62,7 @@ return packer.startup(function(use)
 	})
 	use({ "kyazdani42/nvim-tree.lua", commit = "f183c7f31197ae499c3420341fb8b275636a49b8" })
 	use("ahmedkhalf/project.nvim")
-	use("lewis6991/impatient.nvim")
+	-- use("lewis6991/impatient.nvim")
 	use({
 		"lukas-reineke/indent-blankline.nvim",
 		event = "BufRead",
@@ -104,10 +104,7 @@ return packer.startup(function(use)
 	use("folke/tokyonight.nvim")
 
 	-- comletion plugins
-	use({
-		"hrsh7th/nvim-cmp",
-		commit = "d93104244c3834fbd8f3dd01da9729920e0b5fe7",
-	}) -- The completion plugin
+	use("hrsh7th/nvim-cmp") -- The completion plugin
 	use("hrsh7th/cmp-buffer") -- buffer completions
 	use("hrsh7th/cmp-path") -- path completions
 	use("hrsh7th/cmp-cmdline") -- cmdline completions
@@ -195,14 +192,15 @@ return packer.startup(function(use)
 	use("akinsho/git-conflict.nvim") -- https://github.com/akinsho/git-conflict.nvim
 
 	-- markdown
-	use({
-		"iamcco/markdown-preview.nvim",
-		run = "cd app && npm install",
-		setup = function()
-			vim.g.mkdp_filetypes = { "markdown" }
-		end,
-		ft = { "markdown" },
-	})
+	-- use({
+	-- 	"iamcco/markdown-preview.nvim",
+	-- 	run = "cd app && npm install",
+	-- 	setup = function()
+	-- 		vim.g.mkdp_filetypes = { "markdown" }
+	-- 	end,
+	-- 	ft = { "markdown" },
+	-- })
+	use("jakewvincent/mkdnflow.nvim")
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

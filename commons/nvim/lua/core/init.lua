@@ -1,5 +1,5 @@
 -- require "core.colorschema"
-require("core.completions")
+require("core.cmp")
 require("lsp")
 require("core.notify")
 require("core.illuminate")
@@ -22,5 +22,6 @@ require("core.sessions")
 require("core.workspaces")
 require("core.git-conflict")
 require("core.alpha")
+require("mkdnflow")
 
 -- require "core.feline"

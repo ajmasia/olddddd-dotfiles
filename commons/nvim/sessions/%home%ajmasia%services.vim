@@ -19,11 +19,11 @@ argglobal
 $argadd docker-compose.yml
 edit docker-compose.yml
 argglobal
-let s:l = 12 - ((11 * winheight(0) + 15) / 30)
+let s:l = 1 - ((0 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 12
+keepjumps 1
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

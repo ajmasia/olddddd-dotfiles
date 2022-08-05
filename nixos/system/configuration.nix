@@ -234,6 +234,7 @@
       vim
       git
       # ofono-phonesim
+      neovim-nightly
       home-manager
     ];
   };
@@ -243,6 +244,12 @@
       allowUnfree = true;
     };
   };
+
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
+    }))
+  ];
 
   programs = {
     gnupg = {

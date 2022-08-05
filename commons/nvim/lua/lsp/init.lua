@@ -9,8 +9,9 @@ require("lsp.handlers").setup()
 require("lsp.null-ls")
 
 local lspconfig = require("lspconfig")
+
 lspconfig.emmet_ls.setup({
-    -- capabilities = capabilities,
-    -- on_attach = on_attach,
-    filetypes = { "html", "css", "typescriptreact", "javascriptreact" },
+	-- capabilities = capabilities,
+	-- on_attach = on_attach,
+	filetypes = { "html", "css", "typescriptreact", "javascriptreact" },
 })

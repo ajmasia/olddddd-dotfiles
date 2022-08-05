@@ -13,18 +13,10 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +0 package.json
+badd +53 ~/.config/nixpkgs/programs.nix
 argglobal
 %argdel
-$argadd package.json
-edit package.json
-argglobal
-let s:l = 18 - ((14 * winheight(0) + 34) / 69)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 18
-normal! 0
+$argadd ~/.config/nixpkgs
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

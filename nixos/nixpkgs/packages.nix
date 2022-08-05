@@ -59,6 +59,7 @@ with pkgs; [
   kubectx
   polkit
   etcher
+  di
 
   # Useless
   cmatrix
@@ -129,7 +130,7 @@ with pkgs; [
   # Development
   # editors
   (emacsWithPackages (epkgs: [ epkgs.emacsql-sqlite ]))
-  unstablePackages.neovim
+  # unstablePackages.neovim
   vscode
   # vscode_1_67
 

@@ -13,18 +13,16 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +1 src/app/components/window-modes/LayerGroupedItem.jsx
-badd +161 src/app/components/window-modes/LayerItem.jsx
+badd +1 src/app/components/modal/download-video/DownloadVideoModal.tsx
 argglobal
 %argdel
-edit src/app/components/window-modes/LayerItem.jsx
+edit src/app/components/modal/download-video/DownloadVideoModal.tsx
 argglobal
-balt src/app/components/window-modes/LayerGroupedItem.jsx
-let s:l = 41 - ((40 * winheight(0) + 34) / 69)
+let s:l = 1 - ((0 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 41
+keepjumps 1
 normal! 0
 lcd ~/projects/genially/mono/apps/editor
 tabnext 1

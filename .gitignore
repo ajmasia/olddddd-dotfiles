@@ -1,4 +1,6 @@
 commons/lvim/plugin
 commons/lvim/sessions
+commons/nvim/plugin/
+commons/nvim/sessions/
 
 .env

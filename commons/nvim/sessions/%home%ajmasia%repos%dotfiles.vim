@@ -13,19 +13,18 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +5 nixos/nixpkgs/config.nix
+badd +4 .gitignore
 argglobal
 %argdel
-$argadd nixos/nixpkgs/config.nix
-edit nixos/nixpkgs/config.nix
+$argadd .gitignore
+edit .gitignore
 argglobal
-let s:l = 7 - ((6 * winheight(0) + 34) / 69)
+let s:l = 4 - ((3 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 7
-normal! 0
-lcd ~/repos/dotfiles
+keepjumps 4
+normal! 022|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
