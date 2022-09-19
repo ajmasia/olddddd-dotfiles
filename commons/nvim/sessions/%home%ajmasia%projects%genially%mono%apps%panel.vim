@@ -13,17 +13,17 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +0 src/app/components/modal/genially/DownloadVideoModal.tsx
+badd +48 src/app/components/template/TemplateContainerCustom.tsx
 argglobal
 %argdel
-edit src/app/components/modal/genially/DownloadVideoModal.tsx
+edit src/app/components/template/TemplateContainerCustom.tsx
 argglobal
-let s:l = 38 - ((37 * winheight(0) + 34) / 69)
+let s:l = 32 - ((31 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 38
-normal! 066|
+keepjumps 32
+normal! 020|
 lcd ~/projects/genially/mono/apps/panel
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
@@ -38,6 +38,7 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
+nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :

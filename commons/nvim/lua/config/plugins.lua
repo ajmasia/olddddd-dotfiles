@@ -191,6 +191,9 @@ return packer.startup(function(use)
 	use({ "sindrets/diffview.nvim", evet = "BufRead" })
 	use("akinsho/git-conflict.nvim") -- https://github.com/akinsho/git-conflict.nvim
 
+	-- Terminal
+	use("akinsho/toggleterm.nvim")
+
 	-- markdown
 	-- use({
 	-- 	"iamcco/markdown-preview.nvim",
@@ -200,7 +203,15 @@ return packer.startup(function(use)
 	-- 	end,
 	-- 	ft = { "markdown" },
 	-- })
-	use("jakewvincent/mkdnflow.nvim")
+	use({
+		"jakewvincent/mkdnflow.nvim",
+		rocks = "luautf8", -- Ensures optional luautf8 dependency is installed
+		config = function()
+			require("mkdnflow").setup({})
+		end,
+	})
+
+	use("lalitmee/browse.nvim")
 
 	-- Automatically set up your configuration after cloning packer.nvim
 	-- Put this at the end after all plugins

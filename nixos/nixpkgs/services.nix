@@ -59,21 +59,25 @@
       in
       [
         {
-          name = "Solo";
-          outputs_connected = [ LAPTOP_SCREEN ];
+          name = "Laptop";
           outputs_disconnected = [ HOME_SCREEN ];
-          configure_single = LAPTOP_SCREEN + "@1920x1080";
-          primary = true;
+          outputs_connected = [ LAPTOP_SCREEN ];
+          configure_single = LAPTOP_SCREEN;
+          primary = LAPTOP_SCREEN;
           atomic = true;
-          execute_after = [ ];
+          execute_after = [
+            "bspc wm -r"
+          ];
         }
         {
-          name = "Office";
+          name = "Laptop + External";
           outputs_connected = [ LAPTOP_SCREEN HOME_SCREEN ];
           configure_row = [ LAPTOP_SCREEN HOME_SCREEN ];
           primary = HOME_SCREEN;
           atomic = true;
-          execute_after = [ ];
+          execute_after = [
+            "bspc wm -r"
+          ];
         }
       ];
   };

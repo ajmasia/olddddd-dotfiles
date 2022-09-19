@@ -13,11 +13,11 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +61 ~/.config/nixpkgs/packages.nix
+badd +0 ~/.config/nixpkgs/config.nix
 argglobal
 %argdel
 $argadd ~/.config/nixpkgs
-edit ~/.config/nixpkgs/packages.nix
+edit ~/.config/nixpkgs/config.nix
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
@@ -31,12 +31,12 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 argglobal
-let s:l = 61 - ((45 * winheight(0) + 34) / 69)
+let s:l = 6 - ((5 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 61
-normal! 03|
+keepjumps 6
+normal! 020|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

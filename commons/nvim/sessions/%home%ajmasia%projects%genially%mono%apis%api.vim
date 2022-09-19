@@ -13,22 +13,12 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +168 ~/projects/genially/mono/apps/panel/src/app/stores/geniallyStore.ts
-badd +64 ~/projects/genially/mono/apps/panel/src/app/stores/models/genially.ts
-badd +252 ~/projects/genially/mono/apps/panel/src/app/services/geniallyService.ts
-badd +79 ~/projects/genially/mono/apps/panel/src/app/App.jsx
-badd +151 ~/projects/genially/mono/apps/panel/src/app/use-cases/initialLoad.ts
-badd +61 ~/projects/genially/mono/apps/panel/src/app/services/authService.ts
-badd +68 ~/projects/genially/mono/apps/panel/src/app/pages/dashboard/TeamDashboard.tsx
-badd +71 ~/projects/genially/mono/ui/build/hooks/useLivePagination.d.ts
-badd +30 src/core/genially/domain/GeniallyName.ts
-badd +229 src/core/genially/domain/Genially.ts
-badd +153 ~/projects/genially/mono/apps/panel/src/app/components/modal/upgrade-plan/UpgradePlanConfirmModal.jsx
-badd +1348 ~/projects/genially/mono/ui/node_modules/@types/react/index.d.ts
-badd +76 ~/projects/genially/mono/apps/panel/src/app/components/modal/upgrade-plan/UpgradePlanConfirmModal.styled.ts
+badd +42 src/core/genially/domain/authorizers/teams/TeamSpaceMemberGeniallyAuthorizer.ts
+badd +53 src/core/cross-cutting/domain/security/ResourceAuthorizer.ts
+badd +18 src/core/genially/domain/authorizers/BaseGeniallyAuthorizer.ts
 argglobal
 %argdel
-edit ~/projects/genially/mono/apps/panel/src/app/components/modal/upgrade-plan/UpgradePlanConfirmModal.jsx
+edit src/core/genially/domain/authorizers/teams/TeamSpaceMemberGeniallyAuthorizer.ts
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
@@ -47,30 +37,29 @@ set winminwidth=0
 set winwidth=1
 wincmd =
 argglobal
-balt ~/projects/genially/mono/apps/panel/src/app/components/modal/upgrade-plan/UpgradePlanConfirmModal.styled.ts
-let s:l = 139 - ((49 * winheight(0) + 34) / 69)
+balt src/core/genially/domain/authorizers/BaseGeniallyAuthorizer.ts
+let s:l = 36 - ((35 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 139
-normal! 029|
-lcd ~/projects/genially/mono/apps/panel
-wincmd w
-argglobal
-if bufexists(fnamemodify("~/projects/genially/mono/apis/api/src/core/genially/domain/GeniallyName.ts", ":p")) | buffer ~/projects/genially/mono/apis/api/src/core/genially/domain/GeniallyName.ts | else | edit ~/projects/genially/mono/apis/api/src/core/genially/domain/GeniallyName.ts | endif
-if &buftype ==# 'terminal'
-  silent file ~/projects/genially/mono/apis/api/src/core/genially/domain/GeniallyName.ts
-endif
-balt ~/projects/genially/mono/apps/panel/src/app/services/authService.ts
-let s:l = 28 - ((27 * winheight(0) + 34) / 69)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 28
-normal! 05|
+keepjumps 36
+normal! 042|
 lcd ~/projects/genially/mono/apis/api
 wincmd w
-2wincmd w
+argglobal
+if bufexists(fnamemodify("~/projects/genially/mono/apis/api/src/core/cross-cutting/domain/security/ResourceAuthorizer.ts", ":p")) | buffer ~/projects/genially/mono/apis/api/src/core/cross-cutting/domain/security/ResourceAuthorizer.ts | else | edit ~/projects/genially/mono/apis/api/src/core/cross-cutting/domain/security/ResourceAuthorizer.ts | endif
+if &buftype ==# 'terminal'
+  silent file ~/projects/genially/mono/apis/api/src/core/cross-cutting/domain/security/ResourceAuthorizer.ts
+endif
+balt ~/projects/genially/mono/apis/api/src/core/genially/domain/authorizers/teams/TeamSpaceMemberGeniallyAuthorizer.ts
+let s:l = 53 - ((52 * winheight(0) + 34) / 69)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 53
+normal! 061|
+lcd ~/projects/genially/mono/apis/api
+wincmd w
 wincmd =
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
@@ -87,6 +76,7 @@ if filereadable(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
+nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :

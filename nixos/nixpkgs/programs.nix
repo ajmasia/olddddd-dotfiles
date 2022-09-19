@@ -1,4 +1,4 @@
-{ pkgs, builtins }:
+{ pkgs, lib, builtins }:
 
 let
   HOME_PATH = builtins.getEnv "HOME";
@@ -18,6 +18,9 @@ with builtins; {
 
       export DIRENV_LOG_FORMAT=
       eval "$(direnv hook bash)"
+
+      # Greet with some fortune cookie | with lovely colors
+      fortune | lolcat
     '';
 
     profileExtra = ''
@@ -71,6 +74,12 @@ with builtins; {
     settings = {
       env = {
         WINIT_X11_SCALE_FACTOR = "1.0";
+        TERM = "xterm-256color";
+      };
+
+      class = {
+        instance = "Alacritty";
+        general = "Alacritty";
       };
 
       font = {
@@ -81,37 +90,10 @@ with builtins; {
         };
       };
 
-      # colors = {
-      #   primary = {
-      #     background = "#1a1b26";
-      #     foreground = "#a9b1d6";
-      #   };
-      #   normal = {
-      #     black = "#32344a";
-      #     red = "#f7768e";
-      #     green = "#9ece6a";
-      #     yellow = "#e0af68";
-      #     blue = "#7aa2f7";
-      #     magenta = "#ad8ee6";
-      #     cyan = "#ad8ee6";
-      #     white = "#787c99";
-      #   };
-      #   bright = {
-      #     black = "#444b6a";
-      #     red = "#ff7a93";
-      #     green = "#b9f27c";
-      #     yellow = "#ff9e64";
-      #     blue = "#7da6ff";
-      #     magenta = "#bb9af7";
-      #     cyan = "#0db9d7";
-      #     white = "#acb0d0";
-      #   };
-      # };
-
       colors = {
         primary = {
-          background = "#282c34";
-          foreground = "#c5c8c6";
+          background = "#24283b";
+          foreground = "0xa9b1d6";
         };
         selection = {
           background = "#444444";
@@ -122,29 +104,29 @@ with builtins; {
           text = "#151515";
         };
         normal = {
-          black = "#dadada";
-          blue = "#85befd";
-          cyan = "#85befd";
-          green = "#87c38a";
-          magenta = "#b9b6fc";
-          red = "#fd5ff1";
-          white = "#e0e0e0";
-          yellow = "#ffd7b1";
+          black = "0x32344a";
+          blue = "0x7aa2f7";
+          cyan = "0x449dab";
+          green = "0x9ece6a";
+          magenta = "0xad8ee6";
+          red = "0xf7768e";
+          white = "0x787c99";
+          yellow = "0xe0af68";
         };
         bright = {
-          black = "#dadada";
-          blue = "#96cbfe";
-          cyan = "#85befd";
-          green = "#94fa36";
-          magenta = "#b9b6fc";
-          red = "#fd5ff1";
-          white = "#e0e0e0";
-          yellow = "#f5ffa8";
+          black = "0x444b6a";
+          blue = "0x7da6ff";
+          cyan = "0xbb9af7";
+          green = "0xb9f27c";
+          magenta = "0xbb9af7";
+          red = "0xff7a93";
+          white = "0xacb0d0";
+          yellow = "0xff9e64";
         };
       };
 
       window = {
-        padding = { x = 4; y = 4; };
+        padding = { x = 8; y = 8; };
       };
 
       cursor = {
@@ -152,9 +134,12 @@ with builtins; {
         unfocused_hollow = false;
 
         style = {
-          shape = "beam";
+          shape = "underline";
           blinking = "always";
         };
+      };
+      shell = {
+        program = "/run/current-system/sw/bin/bash";
       };
     };
   };
@@ -165,10 +150,12 @@ with builtins; {
 
     settings = {
       add_newline = false;
-
       line_break = {
         disabled = true;
       };
+      # format = lib.concatStrings [
+      #   "[$username](red)"
+      # ];
 
       nix_shell = {
         style = "bold blue";
@@ -177,6 +164,20 @@ with builtins; {
         pure_msg = "[pure](bold green)";
         format = "via [$symbol$state( \($name)\)]($style) ";
       };
+
+      # username = {
+      #   style_user = "green";
+      #   style_root = "red bold";
+      #   format = "[$user]($style)";
+      #   disabled = false;
+      #   show_always = true;
+      # };
+
+      # hostname = {
+      #   disabled = false;
+      #   ssh_only = false;
+      #   format = "[@](red)[$hostname](green) ";
+      # };
     };
   };
 
@@ -259,6 +260,23 @@ with builtins; {
       let g:airline_powerline_fonts = 1
       colorscheme OceanicNext
     '';
+  };
+
+  kitty = {
+    enable = true;
+
+    theme = "Tokyo Night Storm";
+    settings = {
+      font_family = "Hack Nerd Font";
+      font_size = 12;
+      window_padding_width = 6;
+      window_border_width = 0;
+      placement_strategy = "top-left";
+      cursor_shape = "underline";
+      window_resize_step_cells = 2;
+      confirm_os_window_close = 0;
+      shell_integration = "enabled";
+    };
   };
 }
 

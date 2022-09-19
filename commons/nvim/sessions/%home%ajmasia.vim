@@ -13,15 +13,18 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +90 ~/.config/nvim/lua/core/whichkey.lua
-badd +1 ~/.config/nvim/lua/lsp/null-ls.lua
-badd +123 ~/.config/nvim/lua/core/telescope.lua
-badd +50 ~/.config/nvim/lua/core/projects.lua
-badd +174 ~/.config/nvim/lua/config/plugins.lua
-badd +55 ~/.config/nvim/lua/core/completions.lua
+badd +59 ~/.config/nixpkgs/bin/set-slack-status
 argglobal
 %argdel
-$argadd .config/nvim
+$argadd ~/.config/nixpkgs
+edit ~/.config/nixpkgs/bin/set-slack-status
+argglobal
+let s:l = 51 - ((44 * winheight(0) + 34) / 69)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 51
+normal! 023|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

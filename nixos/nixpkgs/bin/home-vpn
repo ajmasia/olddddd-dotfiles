@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+check_home_vpn_status() {
+  echo "$(systemctl is-active openvpn-home.service)"
+}
+
+show_vpn_status() {
+  vpn_status=$(check_home_vpn_status)
+
+  if [[ $vpn_status = "active" ]]; then
+    echo "%{B#21252b}%{F#fbd065}%{B- F-}"
+  else
+    echo "%{B#21252b}%{F#868686}%{B- F-}"
+  fi
+}
+
+connect_home_vpn() {
+  qsudo systemctl start openvpn-home.service
+  notify-send "home VPN $(check_home_vpn_status) 🟢"
+}
+
+disconnect_home_vpn() {
+  qsudo systemctl stop openvpn-home.service
+  notify-send "home VPN $(check_home_vpn_status) ⛔"
+}
+
+
+case "$1" in
+  --toggle)
+    vpn_status=$(check_home_vpn_status)
+
+    if [[ $vpn_status = "inactive" ]]; then
+      connect_home_vpn
+    else
+      disconnect_home_vpn
+    fi
+
+    ;;
+  *)
+    show_vpn_status 
+    ;;
+esac
+
+
+

@@ -13,54 +13,18 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +1 ~/learning/nodejs/secrets-cli/docker-compose.yml
-badd +76 ~/learning/nodejs/secrets-cli/lib/postgre.js
-badd +66 index.js
-badd +40 ~/learning/nodejs/secrets-cli/lib/sqlite.js
-badd +15 ~/learning/nodejs/secrets-cli/lib/crypto.js
+badd +0 .gitignore
 argglobal
 %argdel
-edit index.js
-let s:save_splitbelow = &splitbelow
-let s:save_splitright = &splitright
-set splitbelow splitright
-wincmd _ | wincmd |
-vsplit
-1wincmd h
-wincmd w
-let &splitbelow = s:save_splitbelow
-let &splitright = s:save_splitright
-wincmd t
-let s:save_winminheight = &winminheight
-let s:save_winminwidth = &winminwidth
-set winminheight=0
-set winheight=1
-set winminwidth=0
-set winwidth=1
-wincmd =
+$argadd .gitignore
+edit .gitignore
 argglobal
-balt ~/learning/nodejs/secrets-cli/lib/sqlite.js
-let s:l = 66 - ((53 * winheight(0) + 34) / 69)
+let s:l = 42 - ((8 * winheight(0) + 20) / 41)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 66
-normal! 09|
-wincmd w
-argglobal
-if bufexists(fnamemodify("~/learning/nodejs/secrets-cli/lib/postgre.js", ":p")) | buffer ~/learning/nodejs/secrets-cli/lib/postgre.js | else | edit ~/learning/nodejs/secrets-cli/lib/postgre.js | endif
-if &buftype ==# 'terminal'
-  silent file ~/learning/nodejs/secrets-cli/lib/postgre.js
-endif
-balt index.js
-let s:l = 81 - ((0 * winheight(0) + 34) / 69)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 81
-normal! 02|
-wincmd w
-wincmd =
+keepjumps 42
+normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
@@ -68,8 +32,6 @@ endif
 unlet! s:wipebuf
 set winheight=1 winwidth=20
 let &shortmess = s:shortmess_save
-let &winminheight = s:save_winminheight
-let &winminwidth = s:save_winminwidth
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)

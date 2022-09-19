@@ -1,6 +1,7 @@
 { pkgs, ... }:
 let
   unstablePackages = import <unstable> { };
+  extraNodePackages = import ./node/default.nix { };
   yarnWithNode16 = pkgs.yarn.overrideAttrs (oldAttrs: rec {
     buildInputs = with pkgs; [
       nodejs-16_x
@@ -50,7 +51,6 @@ with pkgs; [
   sox
   qsudo
   qt5ct
-  i3lock-fancy
   galculator
   system-config-printer
   direnv
@@ -60,6 +60,11 @@ with pkgs; [
   polkit
   etcher
   di
+  lfs
+  neofetch
+  fortune
+  lolcat
+  btop
 
   # Useless
   cmatrix
@@ -72,6 +77,9 @@ with pkgs; [
   pcmanfm
   ranger
   nnn
+
+  # Mail clients
+  mailspring
 
   # File viewers
   sxiv
@@ -115,9 +123,9 @@ with pkgs; [
   timewarrior
   calibre
   # todoist-electron
-  # todoist
-  # bitwarden
-  # bitwarden-cli
+  todoist
+  bitwarden
+  bitwarden-cli
   obsidian
   pdfarranger
   _1password
@@ -130,7 +138,7 @@ with pkgs; [
   # Development
   # editors
   (emacsWithPackages (epkgs: [ epkgs.emacsql-sqlite ]))
-  # unstablePackages.neovim
+  unstablePackages.neovim
   vscode
   # vscode_1_67
 
@@ -166,6 +174,7 @@ with pkgs; [
   # node packages
   nodePackages.node2nix
   nodePackages.neovim
+  extraNodePackages.rtm-cli
   # nodePackages.eslint
   # nodePackages.prettier
   # nodePackages.typescript-language-server

@@ -13,19 +13,25 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +79 src/components/DownloadVideo/components/VideoSettings/VideoSettings.tsx
-badd +99 src/hooks/useExperiment.ts
+badd +98 src/components/DownloadVideo/components/VideoSettings/VideoSettings.tsx
+badd +39 ~/repos/dotfiles/commons/nvim/lua/core/surround.lua
 argglobal
 %argdel
 edit src/components/DownloadVideo/components/VideoSettings/VideoSettings.tsx
+wincmd t
+let s:save_winminheight = &winminheight
+let s:save_winminwidth = &winminwidth
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
 argglobal
-balt src/hooks/useExperiment.ts
-let s:l = 79 - ((34 * winheight(0) + 34) / 69)
+let s:l = 98 - ((41 * winheight(0) + 34) / 69)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 79
-normal! 02|
+keepjumps 98
+normal! 0
 lcd ~/projects/genially/mono/ui
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
@@ -34,6 +40,8 @@ endif
 unlet! s:wipebuf
 set winheight=1 winwidth=20
 let &shortmess = s:shortmess_save
+let &winminheight = s:save_winminheight
+let &winminwidth = s:save_winminwidth
 let s:sx = expand("<sfile>:p:r")."x.vim"
 if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)

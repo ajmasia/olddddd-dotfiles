@@ -10,7 +10,7 @@ require("core.comments")
 require("core.lualine")
 require("core.whichkey")
 require("core.nvim-tree")
-require("core.projects")
+require("core.project")
 require("core.impatient")
 -- require "core.indentline"
 require("core.gps")
@@ -23,5 +23,7 @@ require("core.workspaces")
 require("core.git-conflict")
 require("core.alpha")
 require("mkdnflow")
+require("core.toggleterm")
+require("core.browse")
 
 -- require "core.feline"

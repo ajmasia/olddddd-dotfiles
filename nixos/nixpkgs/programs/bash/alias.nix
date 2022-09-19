@@ -3,8 +3,9 @@ import ../../../../commons/alias/commons.nix //
   import ../../../../commons/alias/docker.nix //
 {
   # directories
-  mono = "cd ~/projects/genially/mono && gsh shell";
-  dev-dv = "cd ~/projects/genially/dev-databases && gsh shell";
+  gmo = "cd ~/projects/genially/mono && gsh shell";
+  gdb = "cd ~/projects/genially/dev-databases && gsh shell";
+  doc = "cd ~/synology-drive";
 
   # vpn
   gdev-vpn = "sudo openvpn ~/.config/vpn/genially_dev.ovpn";

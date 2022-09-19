@@ -4,8 +4,9 @@
   "super + Escape" = "pkill -USR1 -x sxhkd";
 
   # App launchers
-  "super + Return" = "alacritty";
+  "super + Return" = "kitty";
   "super + @space" = "rofi -show drun";
+  "super + p" = "rofi -show drun";
   "super + e" = "emojis";
   "super + shift + f" = "flameshot gui";
   "super + shift + l" = "set-slack-status";
@@ -42,5 +43,6 @@
   "XF86Audio{Raise,Lower}Volume" = "vol {up,down}";
   "XF86AudioMute" = "vol mute";
 }
+
 
 

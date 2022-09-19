@@ -11,11 +11,11 @@ pkill dunst
 dunst -conf ~/.config/dunst/dunstrc &
 
 pkill xautolock
-# xautolock -time 10 -locker "betterlockscreen -l" -notify 15 -notifier "notify-send 'Locker' 'Locking screen in 15 seconds'" -killtime 10 -killer "systemctl suspend" &
-xautolock -time 20 -locker 'i3lock-fancy -n' -notify 15 -notifier "notify-send 'Screen will lock in 15 s'" -detectsleep -killtime 20 -killer "systemctl suspend" &
+xautolock -time 10 -locker "betterlockscreen -l" -notify 15 -notifier "notify-send 'Locker' 'Locking screen in 15 seconds'" -killtime 10 -killer "systemctl suspend" &
+# xautolock -time 20 -locker 'i3lock-fancy -n' -notify 15 -notifier "notify-send 'Screen will lock in 15 s'" -detectsleep -killtime 20 -killer "systemctl suspend" &
 
 ~/.config/polybar/launch.sh &
-feh --bg-fill ~/.config/wallpapers/wallpaper_001.jpg &
+feh --bg-fill ~/.config/wallpapers/wallpaper_004.jpg &
 
 pkill Conky
 conky -d -c ~/.config/nixpkgs/xdg/conky/config
@@ -30,23 +30,11 @@ synology-drive &
 
 xsetroot -cursor_name left_ptr &
 
-# monitors
-is_external_monitor_connected=$(xrandr --query | grep 'HDMI-A-0 connected')
-
-if [[ $is_external_monitor_connected == "" ]]; then
-  bspc monitor eDP -d I II III IV V VI 
-else
-  bspc monitor eDP -d VII VIII IX X
-  bspc monitor HDMI-A-0 -f -d I II III IV V VI
-  bspc rule -a Slack desktop='^1'
-  bspc rule -a TelegramDesktop desktop='^2'
-fi
-
-play ~/.config/sounds/startup_01.wav
+play ~/.config/sounds/startup_01.wav &
 
 # window information
 bspc config border_width 0
-bspc config window_gap 6
+bspc config window_gap 12
 
 bspc config ignore_ewmh_struts
 
@@ -69,4 +57,19 @@ bspc config pointer_action2 resize_corner
 bspc rule -a Zathura state=tiled
 bspc rule -a Todoist state=floating follow=on focus=on
 bspc rule -a Galculator state=floating follow=on focus=on
+bspc rule -a Slack desktop='^2'
+bspc rule -a TelegramDesktop desktop='^3' follow=on focus=on
+
+# monitors
+is_external_monitor_connected=$(xrandr --query | grep 'HDMI-A-0 connected')
+
+if [[ $is_external_monitor_connected == "" ]]; then
+  bspc monitor eDP -d I II III IV V VI 
+  bspc rule -a Alacritty -o desktop='^1' && /home/ajmasia/.nix-profile/bin/alacritty
+else
+  bspc monitor eDP -d VII VIII IX X
+  bspc monitor HDMI-A-0 -f -d I II III IV V VI
+  bspc rule -a Alacritty -o desktop='^1' && /home/ajmasia/.nix-profile/bin/alacritty
+fi 
+
 

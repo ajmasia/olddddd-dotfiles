@@ -24,7 +24,7 @@ with pkgs; {
   };
 
   xdg = (import ./xdg.nix) { pkgs = pkgs; };
-  programs = (import ./programs.nix) { pkgs = pkgs; builtins = builtins; };
+  programs = (import ./programs.nix) { pkgs = pkgs; lib = lib; builtins = builtins; };
   services = (import ./services.nix) { };
 
   # systemd.user = {

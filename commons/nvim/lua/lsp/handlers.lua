@@ -88,23 +88,13 @@ end
 -- end
 
 M.on_attach = function(client, bufnr)
-	-- notify(client.name)
+	lsp_keymaps(bufnr)
+	lsp_highlight_document(client)
+
 	if client.name == "tsserver" or client.name == "html" then
 		client.resolved_capabilities.document_formatting = false
 	end
-	lsp_keymaps(bufnr)
-	lsp_highlight_document(client)
 end
-
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_ok then
-	return
-end
-
-M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 function M.enable_format_on_save()
 	vim.cmd([[
