@@ -16,6 +16,9 @@ let
       sha256 = "1yan995h228v18b6hcjgvkbnaxwbbrink5if4ggvdans9mczcgfw";
     })
     { };
+  # custom-nerdfonts = (pkgs.nerdfonts.override { 
+  #   fonts = [ "FiraCode" "DroidSansMono" "Hack" "SourceCodePro" "CascadiaCode"]; 
+  # });
 in
 with pkgs; [
   # System
@@ -65,6 +68,15 @@ with pkgs; [
   fortune
   lolcat
   btop
+  etcher
+  ryzenadj
+  lazygit
+
+  yubioath-desktop
+  yubikey-manager
+
+  # Terminal
+  wezterm
 
   # Useless
   cmatrix
@@ -85,10 +97,9 @@ with pkgs; [
   sxiv
 
   # Fonst
-  font-manager
   nerdfonts
+  # custom-nerdfonts
   font-awesome_5
-  fira-code
 
   # UI
   xdragon
@@ -98,6 +109,7 @@ with pkgs; [
   # sxhkd
   polybarFull
   picom
+  # picom-pijulius
   xautolock
   betterlockscreen
   lxappearance
@@ -119,6 +131,13 @@ with pkgs; [
   cava
   vlc
 
+  # Graphical editors
+  inkscape
+  gimp
+
+  # others
+  home-assistant-cli
+
   # Productivity
   timewarrior
   calibre
@@ -126,7 +145,7 @@ with pkgs; [
   todoist
   bitwarden
   bitwarden-cli
-  obsidian
+  unstablePackages.obsidian
   pdfarranger
   _1password
   _1password-gui
@@ -139,16 +158,17 @@ with pkgs; [
   # editors
   (emacsWithPackages (epkgs: [ epkgs.emacsql-sqlite ]))
   unstablePackages.neovim
-  vscode
-  # vscode_1_67
+  unstablePackages.vscode
+  thonny
 
   # interprets
-  python3
+  python3Full
   nodejs-16_x
   yarnWithNode16
 
   # python packages
   python39Packages.pyqt5
+  python39Packages.pip
 
   # tools
   gsh
@@ -169,7 +189,7 @@ with pkgs; [
   sumneko-lua-language-server
 
   # packages managers
-  cargo
+  unstablePackages.cargo
 
   # node packages
   nodePackages.node2nix

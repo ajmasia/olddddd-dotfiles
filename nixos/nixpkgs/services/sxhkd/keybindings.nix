@@ -4,7 +4,7 @@
   "super + Escape" = "pkill -USR1 -x sxhkd";
 
   # App launchers
-  "super + Return" = "kitty";
+  "super + Return" = "alacritty";
   "super + @space" = "rofi -show drun";
   "super + p" = "rofi -show drun";
   "super + e" = "emojis";

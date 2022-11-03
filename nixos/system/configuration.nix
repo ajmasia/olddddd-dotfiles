@@ -67,7 +67,6 @@
     xserver = {
       enable = true;
       autorun = true;
-      videoDrivers = [ "amdgpu-pro" ];
 
       displayManager = {
         lightdm = {
@@ -77,9 +76,6 @@
             };
           };
         };
-        # gdm = {
-        #   enable = true;
-        # };
       };
 
       windowManager = {
@@ -87,12 +83,6 @@
           enable = true;
         };
       };
-
-      # desktopManager = {
-      #   gnome = {
-      #     enable = true;
-      #   };
-      # };
 
       layout = "us";
       xkbVariant = "altgr-intl";
@@ -186,6 +176,9 @@
         enable = true;
         enableExtensionPack = true;
       };
+      guest = {
+        enable = true;
+      };
     };
   };
 
@@ -199,6 +192,7 @@
   };
   users.extraGroups.vboxusers.members = [ "ajmasia" ];
 
+
   environment = {
     etc = {
       openvpn = {
@@ -207,7 +201,6 @@
     };
 
     variables = {
-      EDITOR = "vim";
       QT_QPA_PLATFORMTHEME = "qt5ct";
     };
 
@@ -232,13 +225,34 @@
       };
     };
     vim = {
-      defaultEditor = true;
+      defaultEditor = false;
     };
   };
 
   xdg = {
     portal = {
       enable = true;
+    };
+  };
+
+  security = {
+    sudo = {
+      enable = true;
+      extraRules = [
+        {
+          users = [ "ajmasia" ];
+          commands = [
+            {
+              command = "/home/ajmasia/.nix-profile/bin/ryzenadj";
+              options = [ "NOPASSWD" ];
+            }
+            {
+              command = "/run/current-system/sw/bin/systemctl";
+              options = [ "NOPASSWD" ];
+            }
+          ];
+        }
+      ];
     };
   };
 

@@ -1,7 +1,7 @@
 {
   # Edit system and user configs
-  hme = "nvim ~/.config/nixpkgs";
-  sce = "nvim /etc/nixos/configuration.nix";
+  hme = "lvim ~/.config/nixpkgs";
+  sce = "lvim /etc/nixos/configuration.nix";
    
   # Switch configurations
   hms = "home-manager switch";

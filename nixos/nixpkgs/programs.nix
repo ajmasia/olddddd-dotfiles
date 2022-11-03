@@ -1,6 +1,7 @@
 { pkgs, lib, builtins }:
 
 let
+  unstablePackages = import <unstable> { };
   HOME_PATH = builtins.getEnv "HOME";
 in
 with builtins; {
@@ -15,6 +16,7 @@ with builtins; {
       # Init extra config
       export PATH="$HOME/.local/bin:$PATH"
       export SLACK_CLI_TOKEN=$(source ~/.env; echo $SLACK_CLI_TOKEN)
+      export EDITOR="nvim"
 
       export DIRENV_LOG_FORMAT=
       eval "$(direnv hook bash)"
@@ -30,9 +32,9 @@ with builtins; {
     historyIgnore = [ "ls" "cd" "exit" ];
     shellOptions = [ "histappend" "checkwinsize" "extglob" "globstar" "checkjobs" "autocd" ];
 
-    sessionVariables = {
-      EDITOR = "vim";
-    };
+    # sessionVariables = {
+    #   EDITOR = "nvim";
+    # };
 
     shellAliases = import ./programs/bash/alias.nix;
   };
@@ -71,10 +73,12 @@ with builtins; {
   alacritty = {
     enable = true;
 
+    package = unstablePackages.alacritty;
+
     settings = {
       env = {
-        WINIT_X11_SCALE_FACTOR = "1.0";
-        TERM = "xterm-256color";
+        WINIT_X11_SCALE_FACTOR = "1.05";
+      #   TERM = "xterm-256color";
       };
 
       class = {
@@ -276,6 +280,10 @@ with builtins; {
       window_resize_step_cells = 2;
       confirm_os_window_close = 0;
       shell_integration = "enabled";
+
+      repaint_delay = 10;
+      input_delay =3;
+      sync_to_monitor = "yes";
     };
   };
 }

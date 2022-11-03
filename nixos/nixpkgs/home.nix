@@ -3,6 +3,7 @@
 let
   USER = builtins.getEnv "USER";
   HOME_PATH = builtins.getEnv "HOME";
+  EDITOR = "nvim";
 in
 with pkgs; {
   home = {
@@ -26,6 +27,7 @@ with pkgs; {
   xdg = (import ./xdg.nix) { pkgs = pkgs; };
   programs = (import ./programs.nix) { pkgs = pkgs; lib = lib; builtins = builtins; };
   services = (import ./services.nix) { };
+  fonts.fontconfig.enable = true;
 
   # systemd.user = {
   #   services = {

@@ -5,24 +5,28 @@ pkill sxhkd
 pgrep -x sxhkd > /dev/null || sxhkd &
 
 pkill picom
-picom --experimental-backends &
+picom --experimental-backend &
+# picom -b --animations --animation-window-mass 0.5 --animation-for-open-window zoom --animation-stiffness 350 &
 
 pkill dunst
 dunst -conf ~/.config/dunst/dunstrc &
 
-pkill xautolock
-xautolock -time 10 -locker "betterlockscreen -l" -notify 15 -notifier "notify-send 'Locker' 'Locking screen in 15 seconds'" -killtime 10 -killer "systemctl suspend" &
+# pkill xautolock
+# xautolock -time 10 -locker "betterlockscreen -l" -notify 15 -notifier "notify-send 'Locker' 'Locking screen in 15 seconds'" -killtime 10 -killer "systemctl suspend" &
 # xautolock -time 20 -locker 'i3lock-fancy -n' -notify 15 -notifier "notify-send 'Screen will lock in 15 s'" -detectsleep -killtime 20 -killer "systemctl suspend" &
 
 ~/.config/polybar/launch.sh &
 feh --bg-fill ~/.config/wallpapers/wallpaper_004.jpg &
 
-pkill Conky
-conky -d -c ~/.config/nixpkgs/xdg/conky/config
+# pkill Conky
+# conky -d -c ~/.config/nixpkgs/xdg/conky/config
 
 # pkill insync
 # rm /tmp/insync1000.sock &
 # insync start &
+
+pkill battery-notifier
+battery-notifier &
 
 pkill -f cloud-drive-con &
 pkill -f cloud-drive* &
@@ -35,6 +39,11 @@ play ~/.config/sounds/startup_01.wav &
 # window information
 bspc config border_width 0
 bspc config window_gap 12
+
+# bspc config focused_border_color	"#BD93F9"
+# bspc config normal_border_color		"#282A36"
+# bspc config active_border_color		"#8BE9FD"
+# bspc config presel_feedback_color	"#50FA7B"
 
 bspc config ignore_ewmh_struts
 
@@ -58,18 +67,20 @@ bspc rule -a Zathura state=tiled
 bspc rule -a Todoist state=floating follow=on focus=on
 bspc rule -a Galculator state=floating follow=on focus=on
 bspc rule -a Slack desktop='^2'
-bspc rule -a TelegramDesktop desktop='^3' follow=on focus=on
+bspc rule -a TelegramDesktop desktop='^1'
 
 # monitors
-is_external_monitor_connected=$(xrandr --query | grep 'HDMI-A-0 connected')
+is_external_monitor_connected=$(xrandr --query | grep 'HDMI-1 connected')
 
 if [[ $is_external_monitor_connected == "" ]]; then
-  bspc monitor eDP -d I II III IV V VI 
-  bspc rule -a Alacritty -o desktop='^1' && /home/ajmasia/.nix-profile/bin/alacritty
+  bspc monitor eDP-1 -d I II III IV V VI VII
+  bspc rule -a Alacritty -o desktop='^1' && /home/ajmasia/.nix-profile/bin/alacritty &
+  bspc rule -a TelegramDesktop -o desktop='^7' && /home/ajmasia/.nix-profile/bin/telegram-desktop &
+  bspc rule -a Slack -o desktop='^8' && /home/ajmasia/.nix-profile/bin/slack &
 else
-  bspc monitor eDP -d VII VIII IX X
-  bspc monitor HDMI-A-0 -f -d I II III IV V VI
-  bspc rule -a Alacritty -o desktop='^1' && /home/ajmasia/.nix-profile/bin/alacritty
+  bspc monitor eDP-1 -d VII VIII IX X
+  bspc monitor HDMI-1 -f -d I II III IV V VI
+  bspc rule -a TelegramDesktop -o desktop='^1' && /home/ajmasia/.nix-profile/bin/telegram-desktop &
+  bspc rule -a Slack -o desktop='^2' && /home/ajmasia/.nix-profile/bin/slack &
+  bspc rule -a Alacritty -o desktop='^5' follow=on focus=on && /home/ajmasia/.nix-profile/bin/alacritty &
 fi 
-
-
