@@ -15,16 +15,6 @@ with pkgs; {
       recursive = true;
     };
 
-    "picom" = {
-      source = ./xdg/picom;
-      recursive = true;
-    };
-
-    "dunst" = {
-      source = ./xdg/dunst;
-      recursive = true;
-    };
-
     "nnn" = {
       recursive = true;
       source = ../../commons/nnn;

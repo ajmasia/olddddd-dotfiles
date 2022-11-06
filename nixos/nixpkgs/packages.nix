@@ -104,12 +104,9 @@ with pkgs; [
   # UI
   xdragon
   kazam
-  dunst
   feh
   # sxhkd
   polybarFull
-  picom
-  # picom-pijulius
   xautolock
   betterlockscreen
   lxappearance

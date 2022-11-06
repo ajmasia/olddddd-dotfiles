@@ -82,6 +82,10 @@
         bspwm = {
           enable = true;
         };
+
+        awesome = {
+          enable = true;
+        };
       };
 
       layout = "us";

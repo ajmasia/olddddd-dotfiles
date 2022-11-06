@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+current_stapm_limit=$(amd-controller -i | grep "STAPM LIMIT" | awk '{print $5}')
+current_ppt_limit_fast=$(amd-controller -i | grep "PPT LIMIT FAST" | awk '{print $6}')
+current_ppt_limit_slow=$(amd-controller -i | grep "PPT LIMIT SLOW" | awk '{print $6}')
+current_profile="CUSTOM"
+
+echo "[${current_ppt_limit_slow}, ${current_stapm_limit}, ${current_ppt_limit_fast}]"
+
+if [[ $current_ppt_limit_slow == "10.000" && $current_stapm_limit == "10.000" && $current_ppt_limit_fast == "10.000" ]]
+then
+  current_profile="SLOW"
+elif [[ $current_ppt_limit_slow == "15.000" && $current_stapm_limit == "15.000" && $current_ppt_limit_fast == "25.000" ]]
+then
+  current_profile="MEDIUM"
+elif [[ $current_ppt_limit_slow == "70.000" && $current_stapm_limit == "80.000" && $current_ppt_limit_fast == "100.000" ]]
+then
+  current_profile="HIGH"
+else
+  current_profile="CUSTOM"
+fi
+
+echo $current_profile
+
