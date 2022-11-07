@@ -52,7 +52,7 @@ tm_checkout() {
 }
 
 
-SELECTED=$(echo -e "Check in\nWorking on\nReviewing PRs\nBreakfast\nCooking\nLunch\nMeeting\nPause\nCheck out\nBack\nCheck out weekend\nWorking out\nDoctor\nFamily" | rofi -dmenu -matching fuzzy -p 'Set your Slack status to' -sort -levenshtein-sort)
+SELECTED=$(echo -e "Check in\nWorking on\nReviewing PRs\nBreakfast\nCooking\nLunch\nMeeting\nP$use\nCheck out\nBack\nCheck out weekend\nWorking out\nDoctor\nFamily" | rofi -dmenu -matching fuzzy -p 'Set your Slack status to' -sort -levenshtein-sort)
 
 case $SELECTED in
   "Check in") 

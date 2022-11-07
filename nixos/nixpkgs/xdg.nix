@@ -4,16 +4,10 @@ with pkgs; {
   enable = true;
 
   configFile = {
-    "bspwm" = {
-      source = ./xdg/bspwm;
-      recursive = true;
-      executable = true;
-    };
-
-    "polybar" = {
-      source = ./xdg/polybar;
-      recursive = true;
-    };
+    # "polybar" = {
+    #   source = ./xdg/polybar;
+    #   recursive = true;
+    # };
 
     "nnn" = {
       recursive = true;

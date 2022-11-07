@@ -208,17 +208,17 @@ with builtins; {
 
   rofi = {
     enable = true;
-    theme = "themes/spotlight-dark.rasi";
-    extraConfig = {
-      "show-icons" = true;
-      "icon-theme" = "Papirus";
-      "display-drun" = "";
-      "drum-display-format" = "{name}";
-      "display-history" = false;
-      "fullscreen" = false;
-      "hide-scrollbar" = false;
-      "sidebar-mode" = false;
-    };
+    theme = "launcher.rasi";
+    # extraConfig = {
+    #   "show-icons" = true;
+    #   "icon-theme" = "Papirus";
+    #   "display-drun" = "";
+    #   "drum-display-format" = "{name}";
+    #   "display-history" = false;
+    #   "fullscreen" = false;
+    #   "hide-scrollbar" = false;
+    #   "sidebar-mode" = false;
+    # };
   };
 
   vim = {

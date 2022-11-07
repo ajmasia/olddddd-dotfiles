@@ -5,8 +5,8 @@
 
   # App launchers
   "super + Return" = "alacritty";
-  "super + @space" = "rofi -show drun";
-  "super + p" = "rofi -show drun";
+  "super + @space" = "rofi -show drun -theme ~/.config/rofi/themes/launcher.rasi &";
+  # "super + p" = "rofi -show drun";
   "super + e" = "emojis";
   "super + shift + f" = "flameshot gui";
   "super + shift + l" = "set-slack-status";
@@ -42,6 +42,9 @@
   # Sound control
   "XF86Audio{Raise,Lower}Volume" = "vol {up,down}";
   "XF86AudioMute" = "vol mute";
+
+  # System management
+  "super + alt + p" = "power-menu &";
 }
 
 

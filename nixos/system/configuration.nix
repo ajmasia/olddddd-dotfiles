@@ -43,7 +43,6 @@
 
     networkmanager = {
       enable = true;
-      # dns = "dnsmasq";
     };
 
     interfaces = {
@@ -80,10 +79,6 @@
 
       windowManager = {
         bspwm = {
-          enable = true;
-        };
-
-        awesome = {
           enable = true;
         };
       };

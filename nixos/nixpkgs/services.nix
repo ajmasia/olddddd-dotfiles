@@ -70,7 +70,21 @@
         dropdown_menu = { shadow = false; }
       };
     '';
-    
+
+  };
+
+  stalonetray = {
+    enable =  false;
+
+    config = {
+      transparent = true;
+      geometry = "6x1-0+0";
+
+      background = "#000000";
+      icon_size = 22;
+      kludges = "force_icons_size";
+      grow_gravity = "E";
+    };
   };
 
   xscreensaver = {

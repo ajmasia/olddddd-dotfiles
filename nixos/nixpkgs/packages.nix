@@ -105,7 +105,6 @@ with pkgs; [
   xdragon
   kazam
   feh
-  # sxhkd
   polybarFull
   xautolock
   betterlockscreen
