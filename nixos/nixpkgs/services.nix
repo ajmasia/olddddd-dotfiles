@@ -74,7 +74,7 @@
   };
 
   stalonetray = {
-    enable =  false;
+    enable = false;
 
     config = {
       transparent = true;

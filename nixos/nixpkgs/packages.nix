@@ -71,6 +71,7 @@ with pkgs; [
   etcher
   ryzenadj
   lazygit
+  awscli2
 
   yubioath-desktop
   yubikey-manager

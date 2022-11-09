@@ -9,6 +9,11 @@ with pkgs; {
     #   recursive = true;
     # };
 
+    "dunst" = {
+      source = ./xdg/dunst;
+      recursive = true;
+    };
+
     "nnn" = {
       recursive = true;
       source = ../../commons/nnn;

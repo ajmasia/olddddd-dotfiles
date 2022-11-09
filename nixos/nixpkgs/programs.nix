@@ -78,7 +78,7 @@ with builtins; {
     settings = {
       env = {
         WINIT_X11_SCALE_FACTOR = "1.05";
-      #   TERM = "xterm-256color";
+        #   TERM = "xterm-256color";
       };
 
       class = {
@@ -282,9 +282,13 @@ with builtins; {
       shell_integration = "enabled";
 
       repaint_delay = 10;
-      input_delay =3;
+      input_delay = 3;
       sync_to_monitor = "yes";
     };
   };
+
+  # mu = {
+  #   enable = true;
+  # };
 }
 
