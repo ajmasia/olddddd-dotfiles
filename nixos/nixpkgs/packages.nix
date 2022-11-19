@@ -124,6 +124,7 @@ with pkgs; [
 
   # Multimedia
   spotify
+  spotify-tray
   pamix
   cava
   vlc

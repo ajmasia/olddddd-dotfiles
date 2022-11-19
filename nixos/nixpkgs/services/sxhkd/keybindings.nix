@@ -10,6 +10,7 @@
   "super + e" = "emojis";
   "super + shift + f" = "flameshot gui";
   "super + shift + l" = "set-slack-status";
+  "super + shift + p" = "set-cpu-profile";
 
   # Windows management
   "super + {_,shift + }w" = "bspc node -{c,k}";

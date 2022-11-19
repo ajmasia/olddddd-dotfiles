@@ -12,22 +12,26 @@ CPU=$(cat /proc/cpuinfo | grep name | uniq | cut -d ':' -f2 | sed -r "s/^\s+//g"
 help() {
 	printf "${YELLOW}Slimbook ${CPU} profile updater tool${COLOR_OFF}\n\n"
 	printf "${GREEN}Usage amd-controller [command <option>] [option]${COLOR_OFF}\n\n"
-	printf "${YELLOW}Commands:${COLOR_OFF}"
+
+	printf "${YELLOW}Commands:${COLOR_OFF}\n"
 	echo "set <option>       Set processor profile"
 	echo
+
 	printf "${YELLOW}Options:${COLOR_OFF}\n"
 	echo "-b, --base         Set your processor to work with a base profile"
 	echo "-s, --slow         Set your processor to work with a slow profile"
 	echo "-m, --medium       Set your processor to work with a medium profile"
-	echo "-hi, --high        Set your processor to work with a high profil"
+	echo "-h, --high         Set your processor to work with a high profil"
 	echo
+
 	printf "${YELLOW}Flags:${COLOR_OFF}\n"
 	echo "-h, --help         Show CLI help"
 	echo "-i, --ifo          Show processor profile info"
 	echo
-	printf "${GREEN}Run 'amd-controller set -s' to set your processor to work with a slow profile${COLOR_OFF}\n"
+
+	printf "${GREEN}Example: Type 'amd-controller set -s' to set your processor to work with a slow profile${COLOR_OFF}\n"
 	echo
-	echo "Inspirated by: https://shorturl.at/hqrAL"
+	echo "Inspired by: https://shorturl.at/hqrAL"
 	echo "Review params for other AMD processors here: https://shorturl.at/jHJ35"
 }
 
@@ -35,7 +39,10 @@ check_dependences() {
 	if ! command -v ryzenadj &>/dev/null 2>&1; then
 		printf >&2 "${RED}Error: ryzenadj could not be found\n"
 		exit 1
-	fi
+  elif ! command -v notify-send &>/dev/null 2>&1; then
+		printf >&2 "${RED}Error: notify-send could not be found\n"
+		exit 1
+  fi
 }
 
 set_base_profile() {
@@ -62,8 +69,37 @@ set_high_profile() {
 	notify-send "AMD Controller" "🔔HIGH profile set successfully for ${CPU}" -t 4000
 }
 
+get_cpu_profile_values() {
+  STAPM_LIMIT=$(sudo ryzenadj -i | grep "STAPM LIMIT" | awk '{print $5}')
+  PPT_LIMIT_FAST=$(sudo ryzenadj -i | grep "PPT LIMIT FAST" | awk '{print $6}')
+  PPT_LIMIT_SLOW=$(sudo ryzenadj -i | grep "PPT LIMIT SLOW" | awk '{print $6}')
+}
+
 show_processor_profile_info() {
-	sudo ryzenadj -i
+	# sudo ryzenadj -i
+  get_cpu_profile_values
+
+
+  printf " ${GREEN}${CPU} currrent profile info${COLOR_OFF}\n\n"
+
+  printf "Param          | Description                | Value  \n"
+  echo "---------------|----------------------------|--------"
+  printf "STAPM LIMIT    | Sustained Power Limit (mW) | ${STAPM_LIMIT}\n"
+  printf "PPT LIMIT SLOW | Average Power Limit (mW)   | ${PPT_LIMIT_SLOW}\n"
+  printf "PPT LIMIT FAST | Actual Power Limit (mW)    | ${PPT_LIMIT_FAST}\n\n"
+
+  printf "${YELLOW}STAPM (Skin Temperature Aware Power Management)${COLOR_OFF}\n"
+  printf "Your device's STAPM configuration is set by the manufacturer and differs depending on the processor used and the form factor of the device\n\n"
+
+  printf "${YELLOW}PPT (Package Power Tracking)${COLOR_OFF}\n"
+  printf "PPT is a measurement of power to the CPU Socket on the motherboard and not the CPU itself\n\n"
+
+  printf "${YELLOW}More info${COLOR_OFF}\n"
+  printf "Ryzenadj: https://github.com/FlyGoat/RyzenAdj\n"
+  printf "AMDController: https://ryzencontroller.com/\n\n"
+
+	printf "${GREEN}For more help, please type 'amd-controller -h, --help'${COLOR_OFF}\n\n"
+  
 }
 
 check_dependences
@@ -80,7 +116,7 @@ set)
 	-m | --medium)
 		set_medium_profile
 		;;
-	-hi | --high)
+	-h | --high)
 		set_high_profile
 		;;
 	-h | --help)

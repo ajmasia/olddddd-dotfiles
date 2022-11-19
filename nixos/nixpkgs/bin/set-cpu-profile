@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+SELECTED=$(echo -e "Slow\nMedium\nHigh" | rofi -dmenu -matching fuzzy -p 'Set your Slack status to' -sort -levenshtein-sort)
+
+case $SELECTED in
+  "Slow")
+    amd-controller set -s
+    ;;
+  "Medium")
+    amd-controller set -m
+    ;;
+  "High")
+    amd-controller set -h
+    ;;
+  *)
+    echo "Options: Slow | Medium | High"
+    ;;
+esac

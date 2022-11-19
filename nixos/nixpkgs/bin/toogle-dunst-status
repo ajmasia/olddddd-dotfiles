@@ -7,7 +7,6 @@ if [[ $is_paused == "false" ]]; then
   next_is_paused="true"
 fi
 
-
 if [[ $next_is_paused == "true" ]]; then
   notify-send Dunst "Notifications are paused" && sleep 6 && dunstctl set-paused toggle
 

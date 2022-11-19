@@ -118,7 +118,10 @@
 
 
   grobi = {
-    enable = true;
+    enable = false;
+    executeAfter = [
+      "notify-send 'Grobi'"
+    ];
     rules =
       let
         LAPTOP_SCREEN = "eDP-1";
@@ -133,7 +136,8 @@
           primary = LAPTOP_SCREEN;
           atomic = true;
           execute_after = [
-            "bspc wm -r"
+            "notify-send 'Laptop'"
+            # "bspc wm -r"
           ];
         }
         {
@@ -143,7 +147,8 @@
           primary = HOME_SCREEN;
           atomic = true;
           execute_after = [
-            "bspc wm -r"
+            "notify-send 'Laptop + External'"
+            # "bspc wm -r"
           ];
         }
       ];

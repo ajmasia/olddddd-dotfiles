@@ -89,7 +89,7 @@ run_cmd() {
 
 # Actions
 chosen="$(run_rofi)"
-echo $chosen
+
 case ${chosen} in
     "$shutdown Shutdown")
 		run_cmd --shutdown
@@ -98,7 +98,7 @@ case ${chosen} in
 		run_cmd --reboot
         ;;
     "$lock Lock")
-		if [[ -x '/usr/bin/betterlockscreen' ]]; then
+		if [[ -x '/usr/bin/betterlockscreen' || -x '/home/ajmasia/.nix-profile/bin/betterlockscreen' ]]; then
 			betterlockscreen -l
 		elif [[ -x '/usr/bin/i3lock' ]]; then
 			i3lock
