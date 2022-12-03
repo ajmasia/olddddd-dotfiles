@@ -1,4 +1,8 @@
 { pkgs, ... }:
+let
+  HOME_PATH = builtins.getEnv "HOME";
+  TERMINAL_APP = builtins.getEnv "TERMINAL";
+in
 
 with pkgs; {
   enable = true;
@@ -46,6 +50,77 @@ with pkgs; {
     "sounds" = {
       source = ../../sounds;
     };
+
+    "udiskie" = {
+      source = ./xdg/udiskie;
+    };
+  };
+
+  desktopEntries = {
+    qt5ct = {
+      comment = "QT5 Configuration Tool";
+      exec = "qt5ct";
+      genericName = "QT5 Configuration";
+      icon = HOME_PATH + "/.local/share/custom-icons/qt_logo.svg";
+      name = "QT5 Settings";
+      terminal = false;
+      type = "Application";
+      categories = [ "Settings" "DesktopSettings" "Qt" ];
+    };
+
+    lxappearance = {
+      comment = "Customize look and feel of your desktop and applications";
+      exec = "lxappearance";
+      genericName = "Customize look and Feel of GTK apps";
+      icon = HOME_PATH + "/.local/share/custom-icons/gtk_logo.svg";
+      name = "GTK Settings";
+      terminal = false;
+      type = "Application";
+      categories = [ "GTK" "Settings" "DesktopSettings" "X-LXDE-Settings" ];
+    };
+
+    pavucontrol = {
+      comment = "Adjust the volume level";
+      exec = "pavucontrol";
+      genericName = "Volume control";
+      icon = HOME_PATH + "/.local/share/custom-icons/pavucontrol.svg";
+      name = "Pulseaudio Volume Control";
+      terminal = false;
+      type = "Application";
+      categories = [ "AudioVideo" ];
+    };
+
+    gsh = {
+      comment = "Genially dev-env";
+      exec = TERMINAL_APP + " -e gsh";
+      genericName = "Genially Dev Env";
+      icon = HOME_PATH + "/.local/share/custom-icons/genially_logo.svg";
+      name = "gsh";
+      terminal = false;
+      type = "Application";
+    };
+     
+    pcmanfm = {
+      comment = "Browse the file system and manage the files";
+      exec = "pcmanfm %U";
+      genericName = "File Manager";
+      icon = HOME_PATH + "/.local/share/custom-icons/pcmanfm.svg";
+      name = "File Manager PCManFM";
+      terminal = false;
+      type = "Application";
+      categories = [ "Settings" ];
+    };
+
+    ranger = {
+      comment = "Launches the ranger file manager";
+      exec = TERMINAL_APP + " -e ranger";
+      genericName = "Terminal File Manager";
+      icon = HOME_PATH + "/.local/share/custom-icons/ranger_logo.svg";
+      name = "Ranger";
+      terminal = false;
+      type = "Application";
+      categories = [ "Settings" ];
+    };
   };
 
   mimeApps = {
@@ -58,6 +133,7 @@ with pkgs; {
         slack = "org.pwmt.zathura.desktop";
         sxiv = "sxiv.desktop";
         zathura = "org.pwmt.zathura.desktop";
+        alacritty = "Alacritty.desktop";
       in
       {
         "application/pdf" = zathura;

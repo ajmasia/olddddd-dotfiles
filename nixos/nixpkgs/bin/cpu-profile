@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+STAPM_LIMIT=$(sudo ryzenadj -i | grep "STAPM LIMIT" | awk '{print $5}')
+PPT_LIMIT_FAST=$(sudo ryzenadj -i | grep "PPT LIMIT FAST" | awk '{print $6}')
+PPT_LIMIT_SLOW=$(sudo ryzenadj -i | grep "PPT LIMIT SLOW" | awk '{print $6}')
+CCLK_BOOST_SETPOINT=$(sudo ryzenadj -i | grep "CCLK Boost SETPOINT" | awk '{print $6}')
+AC_STATUS=$(cat /sys/class/power_supply/AC0/online)
+
 check_dependences() {
 	if ! command -v ryzenadj &>/dev/null 2>&1; then
 		printf >&2 "${RED}Error: ryzenadj could not be found\n"
@@ -7,24 +13,40 @@ check_dependences() {
 	fi
 }
 
-get_cpu_profile_values() {
-  STAPM_LIMIT=$(sudo ryzenadj -i | grep "STAPM LIMIT" | awk '{print $5}')
-  PPT_LIMIT_FAST=$(sudo ryzenadj -i | grep "PPT LIMIT FAST" | awk '{print $6}')
-  PPT_LIMIT_SLOW=$(sudo ryzenadj -i | grep "PPT LIMIT SLOW" | awk '{print $6}')
-}
-
-
 show_current_cpu_profile() {
-  get_cpu_profile_values
+  check_dependences
 
-  if [[ $STAPM_LIMIT == "10.000" && $PPT_LIMIT_SLOW = "10.000" && $PPT_LIMIT_FAST = "10.000" ]]; then
+  if [[ $AC_STATUS == "0" && $STAPM_LIMIT == "10.000" && $PPT_LIMIT_SLOW == "10.000" && $PPT_LIMIT_FAST == "10.000" ]]; then
     echo "%{B#21252b}%{F#98c379}%{B- F-}"
-  elif [[ $STAPM_LIMIT == "15.000" && $PPT_LIMIT_SLOW = "15.000" && $PPT_LIMIT_FAST = "25.000" ]]; then
+
+  elif [[ $AC_STATUS == "0" && $STAPM_LIMIT == "15.000" && $PPT_LIMIT_SLOW == "15.000" && $PPT_LIMIT_FAST == "25.000" ]]; then
     echo "%{B#21252b}%{F#61afef}%{B- F-}"
-  elif [[ $STAPM_LIMIT == "80.000" && $PPT_LIMIT_SLOW = "70.000" && $PPT_LIMIT_FAST = "100.000" ]]; then
+
+  elif [[ $AC_STATUS == "0" && $STAPM_LIMIT == "30.000" && $PPT_LIMIT_SLOW == "30.000" && $PPT_LIMIT_FAST == "35.000" ]]; then
     echo "%{B#21252b}%{F#e06c75}%{B- F-}"
+
+  elif [[ $AC_STATUS == "1" && $STAPM_LIMIT == "15.000" && $PPT_LIMIT_SLOW == "15.000" && $PPT_LIMIT_FAST == "25.000" ]]; then
+    echo "%{B#21252b}%{F#98c379}%{B- F-}"
+
+  elif [[ $AC_STATUS == "1" && $STAPM_LIMIT == "30.000" && $PPT_LIMIT_SLOW == "30.000" && $PPT_LIMIT_FAST == "35.000" ]]; then
+    echo "%{B#21252b}%{F#61afef}%{B- F-}"
+
+  elif [[ $AC_STATUS == "1" && $STAPM_LIMIT == "50.000" && $PPT_LIMIT_SLOW == "54.000" && $PPT_LIMIT_FAST == "65.000" ]]; then
+    echo "%{B#21252b}%{F#e06c75}%{B- F-}"
+
+  elif [[ $AC_STATUS == "1" && $STAPM_LIMIT == "70.000" && $PPT_LIMIT_SLOW == "80.000" && $PPT_LIMIT_FAST == "100.000" ]]; then
+    echo "%{B#21252b}%{F#e06c75}%{B- F-}"
+
+  # silent
+  elif [[ $AC_STATUS == "1" && $STAPM_LIMIT == "45.000" && $PPT_LIMIT_SLOW == "54.000" && $PPT_LIMIT_FAST == "65.000" ]]; then
+    echo "%{B#21252b}%{F#61afef}龍%{B- F-}"
+
+  # balance
+  elif [[ $AC_STATUS == "1" && $STAPM_LIMIT == "54.000" && $PPT_LIMIT_SLOW == "60.000" && $PPT_LIMIT_FAST == "65.000" ]]; then
+    echo "%{B#21252b}%{F#e06c75}龍%{B- F-}"
+
   else
-    echo "%{B#21252b}%{F#e0af68}%{T3}%{B- F-}"
+    echo "%{B#21252b}%{F#c678dd}%{T3}%{B- F-}"
   fi
 }
 

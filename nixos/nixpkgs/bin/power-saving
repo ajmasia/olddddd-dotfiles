@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+CCLK_BOOST_SETPOINT=$(sudo ryzenadj -i | grep "CCLK Boost SETPOINT" | awk '{print $6}')
+
+check_dependences() {
+	if ! command -v ryzenadj &>/dev/null 2>&1; then
+		printf >&2 "${RED}Error: ryzenadj could not be found\n"
+		exit 1
+	fi
+}
+
+show_current_cpu_profile() {
+  check_dependences
+
+  if [[ $CCLK_BOOST_SETPOINT == "50.000" ]]; then
+    echo "%{B#21252b}%{F#e06c75}%{B- F-}"
+
+  else
+    echo "%{B#21252b}%{F#98c379}%{B- F-}"
+  fi
+}
+
+show_current_cpu_profile

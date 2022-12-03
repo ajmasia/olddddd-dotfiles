@@ -60,7 +60,6 @@ with pkgs; [
   conky
   kubectl
   kubectx
-  polkit
   etcher
   di
   lfs
@@ -72,9 +71,14 @@ with pkgs; [
   ryzenadj
   lazygit
   awscli2
+  # unstablePackages.dt-shell-color-scripts
+  usermount
 
   yubioath-desktop
+  yubikey-personalization
   yubikey-manager
+
+  geekbench5
 
   # Terminal
   wezterm
@@ -109,7 +113,12 @@ with pkgs; [
   polybarFull
   xautolock
   betterlockscreen
-  lxappearance
+  lxappearance # Configuring the theme and fonts of gtk applications
+  libsForQt5.qt5ct # Qt5 Configuration Tool
+  gnome.gnome-disk-utility
+  gnome.nautilus
+  adwaita-qt
+  # papirus-icon-theme
 
   # Browsers
   #chromium
@@ -124,7 +133,6 @@ with pkgs; [
 
   # Multimedia
   spotify
-  spotify-tray
   pamix
   cava
   vlc
@@ -149,7 +157,7 @@ with pkgs; [
   _1password-gui
   # unstablePackages.synology-drive-client
   synology_drive_client_12920
-  nixpkgs_for_insync3.insync-v3
+  # nixpkgs_for_insync3.insync-v3
   # inkdrop
 
   # Development
@@ -177,8 +185,9 @@ with pkgs; [
   hugo
 
   # compilers
-  gnumake
   gcc
+  gnumake
+  cmake
 
   # lsp
   stylua

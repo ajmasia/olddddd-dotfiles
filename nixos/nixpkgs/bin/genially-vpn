@@ -15,12 +15,12 @@ show_vpn_status() {
 }
 
 connect_genially_vpn() {
-  qsudo systemctl start openvpn-genially.service
+  systemctl start openvpn-genially.service
   notify-send "Genially VPN $(check_genially_vpn_status) 🟢"
 }
 
 disconnect_genially_vpn() {
-  qsudo systemctl stop openvpn-genially.service
+  systemctl stop openvpn-genially.service
   notify-send "Genially VPN $(check_genially_vpn_status) ⛔"
 }
 

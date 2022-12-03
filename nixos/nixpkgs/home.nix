@@ -3,7 +3,6 @@
 let
   USER = builtins.getEnv "USER";
   HOME_PATH = builtins.getEnv "HOME";
-  EDITOR = "nvim";
 in
 with pkgs; {
   home = {
@@ -13,6 +12,8 @@ with pkgs; {
 
     sessionVariables = {
       CM_LAUNCHER = "rofi";
+      TERMINAL = "alacritty";
+      EDITOR = "nvim";
     };
 
     keyboard = {
@@ -117,22 +118,22 @@ with pkgs; {
           play ~/.config/sounds/startup-01.mp3 &
 
           laptop_screen_state=$(bat /proc/acpi/button/lid/LID1/state | awk '{print $2}')
-          is_external_monitor_connected=$(xrandr --query | grep 'HDMI-1 connected')
+          is_external_monitor_connected=$(xrandr --query | grep 'HDMI-A-0 connected')
 
           if [[ $is_external_monitor_connected == "" ]]; then
-            bspc monitor eDP-1 -d I II III IV V VI VII VIII
+            bspc monitor eDP -d I II III IV V VI VII VIII
             # bspc rule -a Alacritty -o desktop='^1' follow=on focus=on && /home/ajmasia/.nix-profile/bin/alacritty &
             # bspc rule -a TelegramDesktop -o desktop='^7' && /home/ajmasia/.nix-profile/bin/telegram-desktop &
             # bspc rule -a Slack -o desktop='^8' && /home/ajmasia/.nix-profile/bin/slack 
           elif [[ $laptop_screen_state == "open" ]]; then
-            bspc monitor eDP-1 -d VII VIII IX X
-            bspc monitor HDMI-1 -f -d I II III IV V VI
+            bspc monitor eDP -d VII VIII IX X
+            bspc monitor HDMI-A-0 -f -d I II III IV V VI
             # bspc rule -a TelegramDesktop -o desktop='^3' && /home/ajmasia/.nix-profile/bin/telegram-desktop &
             # bspc rule -a Slack -o desktop='^4' && /home/ajmasia/.nix-profile/bin/slack &
             # bspc rule -a Alacritty -o desktop='^5' && /home/ajmasia/.nix-profile/bin/alacritty &
             # bspc rule -a Alacritty -o desktop='^1' follow=on focus=on && /home/ajmasia/.nix-profile/bin/alacritty
           else
-            bspc monitor HDMI-1 -d I II III IV V VI VII VIII
+            bspc monitor HDMI-A-0 -d I II III IV V VI VII VIII
             # bspc rule -a Alacritty -o desktop='^1' follow=on focus=on && /home/ajmasia/.nix-profile/bin/alacritty &
             # bspc rule -a TelegramDesktop -o desktop='^7' && /home/ajmasia/.nix-profile/bin/telegram-desktop &
             # bspc rule -a Slack -o desktop='^8' && /home/ajmasia/.nix-profile/bin/slack 
@@ -146,6 +147,48 @@ with pkgs; {
   programs = (import ./programs.nix) { pkgs = pkgs; lib = lib; builtins = builtins; };
   services = (import ./services.nix) { };
   fonts.fontconfig.enable = true;
+
+  systemd.user.services = {
+    polkit-gnome-authentication-agent-1 = {
+      Unit = {
+        After = [ "graphical-session-pre.target" ];
+        Description = "polkit-gnome-authentication-agent-1";
+        PartOf = [ "graphical-session.target" ];
+      };
+
+      Service = {
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+        Type = "simple";
+      };
+
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
+    };
+
+    # power-settings = {
+    #   Unit = {
+    #     After = [ "graphical-session-pre.target" ];
+    #     Description = "set processor profile on startup";
+    #     PartOf = [ "multi-user.target" ];
+    #   };
+
+    #   Service = {
+    #     ExecStart = "amd-controller set -m";
+    #     Restart = "on-failure";
+    #     RestartSec = 1;
+    #     TimeoutStopSec = 10;
+    #     Type = "simple";
+    #   };
+
+    #   Install = {
+    #     WantedBy = [ "multi-user.target" ];
+    #   };
+    # };
+  };
 }
 
 

@@ -56,12 +56,19 @@
     };
   };
 
+  security = {
+    polkit = {
+      enable = true;
+    };
+  };
+
   services = {
     accounts-daemon = {
       enable = true;
     };
 
     gnome.gnome-keyring.enable = true;
+    gnome.core-utilities.enable = false;
 
     xserver = {
       enable = true;
@@ -111,10 +118,15 @@
       enable = true;
     };
 
+    pcscd = {
+      enable = true;
+    };
+
     # This config is needed to work with Bazecor
     udev = {
       extraRules = ''
         SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2201", GROUP="users", MODE="0666"
+        # SUBSYSTEM=="power_supply", ATTR{online}=="1", RUN+="${pkgs.ryzenadj}/bin/ryzenadj --tctl-temp=95 --slow-limit=15000 --stapm-limit=15000 --fast-limit=25000 --power-saving"
       '';
     };
 
@@ -134,6 +146,34 @@
           };
         };
       };
+    };
+
+    acpid = {
+      enable = true;
+    };
+
+    tlp = {
+      enable = true;
+      settings = {
+        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+        CPU_SCALING_GOVERNOR_ON_AC = "powersave";
+
+        # The following prevents the battery from charging fully to
+        # preserve lifetime. Run `tlp fullcharge` to temporarily force
+        # full charge.
+        # https://linrunner.de/tlp/faq/battery.html#how-to-choose-good-battery-charge-thresholds
+        START_CHARGE_THRESH_BAT0 = 40;
+        STOP_CHARGE_THRESH_BAT0 = 50;
+
+        # 100 being the maximum, limit the speed of my CPU to reduce
+        # heat and increase battery usage:
+        CPU_MAX_PERF_ON_AC = 75;
+        CPU_MAX_PERF_ON_BAT = 60;
+      };
+    };
+
+    cpupower-gui = {
+      enable = true;
     };
   };
 
@@ -175,9 +215,9 @@
         enable = true;
         enableExtensionPack = true;
       };
-      guest = {
-        enable = true;
-      };
+      # guest = {
+      #   enable = true;
+      # };
     };
   };
 
@@ -207,6 +247,7 @@
       gnupg
       ghc
       wget
+      ryzenadj
       home-manager
     ];
   };
@@ -243,10 +284,6 @@
           commands = [
             {
               command = "/home/ajmasia/.nix-profile/bin/ryzenadj";
-              options = [ "NOPASSWD" ];
-            }
-            {
-              command = "/run/current-system/sw/bin/systemctl";
               options = [ "NOPASSWD" ];
             }
           ];

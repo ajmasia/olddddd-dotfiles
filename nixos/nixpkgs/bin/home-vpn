@@ -15,12 +15,12 @@ show_vpn_status() {
 }
 
 connect_home_vpn() {
-  qsudo systemctl start openvpn-home.service
+  systemctl start openvpn-home.service
   notify-send "home VPN $(check_home_vpn_status) 🟢"
 }
 
 disconnect_home_vpn() {
-  qsudo systemctl stop openvpn-home.service
+  systemctl stop openvpn-home.service
   notify-send "home VPN $(check_home_vpn_status) ⛔"
 }
 

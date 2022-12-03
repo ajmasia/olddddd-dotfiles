@@ -8,6 +8,25 @@ GREEN='\033[0;32m'  # Green
 YELLOW='\033[0;33m' # Yellow
 
 CPU=$(cat /proc/cpuinfo | grep name | uniq | cut -d ':' -f2 | sed -r "s/^\s+//g")
+AC_STATUS=$(cat /sys/class/power_supply/AC0/online)
+
+SLOW_WITH_BATTERY="--tctl-temp=95 --slow-limit=10000 --stapm-limit=10000 --fast-limit=10000 --power-saving"
+SLOW_WITH_AC="--tctl-temp=95 --slow-limit=15000 --stapm-limit=15000 --fast-limit=25000 --max-performance"
+
+MEDIUM_WITH_BATTERY="--tctl-temp=95 --slow-limit=15000 --stapm-limit=15000 --fast-limit=25000 --power-saving"
+MEDIUM_WITH_AC="--tctl-temp=95 --slow-limit=30000 --stapm-limit=30000 --fast-limit=35000 --max-performance"
+
+HIGH_WITH_BATTERY="--tctl-temp=95 --slow-limit=30000 --stapm-limit=30000 --fast-limit=35000 --power-saving"
+HIGH_WITH_AC="--tctl-temp=95 --slow-limit=54000 --stapm-limit=50000 --fast-limit=65000 --max-performance"
+
+FIRE_WITH_BATTERY="--tctl-temp=95 --slow-limit=30000 --stapm-limit=30000 --fast-limit=35000 --power-saving"
+FIRE_WITH_AC="--tctl-temp=95 --slow-limit=80000 --stapm-limit=70000 --fast-limit=100000 --max-performance"
+
+SILENT_WITH_BATTERY="--tctl-temp=95 --slow-limit=30000 --stapm-limit=30000 --fast-limit=35000 --power-saving"
+SILENT_WITH_AC="--tctl-temp=95 --slow-limit=54000 --stapm-limit=45000 --fast-limit=65000 --max-performance"
+
+BALANCE_WITH_BATTERY="--tctl-temp=95 --slow-limit=30000 --stapm-limit=30000 --fast-limit=35000 --power-saving"
+BALANCE_WITH_AC="--tctl-temp=95 --slow-limit=60000 --stapm-limit=54000 --fast-limit=65000 --max-performance"
 
 help() {
 	printf "${YELLOW}Slimbook ${CPU} profile updater tool${COLOR_OFF}\n\n"
@@ -18,15 +37,19 @@ help() {
 	echo
 
 	printf "${YELLOW}Options:${COLOR_OFF}\n"
-	echo "-b, --base         Set your processor to work with a base profile"
-	echo "-s, --slow         Set your processor to work with a slow profile"
-	echo "-m, --medium       Set your processor to work with a medium profile"
-	echo "-h, --high         Set your processor to work with a high profil"
+	echo "-s, --slow              Set your processor to work with slow profile"
+	echo "-m, --medium            Set your processor to work with medium profile"
+	echo "-h, --high              Set your processor to work with high profil"
+	echo "-f, --fire              Set your processor to work with fire profil"
+	echo "-sl --silent            Set your processor to work with system silent profil"
+	echo "-bl --balance           Set your processor to work with system balance profil"
+	echo "-ps, --power-saving     Tune your processor for power saving" 
+	echo "-mp, --max-performance  Tune your processor for max performance" 
 	echo
 
 	printf "${YELLOW}Flags:${COLOR_OFF}\n"
 	echo "-h, --help         Show CLI help"
-	echo "-i, --ifo          Show processor profile info"
+	echo "-i, --info         Show processor profile info"
 	echo
 
 	printf "${GREEN}Example: Type 'amd-controller set -s' to set your processor to work with a slow profile${COLOR_OFF}\n"
@@ -45,48 +68,104 @@ check_dependences() {
   fi
 }
 
-set_base_profile() {
-	sudo ryzenadj --tctl-temp=95 --slow-limit=30000 --stapm-limit=30000 --fast-limit=35000 &>/dev/null
-	printf "${GREEN}🛠  BASE profile set successfully for $CPU processor\n"
-	notify-send "AMD Controller" "🔔 BASE profile set successfully for ${CPU}" -t 4000
-}
 
 set_slow_profile() {
-	sudo ryzenadj --tctl-temp=95 --slow-limit=10000 --stapm-limit=10000 --fast-limit=10000 &>/dev/null
+  if [[ $AC_STATUS == "1" ]]; then
+	  sudo ryzenadj $SLOW_WITH_AC &>/dev/null
+  else 
+	  sudo ryzenadj $SLOW_WITH_BATTERY &>/dev/null
+  fi
+
 	printf "${GREEN}🛠  SLOW profile set successfully for $CPU processor\n"
-	notify-send "AMD Controller" "🔔 SLOW profile set successfully for ${CPU}" -t 4000
+	notify-send "New profile setting" "${CPU} in SLOW mode" -t 4000 -i $HOME/.local/share/custom-icons/amd-1.png
 }
 
 set_medium_profile() {
-	sudo ryzenadj --tctl-temp=95 --slow-limit=15000 --stapm-limit=15000 --fast-limit=25000 &>/dev/null
+  if [[ $AC_STATUS == "1" ]]; then
+	  sudo ryzenadj $MEDIUM_WITH_AC &>/dev/null
+  else
+	  sudo ryzenadj $MEDIUM_WITH_BATTERY &>/dev/null
+  fi
+
 	printf "${GREEN}🛠  MEDIUM profile set successfully for $CPU processor\n"
-	notify-send "AMD Controller" "🔔 MEDIUM profile set successfully for ${CPU}" -t 4000
+	notify-send "New profile setting" "${CPU} in MEDIUM mode" -t 4000 -i $HOME/.local/share/custom-icons/amd-2.png
 }
 
 set_high_profile() {
-	sudo ryzenadj --tctl-temp=95 --slow-limit=70000 --stapm-limit=80000 --fast-limit=100000 &>/dev/null
+  if [[ $AC_STATUS == "1" ]]; then
+	  sudo ryzenadj $HIGH_WITH_AC &>/dev/null
+  else
+	  sudo ryzenadj $HIGH_WITH_BATTERY &>/dev/null
+  fi
+
 	printf "${GREEN}🛠  HIGH profile set successfully for $CPU processor\n"
-	notify-send "AMD Controller" "🔔HIGH profile set successfully for ${CPU}" -t 4000
+	notify-send "New profile setting" "${CPU} in HIGH mode" -t 4000 -i $HOME/.local/share/custom-icons/amd-3.png
 }
 
-get_cpu_profile_values() {
+set_fire_profile() {
+  if [[ $AC_STATUS == "1" ]]; then
+	  sudo ryzenadj $FIRE_WITH_AC &>/dev/null
+  else
+	  sudo ryzenadj $FIRE_WITH_BATTERY &>/dev/null
+  fi
+
+	printf "${GREEN}🛠  FIRE profile set successfully for $CPU processor\n"
+	notify-send "New profile setting" "${CPU} in HIGH mode" -t 4000 -i $HOME/.local/share/custom-icons/amd-3.png
+}
+
+set_silent_profile() {
+  if [[ $AC_STATUS == "1" ]]; then
+	  sudo ryzenadj $SILENT_WITH_AC &>/dev/null
+  else
+	  sudo ryzenadj $SILENT_WITH_BATTERY  &>/dev/null
+  fi
+
+	printf "${GREEN}🛠 SILENT profile set successfully for $CPU processor\n"
+	notify-send "New profile setting" "${CPU} in SILENT mode" -t 4000 -i $HOME/.local/share/custom-icons/amd-3.png
+}
+
+set_balance_profile() {
+  if [[ $AC_STATUS == "1" ]]; then
+	  sudo ryzenadj $BALANCE_WITH_AC &>/dev/null
+  else
+	  sudo ryzenadj $BALANCE_WITH_BATTERY &>/dev/null
+  fi
+
+	printf "${GREEN}🛠 BALANCE profile set successfully for $CPU processor\n"
+	notify-send "New profile setting" "${CPU} in BALANCE mode" -t 4000 -i $HOME/.local/share/custom-icons/amd-3.png
+}
+
+set_power_saving_profile() {
+	sudo ryzenadj --power-saving
+
+	printf "${GREEN}🛠 POWER SAVING profile set successfullys for $CPU processor\n"
+	notify-send "AMD Controller" "🔔POWER PROFILE profile set successfully for ${CPU}" -t 4000
+}
+
+set_max_performance_profile() {
+	sudo ryzenadj --max-performance
+
+	printf "${GREEN}🛠 MAX PEPERFORMANCE profile set successfullys for $CPU processor\n"
+	notify-send "AMD Controller" "🔔MAX PEPERFORMANCE profile set successfully for ${CPU}" -t 4000
+}
+
+
+show_processor_profile_info() {
   STAPM_LIMIT=$(sudo ryzenadj -i | grep "STAPM LIMIT" | awk '{print $5}')
   PPT_LIMIT_FAST=$(sudo ryzenadj -i | grep "PPT LIMIT FAST" | awk '{print $6}')
   PPT_LIMIT_SLOW=$(sudo ryzenadj -i | grep "PPT LIMIT SLOW" | awk '{print $6}')
-}
-
-show_processor_profile_info() {
-	# sudo ryzenadj -i
-  get_cpu_profile_values
-
+  CCLK_BOOST_SETPOINT=$(sudo ryzenadj -i | grep "CCLK Boost SETPOINT" | awk '{print $6}')
+  CCLK_BUSY_VALUE=$(sudo ryzenadj -i | grep "CCLK BUSY VALUE" | awk '{print $6}')
 
   printf " ${GREEN}${CPU} currrent profile info${COLOR_OFF}\n\n"
 
-  printf "Param          | Description                | Value  \n"
-  echo "---------------|----------------------------|--------"
-  printf "STAPM LIMIT    | Sustained Power Limit (mW) | ${STAPM_LIMIT}\n"
-  printf "PPT LIMIT SLOW | Average Power Limit (mW)   | ${PPT_LIMIT_SLOW}\n"
-  printf "PPT LIMIT FAST | Actual Power Limit (mW)    | ${PPT_LIMIT_FAST}\n\n"
+  printf "Param               | Description                     | Value  \n"
+  echo "--------------------|---------------------------------|--------"
+  printf "STAPM LIMIT         | Sustained Power Limit (mW)      | ${STAPM_LIMIT}\n"
+  printf "PPT LIMIT SLOW      | Average Power Limit (mW)        | ${PPT_LIMIT_SLOW}\n"
+  printf "PPT LIMIT FAST      | Actual Power Limit (mW)         | ${PPT_LIMIT_FAST}\n"
+  printf "CCLK BOOST SETPOINT | Power Saving tune value (mW)    | ${CCLK_BOOST_SETPOINT}\n"
+  printf "CCLK BUSY VALUE     | Max Performance tune value (mW) | ${CCLK_BUSY_VALUE}\n\n"
 
   printf "${YELLOW}STAPM (Skin Temperature Aware Power Management)${COLOR_OFF}\n"
   printf "Your device's STAPM configuration is set by the manufacturer and differs depending on the processor used and the form factor of the device\n\n"
@@ -99,12 +178,11 @@ show_processor_profile_info() {
   printf "AMDController: https://ryzencontroller.com/\n\n"
 
 	printf "${GREEN}For more help, please type 'amd-controller -h, --help'${COLOR_OFF}\n\n"
-  
 }
 
 check_dependences
 
-case "$1" in
+case $1 in
 set)
 	case $2 in
 	-b | --base)
@@ -119,8 +197,20 @@ set)
 	-h | --high)
 		set_high_profile
 		;;
-	-h | --help)
-		help
+	-f | --fire)
+    set_fire_profile
+		;;
+	-sl | --silent)
+    set_silent_profile
+		;;
+	-bl | --balance)
+    set_balance_profile
+		;;
+	-ps | --power-saving)
+		set_power_saving_profile
+		;;
+	-mp | --max-performance)
+		set_max_performance_profile
 		;;
 	*)
 		printf "${YELLOW}Invalid option\n${COLOR_OFF}"

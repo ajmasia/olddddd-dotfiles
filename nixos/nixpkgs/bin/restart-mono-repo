@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+REPO_PATH=$HOME/projects/genially/mono
+
+printf "Restarting Genially mono project ..."
+
+start_time="$(date -u +%s)"
+
+cd $REPO_PATH
+printf "\nCleaning modules ..."
+yarn clean:modules 
+
+printf "\nInstalling dependencies ..."
+yarn 
+
+printf "\nBuildin project ..."
+gsh cli builder --all
+
+end_time="$(date -u +%s)"
+
+elapsed="$(($end_time-$start_time))"
+h=$(($elapsed/3600))
+m=$((($elapsed%3600)/60))
+s=$(($elapsed%60))
+
+printf "Genially mono project restarted \nTotal time (hours:minutes:seconds): %02d:%02d:%02d \n" $h $m $s
+

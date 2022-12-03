@@ -13,5 +13,7 @@ import ../../../../commons/alias/commons.nix //
   # apps 
   bazecor = "appimage-run ~/.local/share/app-images/Bazecor-0.3.3.AppImage";
 
+  # genially project
+  grp = "yarn clean:modules && yarn && gsh cli builder --all";
 }
 
