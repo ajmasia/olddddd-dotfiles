@@ -12,6 +12,10 @@ with pkgs; {
     #   source = ./xdg/polybar;
     #   recursive = true;
     # };
+    "picom" = {
+      source = ./xdg/picom;
+      recursive = true;
+    };
 
     "dunst" = {
       source = ./xdg/dunst;
@@ -99,7 +103,7 @@ with pkgs; {
       terminal = false;
       type = "Application";
     };
-     
+
     pcmanfm = {
       comment = "Browse the file system and manage the files";
       exec = "pcmanfm %U";

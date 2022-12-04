@@ -5,32 +5,38 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
+  # boot.kernelParams = [
+  #   "initcall_blacklist=acpi_cpufreq_init"
+  # ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/c74a6919-702b-443a-872e-e3434435aaa9";
+    {
+      device = "/dev/disk/by-uuid/c74a6919-702b-443a-872e-e3434435aaa9";
       fsType = "ext4";
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/fe6dc4e3-2133-46fb-b5fe-3cbdde98d0eb";
+    {
+      device = "/dev/disk/by-uuid/fe6dc4e3-2133-46fb-b5fe-3cbdde98d0eb";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/9EEB-BCD2";
+    {
+      device = "/dev/disk/by-uuid/9EEB-BCD2";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/4c097279-4dd8-4a7a-be4b-a141441c1c13"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/4c097279-4dd8-4a7a-be4b-a141441c1c13"; }];
 
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

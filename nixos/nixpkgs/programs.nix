@@ -73,12 +73,9 @@ with builtins; {
   alacritty = {
     enable = true;
 
-    package = unstablePackages.alacritty;
-
     settings = {
       env = {
         WINIT_X11_SCALE_FACTOR = "1.05";
-        #   TERM = "xterm-256color";
       };
 
       class = {
@@ -157,32 +154,48 @@ with builtins; {
       line_break = {
         disabled = true;
       };
-      # format = lib.concatStrings [
-      #   "[$username](red)"
-      # ];
 
-      nix_shell = {
-        style = "bold blue";
-        symbol = "❄️ ";
-        impure_msg = "[impure](bold red)";
-        pure_msg = "[pure](bold green)";
-        format = "via [$symbol$state( \($name)\)]($style) ";
+      aws = {
+        disabled = true;
       };
 
-      # username = {
-      #   style_user = "green";
-      #   style_root = "red bold";
-      #   format = "[$user]($style)";
-      #   disabled = false;
-      #   show_always = true;
-      # };
-
-      # hostname = {
-      #   disabled = false;
-      #   ssh_only = false;
-      #   format = "[@](red)[$hostname](green) ";
-      # };
+      nix_shell = {
+        impure_msg = "i";
+        pure_msg = "p";
+      };
     };
+
+    # settings = {
+    #   add_newline = false;
+    #   line_break = {
+    #     disabled = true;
+    #   };
+    #   # format = lib.concatStrings [
+    #   #   "[$username](red)"
+    #   # ];
+
+    #   nix_shell = {
+    #     style = "bold blue";
+    #     symbol = "❄️ ";
+    #     impure_msg = "[impure](bold red)";
+    #     pure_msg = "[pure](bold green)";
+    #     # format = "via [$symbol$state( \($name)\)]($style) ";
+    #   };
+
+    #   # username = {
+    #   #   style_user = "green";
+    #   #   style_root = "red bold";
+    #   #   format = "[$user]($style)";
+    #   #   disabled = false;
+    #   #   show_always = true;
+    #   # };
+
+    #   # hostname = {
+    #   #   disabled = false;
+    #   #   ssh_only = false;
+    #   #   format = "[@](red)[$hostname](green) ";
+    #   # };
+    # };
   };
 
   tmux = {
@@ -272,7 +285,7 @@ with builtins; {
     theme = "Tokyo Night Storm";
     settings = {
       font_family = "Hack Nerd Font";
-      font_size = 12;
+      font_size = 13;
       window_padding_width = 6;
       window_border_width = 0;
       placement_strategy = "top-left";

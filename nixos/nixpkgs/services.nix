@@ -26,52 +26,51 @@
     keybindings = import ./services/sxhkd/keybindings.nix;
   };
 
-  picom = {
-    enable = true;
+  # picom = {
+  #   enable = true;
 
-    fade = true;
-    fadeSteps = [ "0.03" "0.28" ];
-    fadeDelta = 8;
+  #   fade = true;
+  #   fadeSteps = [ 0.03 0.28 ];
+  #   fadeDelta = 8;
 
-    inactiveOpacity = "0.92";
-    opacityRule = [ "100:class_g = 'Rofi'" ];
+  #   inactiveOpacity = 0.92;
+  #   opacityRules = [ "100:class_g = 'Rofi'" ];
 
-    experimentalBackends = true;
-    vSync = true;
-    backend = "glx";
+  #   experimentalBackends = true;
+  #   vSync = true;
+  #   backend = "glx";
 
-    noDNDShadow = false;
-    noDockShadow = false;
-    menuOpacity = "1.0";
+  #   noDNDShadow = false;
+  #   noDockShadow = false;
+  #   menuOpacity = 1.0;
 
-    extraOptions = ''
-      frame-opacity = 0.85;
-      inactive-opacity-override = false;
+  #   settings = {
+  #     frame-opacity = 0.85;
 
-      mark-wmwin-focused = true;
-      mark-ovredir-focused = false
+  #     inactive-opacity-override = false;
 
-      corner-radius = 12
-      rounded-corners-exclude = [
-        "window_type = 'dock'",
-      ];
+  #     mark-wmwin-focused = true;
+  #     mark-ovredir-focused = false;
 
-      detect-rounded-corners = true;
-      detect-client-opacity = true;
-      detect-transient = true;
+  #     corner-radius = 12;
+  #     rounded-corners-exclude = [
+  #       "window_type = 'dock'"
+  #     ];
 
-      log-level = "warn";
+  #     detect-rounded-corners = true;
+  #     detect-client-opacity = true;
+  #     detect-transient = true;
 
-      wintypes:
-      {
-        tooltip = { fade = true; shadow = false; opacity = 1.0; focus = true; full-shadow = false; };
-        dock = { clip-shadow-above = true; }
-        popup_menu = { shadow = false }
-        dropdown_menu = { shadow = false; }
-      };
-    '';
+  #     log-level = "warn";
+  #   };
 
-  };
+  #   wintypes = {
+  #     tooltip = { fade = true; shadow = false; opacity = 1.0; focus = true; full-shadow = false; };
+  #     dock = { clip-shadow-above = true; };
+  #     popup_menu = { shadow = false; };
+  #     dropdown_menu = { shadow = false; };
+  #   };
+  # };
 
   stalonetray = {
     enable = false;
@@ -113,7 +112,9 @@
 
   udiskie = {
     enable = true;
+
     notify = true;
+    tray = "always";
   };
 
 

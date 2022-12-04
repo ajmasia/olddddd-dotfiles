@@ -25,32 +25,6 @@ with pkgs; {
     file = (import ./files.nix) { };
   };
 
-  # accounts.email = {
-  #   accounts.genially = {
-  #     address = "antoniomasia@genial.ly";
-  #     aliases = ["antoniomasia@genially.com"];
-  #     flavor = "gmail.com";
-
-  #     imap = {
-  #       host = "imap.gmail.com";
-  #       tls.enable = true;
-  #     };
-
-  #     mu.enable = true;
-
-  #     offlineimap = {
-  #       enable = true;
-  #       extraConfig.account.autorefresh = 10;
-  #     };
-
-  #     #passwordCommand = "get_pass gmail";
-  #     primary = true;
-  #     realName = "Antonio José Masiá";
-  #   };
-
-  #   certificatesFile = "/etc/ssl/certs/ca-certificates.crt";
-  # };
-
   xsession = {
     enable = true;
 
@@ -100,7 +74,9 @@ with pkgs; {
           
           ~/.config/polybar/launch.sh 
 
-          systemctl --user restart picom.service
+          # systemctl --user restart picom.service
+          pkill picom
+          picom &
           
           feh --bg-fill ~/.config/wallpapers/wallpaper_004.jpg
           pkill xautolock

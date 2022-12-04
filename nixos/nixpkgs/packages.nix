@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   unstablePackages = import <unstable> { };
-  extraNodePackages = import ./node/default.nix { };
+  # extraNodePackages = import ./node/default.nix { };
   yarnWithNode16 = pkgs.yarn.overrideAttrs (oldAttrs: rec {
     buildInputs = with pkgs; [
       nodejs-16_x
@@ -72,7 +72,7 @@ with pkgs; [
   lazygit
   awscli2
   # unstablePackages.dt-shell-color-scripts
-  usermount
+  # usermount
 
   yubioath-desktop
   yubikey-personalization
@@ -111,6 +111,7 @@ with pkgs; [
   kazam
   feh
   polybarFull
+  picom-jonaburg
   xautolock
   betterlockscreen
   lxappearance # Configuring the theme and fonts of gtk applications
@@ -201,8 +202,7 @@ with pkgs; [
   # node packages
   nodePackages.node2nix
   nodePackages.neovim
-  extraNodePackages.rtm-cli
-  # nodePackages.eslint
+  nodePackages.eslint
   # nodePackages.prettier
   # nodePackages.typescript-language-server
   # nodePackages.vscode-langservers-extracted
