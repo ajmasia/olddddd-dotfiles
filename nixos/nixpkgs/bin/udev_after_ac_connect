@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+SLOW_WITH_AC="--tctl-temp=95 --slow-limit=15000 --stapm-limit=15000 --fast-limit=25000 --power-saving"
+
+echo $(date) >> $HOME/udev.log 
+sudo ryzenadj $SLOW_WITH_AC &>/dev/null
+
+

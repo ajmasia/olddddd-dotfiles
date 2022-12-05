@@ -144,26 +144,6 @@ with pkgs; {
         WantedBy = [ "graphical-session.target" ];
       };
     };
-
-    # power-settings = {
-    #   Unit = {
-    #     After = [ "graphical-session-pre.target" ];
-    #     Description = "set processor profile on startup";
-    #     PartOf = [ "multi-user.target" ];
-    #   };
-
-    #   Service = {
-    #     ExecStart = "amd-controller set -m";
-    #     Restart = "on-failure";
-    #     RestartSec = 1;
-    #     TimeoutStopSec = 10;
-    #     Type = "simple";
-    #   };
-
-    #   Install = {
-    #     WantedBy = [ "multi-user.target" ];
-    #   };
-    # };
   };
 }
 

@@ -68,7 +68,6 @@ check_dependences() {
   fi
 }
 
-
 set_slow_profile() {
   if [[ $AC_STATUS == "1" ]]; then
 	  sudo ryzenadj $SLOW_WITH_AC &>/dev/null

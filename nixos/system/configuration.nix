@@ -126,6 +126,9 @@
       extraRules = ''
         # This config is needed to work with Bazecor
         SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2201", GROUP="users", MODE="0666"
+        # This config optimize the battery power
+        SUBSYSTEM=="power_supply", KERNEL=="AC0", DRIVER=="", ATTR{online}=="1", RUN+="${pkgs.ryzenadj}/bin/ryzenadj --tctl-temp=95 --slow-limit=15000 --stapm-limit=15000 --fast-limit=25000 --power-saving"
+        SUBSYSTEM=="power_supply", KERNEL=="AC0", DRIVER=="", ATTR{online}=="0", RUN+="${pkgs.ryzenadj}/bin/ryzenadj --tctl-temp=95 --slow-limit=10000 --stapm-limit=10000 --fast-limit=10000 --power-saving"
       '';
     };
 
@@ -298,6 +301,18 @@
           ];
         }
       ];
+    };
+  };
+
+  systemd = {
+    services.awake = {
+      enable = true;
+
+      after = [ "suspend.service" ];
+      script = '' 
+        sleep 15 && ${pkgs.ryzenadj}/bin/ryzenadj --tctl-temp=95 --slow-limit=15000 --stapm-limit=15000 --fast-limit=25000 --power-saving &>/dev/null
+      '';
+      wantedBy = [ "suspend.service" ];
     };
   };
 
