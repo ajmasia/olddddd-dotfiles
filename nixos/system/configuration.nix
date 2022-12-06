@@ -3,7 +3,10 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
-
+let
+  scripts = import ./scripts.nix { pkgs = pkgs; };
+  secrets = import ./secrets.nix;
+in
 {
   imports =
     [
@@ -126,9 +129,6 @@
       extraRules = ''
         # This config is needed to work with Bazecor
         SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2201", GROUP="users", MODE="0666"
-        # This config optimize the battery power
-        SUBSYSTEM=="power_supply", KERNEL=="AC0", DRIVER=="", ATTR{online}=="1", RUN+="${pkgs.ryzenadj}/bin/ryzenadj --tctl-temp=95 --slow-limit=15000 --stapm-limit=15000 --fast-limit=25000 --power-saving"
-        SUBSYSTEM=="power_supply", KERNEL=="AC0", DRIVER=="", ATTR{online}=="0", RUN+="${pkgs.ryzenadj}/bin/ryzenadj --tctl-temp=95 --slow-limit=10000 --stapm-limit=10000 --fast-limit=10000 --power-saving"
       '';
     };
 
@@ -148,8 +148,8 @@
           autoStart = false;
           config = ''config /home/ajmasia/.config/vpn/home.ovpn'';
           authUserPass = {
-            username = (import ./secrets.nix).home-vpn.user;
-            password = (import ./secrets.nix).home-vpn.password;
+            username = secrets.home-vpn.user;
+            password = secrets.home-vpn.password;
           };
         };
       };
@@ -159,27 +159,18 @@
     acpid = {
       enable = true;
     };
+  };
 
-    # Daemon for saving laptop battery power
-    tlp = {
+  # Power management service. Includes support for suspend-to-RAM and powersave features on laptop
+  powerManagement = {
+    enable = true;
+
+    cpuFreqGovernor = "ondemand";
+    powerUpCommands = scripts.powerCommand;
+    resumeCommands = scripts.powerCommand;
+
+    powertop = {
       enable = true;
-
-      settings = {
-        CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-        CPU_SCALING_GOVERNOR_ON_AC = "performance";
-        # The following prevents the battery from charging fully to preserve lifetime
-        # Run `tlp fullcharge` to temporarily force full charge
-        # https://linrunner.de/tlp/faq/battery.html#how-to-choose-good-battery-charge-thresholds
-        START_CHARGE_THRESH_BAT0 = 40;
-        STOP_CHARGE_THRESH_BAT0 = 80;
-        NATACPI_ENABLE = 1;
-        # 100 being the maximum, limit the speed of my CPU to reduce heat and increase battery usage
-        CPU_MAX_PERF_ON_AC = 80;
-        CPU_MAX_PERF_ON_BAT = 60;
-        DEVICES_TO_DISABLE_ON_BAT = "bluetooth";
-        RADEON_POWER_PROFILE_ON_AC = "auto";
-        RADEON_POWER_PROFILE_ON_BAT = "auto";
-      };
     };
   };
 
@@ -301,18 +292,6 @@
           ];
         }
       ];
-    };
-  };
-
-  systemd = {
-    services.awake = {
-      enable = true;
-
-      after = [ "suspend.service" ];
-      script = '' 
-        sleep 15 && ${pkgs.ryzenadj}/bin/ryzenadj --tctl-temp=95 --slow-limit=15000 --stapm-limit=15000 --fast-limit=25000 --power-saving &>/dev/null
-      '';
-      wantedBy = [ "suspend.service" ];
     };
   };
 
