@@ -4,8 +4,12 @@
 
 { config, pkgs, ... }:
 let
-  scripts = import ./scripts.nix { pkgs = pkgs; };
+  # scripts = import ./scripts.nix { pkgs = pkgs; };
   secrets = import ./secrets.nix;
+
+  scripts = import ./bin/scripts.nix { pkgs = pkgs; };
+  awake = scripts.awake;
+  awake-udev = scripts.awake-udev;
 in
 {
   imports =
@@ -28,7 +32,7 @@ in
     };
 
     plymouth = {
-      enable = true;
+      enable = false;
     };
   };
 
@@ -129,6 +133,10 @@ in
       extraRules = ''
         # This config is needed to work with Bazecor
         SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2201", GROUP="users", MODE="0666"
+
+        # This config optimize the battery power
+        SUBSYSTEM=="power_supply", KERNEL=="AC0", DRIVER=="", ATTR{online}=="1", RUN+="${awake-udev}/bin/awake-udev"
+        SUBSYSTEM=="power_supply", KERNEL=="AC0", DRIVER=="", ATTR{online}=="0", RUN+="${awake-udev}/bin/awake-udev"
       '';
     };
 
@@ -166,8 +174,8 @@ in
     enable = true;
 
     cpuFreqGovernor = "ondemand";
-    powerUpCommands = scripts.powerCommand;
-    resumeCommands = scripts.powerCommand;
+    powerUpCommands = "${awake}/bin/awake";
+    resumeCommands = "${awake}/bin/awake";
 
     powertop = {
       enable = true;
@@ -248,6 +256,8 @@ in
       wget
       ryzenadj
       home-manager
+      awake
+      awake-udev
     ];
   };
 

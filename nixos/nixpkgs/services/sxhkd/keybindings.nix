@@ -6,6 +6,7 @@
   # App launchers
   "super + Return" = "alacritty";
   "super + @space" = "rofi -show drun -theme ~/.config/rofi/themes/launcher.rasi &";
+  "alt + tab" = "rofi -show window -theme ~/.config/rofi/themes/launcher.rasi &";
   # "super + p" = "rofi -show drun";
   "super + e" = "emojis";
   "super + shift + f" = "flameshot gui";
