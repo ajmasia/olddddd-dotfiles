@@ -120,6 +120,7 @@ with pkgs; [
   gnome.nautilus
   adwaita-qt
   # papirus-icon-theme
+  sioyek
 
   # Browsers
   #chromium
@@ -172,6 +173,10 @@ with pkgs; [
   python3Full
   nodejs-16_x
   yarnWithNode16
+
+  # haskell
+  stack
+  ghc
 
   # python packages
   python39Packages.pyqt5

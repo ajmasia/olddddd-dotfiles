@@ -42,6 +42,7 @@ with pkgs; {
           "pointer_follows_monitor" = true;
           "pointer_modifier" = "mod4";
           "pointer_action1" = "move";
+          # "pointer_action2" = "resize_side";
           "pointer_action2" = "resize_corner";
         };
         rules = {
