@@ -1,6 +1,6 @@
 { pkgs, ... }:
 let
-  unstablePackages = import <unstable> { };
+  unstable = import <unstable> { };
   # extraNodePackages = import ./node/default.nix { };
   yarnWithNode16 = pkgs.yarn.overrideAttrs (oldAttrs: rec {
     buildInputs = with pkgs; [
@@ -71,10 +71,10 @@ with pkgs; [
   ryzenadj
   lazygit
   awscli2
-  # unstablePackages.dt-shell-color-scripts
+  # unstable.dt-shell-color-scripts
   # usermount
 
-  yubioath-desktop
+  unstable.yubioath-flutter
   yubikey-personalization
   yubikey-manager
 
@@ -121,10 +121,11 @@ with pkgs; [
   adwaita-qt
   # papirus-icon-theme
   sioyek
+  bsp-layout
 
   # Browsers
   #chromium
-  unstablePackages.google-chrome
+  unstable.google-chrome
   firefox
 
   # Comunications
@@ -153,11 +154,11 @@ with pkgs; [
   todoist
   bitwarden
   bitwarden-cli
-  unstablePackages.obsidian
+  unstable.obsidian
   pdfarranger
   _1password
   _1password-gui
-  # unstablePackages.synology-drive-client
+  # unstable.synology-drive-client
   synology_drive_client_12920
   # nixpkgs_for_insync3.insync-v3
   # inkdrop
@@ -165,8 +166,8 @@ with pkgs; [
   # Development
   # editors
   (emacsWithPackages (epkgs: [ epkgs.emacsql-sqlite ]))
-  unstablePackages.neovim
-  unstablePackages.vscode
+  unstable.neovim
+  unstable.vscode
   thonny
 
   # interprets
@@ -202,7 +203,7 @@ with pkgs; [
   sumneko-lua-language-server
 
   # packages managers
-  unstablePackages.cargo
+  unstable.cargo
 
   # node packages
   nodePackages.node2nix

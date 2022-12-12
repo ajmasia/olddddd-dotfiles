@@ -44,6 +44,7 @@ with pkgs; {
           "pointer_action1" = "move";
           # "pointer_action2" = "resize_side";
           "pointer_action2" = "resize_corner";
+          "automatic_scheme" = "spiral";
         };
         rules = {
           "Zathura" = {

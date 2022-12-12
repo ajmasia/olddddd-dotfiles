@@ -26,7 +26,7 @@
 
     AC_STATUS=$(${pkgs.coreutils}/bin/cat /sys/class/power_supply/AC0/online)
 
-    sleep 40 # needed for override the BIOS default setup
+    sleep 1m # needed for override the BIOS default setup
     if [[ $AC_STATUS == "1" ]]; then
       ${pkgs.ryzenadj}/bin/ryzenadj --tctl-temp=95 --slow-limit=15000 --stapm-limit=15000 --fast-limit=25000 --power-saving &>/dev/null
     else 

@@ -67,6 +67,27 @@ in
     polkit = {
       enable = true;
     };
+
+    pam.yubico = {
+      enable = true;
+      debug = false;
+      mode = "challenge-response";
+    };
+
+    sudo = {
+      enable = true;
+      extraRules = [
+        {
+          users = [ "ajmasia" ];
+          commands = [
+            {
+              command = "/home/ajmasia/.nix-profile/bin/ryzenadj";
+              options = [ "NOPASSWD" ];
+            }
+          ];
+        }
+      ];
+    };
   };
 
   services = {
@@ -130,6 +151,7 @@ in
     };
 
     udev = {
+      packages = [ pkgs.yubikey-personalization ];
       extraRules = ''
         # This config is needed to work with Bazecor
         SUBSYSTEMS=="usb", ATTRS{idVendor}=="1209", ATTRS{idProduct}=="2201", GROUP="users", MODE="0666"
@@ -219,7 +241,7 @@ in
 
     virtualbox = {
       host = {
-        enable = true;
+        enable = false;
 
         enableExtensionPack = true;
       };
@@ -284,24 +306,6 @@ in
     # Enable XDG desktop integration
     portal = {
       enable = true;
-    };
-  };
-
-  security = {
-    sudo = {
-      enable = true;
-
-      extraRules = [
-        {
-          users = [ "ajmasia" ];
-          commands = [
-            {
-              command = "/home/ajmasia/.nix-profile/bin/ryzenadj";
-              options = [ "NOPASSWD" ];
-            }
-          ];
-        }
-      ];
     };
   };
 
