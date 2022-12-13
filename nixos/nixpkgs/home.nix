@@ -95,6 +95,8 @@ with pkgs; {
 
           play ~/.config/sounds/startup-01.mp3 &
 
+          ~/.config/conky/Mimosa_DBlue/start.sh &
+
           laptop_screen_state=$(bat /proc/acpi/button/lid/LID1/state | awk '{print $2}')
           is_external_monitor_connected=$(xrandr --query | grep 'HDMI-A-0 connected')
 

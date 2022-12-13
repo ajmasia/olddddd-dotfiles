@@ -58,6 +58,10 @@ with pkgs; {
     "udiskie" = {
       source = ./xdg/udiskie;
     };
+
+    # "conky" = {
+    #   source = ./xdg/conky;
+    # };
   };
 
   desktopEntries = {

@@ -71,6 +71,7 @@ with pkgs; [
   ryzenadj
   lazygit
   awscli2
+  cairo
   # unstable.dt-shell-color-scripts
   # usermount
 
@@ -103,8 +104,10 @@ with pkgs; [
 
   # Fonst
   nerdfonts
+  # google-fonts
   # custom-nerdfonts
   font-awesome_5
+  # material-icons
 
   # UI
   xdragon
@@ -122,6 +125,7 @@ with pkgs; [
   # papirus-icon-theme
   sioyek
   bsp-layout
+  # meteo
 
   # Browsers
   #chromium
