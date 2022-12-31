@@ -74,6 +74,7 @@ with pkgs; [
   cairo
   # unstable.dt-shell-color-scripts
   # usermount
+  acpi
 
   unstable.yubioath-flutter
   yubikey-personalization
@@ -120,11 +121,15 @@ with pkgs; [
   lxappearance # Configuring the theme and fonts of gtk applications
   libsForQt5.qt5ct # Qt5 Configuration Tool
   gnome.gnome-disk-utility
-  gnome.nautilus
-  adwaita-qt
+  # gnome.nautilus
+  # adwaita-qt
+  networkmanagerapplet
   # papirus-icon-theme
   sioyek
   bsp-layout
+  cbatticon
+  spotify-tray
+  # google-cloud-sdk
   # meteo
 
   # Browsers
@@ -143,6 +148,8 @@ with pkgs; [
   pamix
   cava
   vlc
+  handbrake
+
 
   # Graphical editors
   inkscape
@@ -154,7 +161,7 @@ with pkgs; [
   # Productivity
   timewarrior
   calibre
-  # todoist-electron
+  # to/meddoist-electron
   todoist
   bitwarden
   bitwarden-cli

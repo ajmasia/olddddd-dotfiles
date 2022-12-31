@@ -1,0 +1,12 @@
+#!/bin/sh
+
+HIDDEN=$(bspc query -N -n .hidden -d focused)
+CURRENT_DESKTOP=$(bspc query -D -d)
+
+if [ -z "$HIDDEN" ]; then
+	bspc node focused -g hidden=on
+else
+	bspc node "$HIDDEN" -g hidden=off
+	bspc node "$HIDDEN" -f
+fi
+

@@ -55,7 +55,6 @@ then
         if [[ $bat_percent -lt $LOW_BAT && "$bs" = "Discharging" && $launched -lt 3 ]]
         then
             notify-send --urgency=critical "$bat_percent% : Batería baja!" -t 6000
-            # play ~/.config/sounds/battery-low_nokia_01.mp3
             launched=$((launched+1))
         elif [[ "$bs" = "Charging" ]]
         then

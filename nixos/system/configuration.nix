@@ -32,7 +32,7 @@ in
     };
 
     plymouth = {
-      enable = false;
+      enable = true;
     };
   };
 
@@ -94,6 +94,9 @@ in
     accounts-daemon = {
       enable = true;
     };
+
+    # Needed to some apps like blueman-manager save their options
+    dbus.packages = [ pkgs.dconf ];
 
     gnome.gnome-keyring.enable = true;
 
@@ -300,6 +303,9 @@ in
     vim = {
       defaultEditor = true;
     };
+
+    # Needed to some apps like blueman-manager save their options
+    dconf.enable = true;
   };
 
   xdg = {

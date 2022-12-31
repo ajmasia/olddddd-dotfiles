@@ -296,6 +296,12 @@
     # Icon for notifications with critical urgency, uncomment to enable
     #icon = /path/to/icon
   };
+
+  # script-test = {
+  #   summary = "*";
+  #   script = "/home/ajmasia/.nix-profile/bin/dunst-sound";
+  # };
+  
   # Every section that isn't one of the above is interpreted as a rules to
   # override settings for certain messages.
   #

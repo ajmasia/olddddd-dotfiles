@@ -4,14 +4,15 @@
   "super + Escape" = "pkill -USR1 -x sxhkd";
 
   # App launchers
-  "super + Return" = "alacritty";
+  "super + {_,alt +}Return" = "{alacritty,open-floating-window alacritty}";
   "super + @space" = "rofi -show drun -theme ~/.config/rofi/themes/launcher.rasi &";
-  "alt + tab" = "rofi -show window -theme ~/.config/rofi/themes/launcher.rasi &";
+  "alt + Tab" = "rofi -show window -theme ~/.config/rofi/themes/launcher.rasi &";
   # "super + p" = "rofi -show drun";
   "super + e" = "emojis";
   "super + shift + f" = "flameshot gui";
   "super + shift + l" = "set-slack-status";
   "super + shift + p" = "set-cpu-profile";
+  "super + shift + i" = "win-hide";
 
   # Windows management
   "super + {_,shift + }w" = "bspc node -{c,k}";
@@ -48,6 +49,4 @@
   # System management
   "super + alt + p" = "power-menu &";
 }
-
-
 

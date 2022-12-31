@@ -45,6 +45,8 @@ with pkgs; {
           # "pointer_action2" = "resize_side";
           "pointer_action2" = "resize_corner";
           "automatic_scheme" = "spiral";
+          "initial_polarity" = "first_child";
+          "pointer_motion_interval" = 0.8;
         };
         rules = {
           "Zathura" = {
@@ -63,40 +65,71 @@ with pkgs; {
           "Slack" = {
             desktop = "^4";
             state = "tiled";
+            follow = false;
+            focus = false;
           };
           "TelegramDesktop" = {
             desktop = "^3";
             state = "tiled";
           };
+          "Nm-connection-editor" = {
+            state = "floating";
+            center = true;
+            rectangle = "800x600+100+100";
+          };
+          ".blueman-manager-wrapped" = {
+            state = "floating";
+            center = true;
+            rectangle = "800x600+100+100";
+          };
+          "Pavucontrol" = {
+            state = "floating";
+            center = true;
+            rectangle = "800x600+100+100";
+          };
+          "Lxappearance" = {
+            state = "floating";
+            center = true;
+            rectangle = "1000x800+100+100";
+          };
+          "qt5ct" = {
+            state = "floating";
+            center = true;
+            rectangle = "1000x800+100+100";
+          };
         };
         startupPrograms = [ ];
         extraConfig = ''
+          # Launch hotkey manager
           pkill sxhkd
           pgrep -x sxhkd > /dev/null || sxhkd &
-          
-          ~/.config/polybar/launch.sh 
 
-          # systemctl --user restart picom.service
+          # Launch picom compositor
           pkill picom
           picom &
-          
+
+          # Launch status bar
+          sleep 2 && ~/.config/polybar/launch.sh &
+
+          # Set desktop background
           feh --bg-fill ~/.config/wallpapers/wallpaper_004.jpg
+
+          # Laucnh conky
+          ~/.config/conky/Mimosa_DBlue/start.sh &
+
+          # Launch starter sound
+          play ~/.config/sounds/startup-01.mp3 &
+
+          # Set sutolock screen 
           pkill xautolock
           xautolock -time 12 -locker "xscreensaver-command -deactivate; sleep 5; betterlockscreen -l" -notify 15 -notifier "notify-send 'Locker' 'Locking screen in 15 seconds' -t 4000" -killtime 10 -killer "systemctl suspend" &
           
-          pkill battery-notifier
-          battery-notifier &
-
-          pkill -f cloud-drive-con
-          pkill -f cloud-drive*
-          synology-drive &
+          # pkill battery-notifier
+          # battery-notifier &
 
           xsetroot -cursor_name left_ptr &
 
-          play ~/.config/sounds/startup-01.mp3 &
-
-          ~/.config/conky/Mimosa_DBlue/start.sh &
-
+          # Initialize bspw monitors & desktops
           laptop_screen_state=$(bat /proc/acpi/button/lid/LID1/state | awk '{print $2}')
           is_external_monitor_connected=$(xrandr --query | grep 'HDMI-A-0 connected')
 
@@ -118,6 +151,15 @@ with pkgs; {
             # bspc rule -a TelegramDesktop -o desktop='^7' && /home/ajmasia/.nix-profile/bin/telegram-desktop &
             # bspc rule -a Slack -o desktop='^8' && /home/ajmasia/.nix-profile/bin/slack 
           fi 
+
+          # Launch battery service notifications
+          pkill cbatticon
+          sleep 4 && cbatticon -i 'standard' -l 30 -r 19 &
+
+          # Launch Synology Drive service
+          pkill -f cloud-drive-con
+          pkill -f cloud-drive*
+          sleep 8 && synology-drive &
         '';
       };
     };
@@ -147,6 +189,18 @@ with pkgs; {
       Install = {
         WantedBy = [ "graphical-session.target" ];
       };
+    };
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Nordic";
+      package = nordic;
+    };
+    iconTheme = {
+      name = "Papirus-Dark";
+      package = papirus-icon-theme;
     };
   };
 }

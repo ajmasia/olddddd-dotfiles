@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+BAT_PATH=/sys/class/power_supply/BAT0
+
+BAT_STAT=$BAT_PATH/status
+BAT_FULL=$BAT_PATH/charge_full
+BAT_NOW=$BAT_PATH/charge_now
+BAT_ENERGY_FULL=$BAT_PATH/energy_full
+BAT_ENERGY_NOW=$BAT_PATH/energy_now
+
+cat $BAT_STAT
+cat $BAT_FULL
+cat $BAT_NOW
+cat $BAT_ENERGY_NOW
+cat $BAT_ENERGY_FULL
+
