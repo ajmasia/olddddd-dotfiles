@@ -63,10 +63,10 @@ with pkgs; {
             focus = true;
           };
           "Slack" = {
-            desktop = "^4";
+            desktop = "^1";
           };
           "TelegramDesktop" = {
-            desktop = "^3";
+            desktop = "^1";
           };
           "Nm-connection-editor" = {
             state = "floating";
