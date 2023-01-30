@@ -32,9 +32,13 @@ in
     };
 
     plymouth = {
-      enable = true;
+      enable = false;
     };
   };
+
+  hardware.logitech.wireless.enable = true;
+  hardware.logitech.wireless.enableGraphical = true; # for solaar to be included
+
 
   time = {
     timeZone = "Europe/Madrid";
@@ -60,6 +64,26 @@ in
       wlp1s0 = {
         useDHCP = true;
       };
+    };
+
+    wg-quick.interfaces = {
+      garage-vpn = {
+        autostart = false;
+        address = [ "172.27.66.2/24" ];
+        dns = [ "172.30.32.3" ];
+        privateKey = secrets.wg.privateKey;
+
+        peers = [
+          {
+            publicKey = "nKx9mrJhDocIoZzm2WUCtwORP+O4HvH7C4rSRBbVBnw=";
+            # presharedKeyFile = "/root/wireguard-keys/preshared_from_peer0_key";
+            allowedIPs = [ "0.0.0.0/0" ];
+            endpoint = secrets.wg.endpoint;
+            persistentKeepalive = 25;
+          }
+        ];
+      };
+
     };
   };
 
@@ -112,6 +136,9 @@ in
             };
           };
         };
+        # gdm = {
+        #   enable = true;
+        # };
       };
 
       windowManager = {
@@ -244,7 +271,7 @@ in
 
     virtualbox = {
       host = {
-        enable = false;
+        enable = true;
 
         enableExtensionPack = true;
       };
@@ -256,6 +283,7 @@ in
       ajmasia = {
         isNormalUser = true;
         extraGroups = [ "wheel" "docker" "input" "audio" ];
+        # homeMode = "755";
       };
     };
 
@@ -314,6 +342,8 @@ in
       enable = true;
     };
   };
+
+  # systemd.services.wg-quick-garage-vpn.wantedBy = pkgs.lib.mkForce [ ];
 
   system = {
     stateVersion = "21.11";

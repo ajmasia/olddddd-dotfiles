@@ -12,10 +12,10 @@ with pkgs; {
     #   source = ./xdg/polybar;
     #   recursive = true;
     # };
-    "picom" = {
-      source = ./xdg/picom;
-      recursive = true;
-    };
+    # "picom" = {
+    #   source = ./xdg/picom;
+    #   recursive = true;
+    # };
 
     "dunst" = {
       source = ./xdg/dunst;
@@ -55,9 +55,9 @@ with pkgs; {
       source = ../../sounds;
     };
 
-    "udiskie" = {
-      source = ./xdg/udiskie;
-    };
+    # "udiskie" = {
+    #   source = ./xdg/udiskie;
+    # };
 
     # "conky" = {
     #   source = ./xdg/conky;
@@ -76,16 +76,16 @@ with pkgs; {
       categories = [ "Settings" "DesktopSettings" "Qt" ];
     };
 
-    lxappearance = {
-      comment = "Customize look and feel of your desktop and applications";
-      exec = "lxappearance";
-      genericName = "Customize look and Feel of GTK apps";
-      icon = HOME_PATH + "/.local/share/custom-icons/gtk_logo.svg";
-      name = "GTK Settings";
-      terminal = false;
-      type = "Application";
-      categories = [ "GTK" "Settings" "DesktopSettings" "X-LXDE-Settings" ];
-    };
+    # lxappearance = {
+    #   comment = "Customize look and feel of your desktop and applications";
+    #   exec = "lxappearance";
+    #   genericName = "Customize look and Feel of GTK apps";
+    #   icon = HOME_PATH + "/.local/share/custom-icons/gtk_logo.svg";
+    #   name = "GTK Settings";
+    #   terminal = false;
+    #   type = "Application";
+    #   categories = [ "GTK" "Settings" "DesktopSettings" "X-LXDE-Settings" ];
+    # };
 
     pavucontrol = {
       comment = "Adjust the volume level";

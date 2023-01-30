@@ -72,9 +72,25 @@ with pkgs; [
   lazygit
   awscli2
   cairo
+  ipinfo
   # unstable.dt-shell-color-scripts
   # usermount
   acpi
+  jrnl
+  playerctl
+  zscroll
+  at-spi2-core # Assistive Technology Service Provider Interface protocol definitions and daemon for D-Bus
+  # scc
+  xorg.xwininfo
+  xdotool
+  xdo
+
+  github-desktop
+  gh
+
+  # Privacy
+  protonvpn-gui
+  protonvpn-cli
 
   unstable.yubioath-flutter
   yubikey-personalization
@@ -115,10 +131,10 @@ with pkgs; [
   kazam
   feh
   polybarFull
-  picom-jonaburg
+  # picom-jonaburg
   xautolock
   betterlockscreen
-  lxappearance # Configuring the theme and fonts of gtk applications
+  # lxappearance # Configuring the theme and fonts of gtk applications
   libsForQt5.qt5ct # Qt5 Configuration Tool
   gnome.gnome-disk-utility
   # gnome.nautilus
@@ -131,11 +147,13 @@ with pkgs; [
   spotify-tray
   # google-cloud-sdk
   # meteo
+  autokey
 
   # Browsers
   #chromium
   unstable.google-chrome
   firefox
+  brave
 
   # Comunications
   tdesktop
@@ -161,8 +179,8 @@ with pkgs; [
   # Productivity
   timewarrior
   calibre
-  # to/meddoist-electron
   todoist
+  todoist-electron
   bitwarden
   bitwarden-cli
   unstable.obsidian
@@ -173,6 +191,7 @@ with pkgs; [
   synology_drive_client_12920
   # nixpkgs_for_insync3.insync-v3
   # inkdrop
+  libreoffice
 
   # Development
   # editors

@@ -15,5 +15,10 @@ import ../../../../commons/alias/commons.nix //
 
   # genially project
   grp = "yarn clean:modules && yarn && gsh cli builder --all";
+
+  # Programs
+  r3t = "nix-shell -p robo3t --run robo3t &";
+  calc = "env GTK_THEME=Adwaita ~/.nix-profile/bin/libreoffice --calc &";
+  base = "env GTK_THEME=Adwaita ~/.nix-profile/bin/libreoffice --base &";
 }
 

@@ -12,7 +12,7 @@
   "super + shift + f" = "flameshot gui";
   "super + shift + l" = "set-slack-status";
   "super + shift + p" = "set-cpu-profile";
-  "super + shift + i" = "win-hide";
+  "super + shift + i" = "scpad";
 
   # Windows management
   "super + {_,shift + }w" = "bspc node -{c,k}";
@@ -32,7 +32,8 @@
   "super + {o,i}" = "bspc wm -h off; bspc node {older,newer} -f;bspc wm -h on;";
 
   # Desktops management
-  "super + {Left,Right}" = "bspc desktop -f {prev,next}.local";
+  # "super + {Left,Right}" = "bspc desktop -f {prev,next}.local"; # Only goes to current monitor workspaces
+  "super + {Left,Right}" = "bspc desktop -f {prev,next}";
 
   # Brightness control
   "XF86MonBrightnessUp" = "brightnessctl s +1%";

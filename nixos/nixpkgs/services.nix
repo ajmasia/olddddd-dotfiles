@@ -1,5 +1,6 @@
-{ ... }:
-{
+{ pkgs, ... }:
+
+with pkgs; {
   blueman-applet = {
     enable = true;
   };
@@ -16,6 +17,10 @@
     enable = true;
   };
 
+  pasystray = {
+    enable = true;
+  };
+
   dunst = {
     enable = true;
     settings = import ./services/dunst;
@@ -26,51 +31,33 @@
     keybindings = import ./services/sxhkd/keybindings.nix;
   };
 
-  # picom = {
-  #   enable = true;
+  picom = {
+    enable = true;
 
-  #   fade = true;
-  #   fadeSteps = [ 0.03 0.28 ];
-  #   fadeDelta = 8;
+    package = picom-jonaburg;
 
-  #   inactiveOpacity = 0.92;
-  #   opacityRules = [ "100:class_g = 'Rofi'" ];
+    vSync = true;
+    backend = "glx";
+    experimentalBackends = true;
 
-  #   experimentalBackends = true;
-  #   vSync = true;
-  #   backend = "glx";
+    shadow = false;
+    shadowExclude = [];
 
-  #   noDNDShadow = false;
-  #   noDockShadow = false;
-  #   menuOpacity = 1.0;
+    activeOpacity = 1.0;
+    inactiveOpacity = 0.88;
+    opacityRules = [
+      "100:class_g = 'Rofi'"
+      "100:window_type = 'notification'"
+    ];
 
-  #   settings = {
-  #     frame-opacity = 0.85;
+    fade = true;
+    fadeSteps = [ 0.03 0.03 ];
+    fadeDelta = 8;
+    fadeExclude = [ ];
 
-  #     inactive-opacity-override = false;
-
-  #     mark-wmwin-focused = true;
-  #     mark-ovredir-focused = false;
-
-  #     corner-radius = 12;
-  #     rounded-corners-exclude = [
-  #       "window_type = 'dock'"
-  #     ];
-
-  #     detect-rounded-corners = true;
-  #     detect-client-opacity = true;
-  #     detect-transient = true;
-
-  #     log-level = "warn";
-  #   };
-
-  #   wintypes = {
-  #     tooltip = { fade = true; shadow = false; opacity = 1.0; focus = true; full-shadow = false; };
-  #     dock = { clip-shadow-above = true; };
-  #     popup_menu = { shadow = false; };
-  #     dropdown_menu = { shadow = false; };
-  #   };
-  # };
+    wintypes = import ./services/picom/wintypes.nix;
+    settings = import ./services/picom/settings.nix;
+  };
 
   stalonetray = {
     enable = false;
@@ -79,7 +66,7 @@
       transparent = true;
       geometry = "6x1-0+0";
 
-      background = "#000000";
+      background = " #000000";
       icon_size = 22;
       kludges = "force_icons_size";
       grow_gravity = "E";
@@ -114,7 +101,23 @@
     enable = true;
 
     notify = true;
-    tray = "always";
+    tray = "auto";
+
+    settings = {
+      program_options = {
+        udisks_version = 2;
+      };
+
+      icon_names = {
+        media = [ "drive-removable-media" ];
+        eject = [ "media-eject" ];
+        unmount = [ "drive-optical" ];
+        detach = [ "system-shutdown-symbolic" ];
+        losetup = [ "drive-removable-media" ];
+        mount = [ "drive-removable-media" ];
+
+      };
+    };
   };
 
 
@@ -138,7 +141,6 @@
           atomic = true;
           execute_after = [
             "notify-send 'Laptop'"
-            # "bspc wm -r"
           ];
         }
         {
@@ -149,10 +151,14 @@
           atomic = true;
           execute_after = [
             "notify-send 'Laptop + External'"
-            # "bspc wm -r"
           ];
         }
       ];
   };
+
+  polybar = import
+    ./services/polybar
+    { pkgs = pkgs; };
+
 }
 

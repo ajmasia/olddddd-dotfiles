@@ -64,13 +64,9 @@ with pkgs; {
           };
           "Slack" = {
             desktop = "^4";
-            state = "tiled";
-            follow = false;
-            focus = false;
           };
           "TelegramDesktop" = {
             desktop = "^3";
-            state = "tiled";
           };
           "Nm-connection-editor" = {
             state = "floating";
@@ -87,6 +83,10 @@ with pkgs; {
             center = true;
             rectangle = "800x600+100+100";
           };
+          "Bitwarden" = {
+            state = "floating";
+            center = true;
+          };
           "Lxappearance" = {
             state = "floating";
             center = true;
@@ -97,69 +97,42 @@ with pkgs; {
             center = true;
             rectangle = "1000x800+100+100";
           };
+          "scpad" = {
+            sticky = true;
+            state = "floating";
+            center = true;
+            rectangle = "1920x1080+100+100";
+          };
         };
-        startupPrograms = [ ];
+
+        startupPrograms = [
+          "# Startup programs"
+          "systemctl --user restart picom.service"
+          "pgrep -x sxhkd > /dev/null || sxhkd"
+          "xsetroot -cursor_name left_ptr"
+          "feh --bg-fill ~/.config/wallpapers/wallpaper_004.jpg"
+          "~/.config/conky/Mimosa_DBlue/start.sh"
+          "xautolock -time 12 -locker \"xscreensaver-command -deactivate; sleep 5; betterlockscreen -l\" -notify 15 -notifier \"notify-send 'Locker' 'Locking screen in 15 seconds' -t 4000\" -killtime 10 -killer \"systemctl suspend\""
+          "~/.config/polybar/launch.sh"
+          "solaar --window=hide"
+          "sleep 2 && cbatticon -i 'standard' -l 30 -r 19"
+          "sleep 2 && synology-drive"
+        ];
+
         extraConfig = ''
-          # Launch hotkey manager
+          # Kill running services
+          # pkill picom
+          pkill polybar
           pkill sxhkd
-          pgrep -x sxhkd > /dev/null || sxhkd &
-
-          # Launch picom compositor
-          pkill picom
-          picom &
-
-          # Launch status bar
-          sleep 2 && ~/.config/polybar/launch.sh &
-
-          # Set desktop background
-          feh --bg-fill ~/.config/wallpapers/wallpaper_004.jpg
-
-          # Laucnh conky
-          ~/.config/conky/Mimosa_DBlue/start.sh &
-
-          # Launch starter sound
-          play ~/.config/sounds/startup-01.mp3 &
-
-          # Set sutolock screen 
+          killall conky
           pkill xautolock
-          xautolock -time 12 -locker "xscreensaver-command -deactivate; sleep 5; betterlockscreen -l" -notify 15 -notifier "notify-send 'Locker' 'Locking screen in 15 seconds' -t 4000" -killtime 10 -killer "systemctl suspend" &
-          
-          # pkill battery-notifier
-          # battery-notifier &
-
-          xsetroot -cursor_name left_ptr &
-
-          # Initialize bspw monitors & desktops
-          laptop_screen_state=$(bat /proc/acpi/button/lid/LID1/state | awk '{print $2}')
-          is_external_monitor_connected=$(xrandr --query | grep 'HDMI-A-0 connected')
-
-          if [[ $is_external_monitor_connected == "" ]]; then
-            bspc monitor eDP -d I II III IV V VI VII VIII
-            # bspc rule -a Alacritty -o desktop='^1' follow=on focus=on && /home/ajmasia/.nix-profile/bin/alacritty &
-            # bspc rule -a TelegramDesktop -o desktop='^7' && /home/ajmasia/.nix-profile/bin/telegram-desktop &
-            # bspc rule -a Slack -o desktop='^8' && /home/ajmasia/.nix-profile/bin/slack 
-          elif [[ $laptop_screen_state == "open" ]]; then
-            bspc monitor eDP -d VII VIII IX X
-            bspc monitor HDMI-A-0 -f -d I II III IV V VI
-            # bspc rule -a TelegramDesktop -o desktop='^3' && /home/ajmasia/.nix-profile/bin/telegram-desktop &
-            # bspc rule -a Slack -o desktop='^4' && /home/ajmasia/.nix-profile/bin/slack &
-            # bspc rule -a Alacritty -o desktop='^5' && /home/ajmasia/.nix-profile/bin/alacritty &
-            # bspc rule -a Alacritty -o desktop='^1' follow=on focus=on && /home/ajmasia/.nix-profile/bin/alacritty
-          else
-            bspc monitor HDMI-A-0 -d I II III IV V VI VII VIII
-            # bspc rule -a Alacritty -o desktop='^1' follow=on focus=on && /home/ajmasia/.nix-profile/bin/alacritty &
-            # bspc rule -a TelegramDesktop -o desktop='^7' && /home/ajmasia/.nix-profile/bin/telegram-desktop &
-            # bspc rule -a Slack -o desktop='^8' && /home/ajmasia/.nix-profile/bin/slack 
-          fi 
-
-          # Launch battery service notifications
+          pkill solaar
           pkill cbatticon
-          sleep 4 && cbatticon -i 'standard' -l 30 -r 19 &
-
-          # Launch Synology Drive service
           pkill -f cloud-drive-con
-          pkill -f cloud-drive*
-          sleep 8 && synology-drive &
+          pkill -f cloud-drive* 
+
+          # Initialize monitors
+          bspc_initialize-monitors
         '';
       };
     };
@@ -167,7 +140,7 @@ with pkgs; {
 
   xdg = (import ./xdg.nix) { pkgs = pkgs; };
   programs = (import ./programs.nix) { pkgs = pkgs; lib = lib; builtins = builtins; };
-  services = (import ./services.nix) { };
+  services = (import ./services.nix) { pkgs = pkgs; };
   fonts.fontconfig.enable = true;
 
   systemd.user.services = {
@@ -199,8 +172,8 @@ with pkgs; {
       package = nordic;
     };
     iconTheme = {
-      name = "Papirus-Dark";
-      package = papirus-icon-theme;
+      name = "Adwaita";
+      package = gnome.adwaita-icon-theme;
     };
   };
 }

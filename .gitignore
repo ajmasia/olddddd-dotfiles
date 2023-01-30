@@ -5,3 +5,4 @@ commons/nvim/sessions
 nixos/system/secrets.nix
 
 .env
+

@@ -303,5 +303,10 @@ with builtins; {
   # mu = {
   #   enable = true;
   # };
+
+  xmobar = {
+    enable = true;
+    extraConfig = builtins.readFile ./xdg/xmobar/xmobar.hs;
+  };
 }
 
