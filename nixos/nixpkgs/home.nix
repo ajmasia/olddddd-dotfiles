@@ -108,28 +108,27 @@ with pkgs; {
         startupPrograms = [
           "# Startup programs"
           "systemctl --user restart picom.service"
+          "~/.config/polybar/launch.sh"
           "pgrep -x sxhkd > /dev/null || sxhkd"
           "xsetroot -cursor_name left_ptr"
           "feh --bg-fill ~/.config/wallpapers/wallpaper_004.jpg"
           "~/.config/conky/Mimosa_DBlue/start.sh"
           "xautolock -time 12 -locker \"xscreensaver-command -deactivate; sleep 5; betterlockscreen -l\" -notify 15 -notifier \"notify-send 'Locker' 'Locking screen in 15 seconds' -t 4000\" -killtime 10 -killer \"systemctl suspend\""
-          "~/.config/polybar/launch.sh"
-          "solaar --window=hide"
-          "sleep 2 && cbatticon -i 'standard' -l 30 -r 19"
+          "solaar -w=hide -b=solaar"
+          "batsignal -n BAT0 -c 20 -w 30 -f 98 -I ~/.local/share/custom-icons/battery.png"
           "sleep 2 && synology-drive"
         ];
 
         extraConfig = ''
           # Kill running services
-          # pkill picom
           pkill polybar
           pkill sxhkd
-          killall conky
           pkill xautolock
           pkill solaar
-          pkill cbatticon
+          pkill batsignal
           pkill -f cloud-drive-con
           pkill -f cloud-drive* 
+          killall conky
 
           # Initialize monitors
           bspc_initialize-monitors
@@ -172,8 +171,9 @@ with pkgs; {
       package = nordic;
     };
     iconTheme = {
-      name = "Adwaita";
-      package = gnome.adwaita-icon-theme;
+      name = "Papirus-Dark";
+      # package = numix-icon-theme;
+      package = papirus-icon-theme;
     };
   };
 }

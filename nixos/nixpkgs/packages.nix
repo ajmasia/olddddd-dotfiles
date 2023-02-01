@@ -73,6 +73,7 @@ with pkgs; [
   awscli2
   cairo
   ipinfo
+  batsignal
   # unstable.dt-shell-color-scripts
   # usermount
   acpi
@@ -134,7 +135,7 @@ with pkgs; [
   # picom-jonaburg
   xautolock
   betterlockscreen
-  # lxappearance # Configuring the theme and fonts of gtk applications
+  lxappearance # Configuring the theme and fonts of gtk applications
   libsForQt5.qt5ct # Qt5 Configuration Tool
   gnome.gnome-disk-utility
   # gnome.nautilus
@@ -143,7 +144,6 @@ with pkgs; [
   # papirus-icon-theme
   sioyek
   bsp-layout
-  cbatticon
   spotify-tray
   # google-cloud-sdk
   # meteo
@@ -195,7 +195,7 @@ with pkgs; [
 
   # Development
   # editors
-  (emacsWithPackages (epkgs: [ epkgs.emacsql-sqlite ]))
+  # (emacsWithPackages (epkgs: [ epkgs.emacsql-sqlite ]))
   unstable.neovim
   unstable.vscode
   thonny

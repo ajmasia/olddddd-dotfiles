@@ -32,7 +32,7 @@ in
     };
 
     plymouth = {
-      enable = false;
+      enable = true;
     };
   };
 

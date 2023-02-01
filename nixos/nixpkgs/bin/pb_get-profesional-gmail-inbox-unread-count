@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+profesional_gmail_username=$(
+	source ~/.env
+	echo $PROFESIONAL_GMAIL_ACCOUNT
+)
+profesional_gmail_password=$(
+	source ~/.env
+	echo $PROFESIONAL_GMAIL_PASSWORD
+)
+
+get_profesional_gmail_inbox_unread_count() {
+	response=$(
+		curl \
+			--silent \
+			--ssl \
+			--user \
+			$profesional_gmail_username:$profesional_gmail_password \
+			--url "imaps://imap.gmail.com:993/INBOX" --request "STATUS INBOX (UNSEEN)"
+	)
+
+	echo $(echo $response | grep -o 'UNSEEN [0-9]*' | awk '{print $2}')
+}
+
+echo $(get_profesional_gmail_inbox_unread_count)

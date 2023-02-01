@@ -160,5 +160,26 @@ with pkgs; {
     ./services/polybar
     { pkgs = pkgs; };
 
+  trayer = {
+    enable = false;
+
+    settings = {
+      monitor = "primary";
+      widthtype = "request";
+
+      distancefrom = "top";
+      distance = 17;
+      align = "right";
+      edge = "top";
+      iconspacing = 4;
+
+      margin = 430;
+
+      transparent = true;
+      alpha = 0;
+      tint = "0x282c34";
+    };
+  };
+
 }
 

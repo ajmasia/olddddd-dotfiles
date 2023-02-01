@@ -20,7 +20,7 @@ if [[ $is_external_monitor_connected == "" ]]; then
 elif [[ $laptop_screen_state == "open" ]]; then
   xrandr --output HDMI-A-0 --primary --output eDP --auto --left-of HDMI-A-0
   polybar -q main-home -c "$DIR"/config.ini &
-  # polybar -q secondary-laptop -c "$DIR"/config.ini &
+  polybar -q secondary-laptop -c "$DIR"/config.ini &
 else
   xrandr --output eDP --off
   polybar -q external -c "$DIR"/config.ini &
