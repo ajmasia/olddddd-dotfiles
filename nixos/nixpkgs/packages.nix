@@ -238,7 +238,7 @@ with pkgs; [
   # node packages
   nodePackages.node2nix
   nodePackages.neovim
-  nodePackages.eslint
+  # nodePackages.eslint
   # nodePackages.prettier
   # nodePackages.typescript-language-server
   # nodePackages.vscode-langservers-extracted
@@ -252,5 +252,7 @@ with pkgs; [
 
   # playgorund
   rpiplay
+
+  luajitPackages.luarocks
 ]
 

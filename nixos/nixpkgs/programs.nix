@@ -14,6 +14,7 @@ with builtins; {
 
     initExtra = ''
       # Init extra config
+      # PATH=~/.emacs.d/bin:$PATH
       export PATH="$HOME/.local/bin:$PATH"
       export SLACK_CLI_TOKEN=$(source ~/.env; echo $SLACK_CLI_TOKEN)
       export EDITOR="nvim"
@@ -288,12 +289,11 @@ with builtins; {
       font_size = 13;
       window_padding_width = 6;
       window_border_width = 0;
-      placement_strategy = "top-left";
+      placement_strategy = "center";
       cursor_shape = "underline";
       window_resize_step_cells = 2;
       confirm_os_window_close = 0;
       shell_integration = "enabled";
-
       repaint_delay = 10;
       input_delay = 3;
       sync_to_monitor = "yes";
@@ -305,8 +305,12 @@ with builtins; {
   # };
 
   xmobar = {
-    enable = true;
+    enable = false;
     extraConfig = builtins.readFile ./xdg/xmobar/xmobar.hs;
+  };
+
+  emacs = {
+    enable = false;
   };
 }
 

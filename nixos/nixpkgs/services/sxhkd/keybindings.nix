@@ -8,6 +8,7 @@
   # App launchers
   "super + @space" = "rofi -show drun -theme ~/.config/rofi/themes/launcher.rasi &";
   "super + {_,alt +}Return" = "{alacritty,open-floating-window alacritty}";
+  "super + shift + k" = "kitty";
   # rofi windows switcher
   "alt + Tab" = "rofi -show window -theme ~/.config/rofi/themes/launcher.rasi &";
   "super + e" = "emojis";

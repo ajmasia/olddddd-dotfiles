@@ -41,7 +41,7 @@ with pkgs; {
     experimentalBackends = true;
 
     shadow = false;
-    shadowExclude = [];
+    shadowExclude = [ ];
 
     activeOpacity = 1.0;
     inactiveOpacity = 0.88;
@@ -181,5 +181,8 @@ with pkgs; {
     };
   };
 
+  emacs = {
+    enable = false;
+  };
 }
 

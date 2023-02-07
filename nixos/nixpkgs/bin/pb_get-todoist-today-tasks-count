@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+api_key=$(
+	source ~/.env
+	echo $TODOIST_TOKEN
+)
+
+tasks=$(curl -s "https://api.todoist.com/rest/v2/tasks?filter=today|overdue" -H "Authorization: Bearer $api_key")
+
+task_count=$(echo "$tasks" | jq '.[].content' | wc -l)
+
+echo "$task_count"
