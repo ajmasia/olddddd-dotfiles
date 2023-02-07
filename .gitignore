@@ -2,6 +2,8 @@ commons/lvim/plugin
 commons/lvim/sessions
 commons/nvim/plugin
 commons/nvim/sessions
+commons/nvim.old/plugin
+commons/nvim.old/sessions
 
 nixos/system/secrets.nix
 
