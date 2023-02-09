@@ -74,6 +74,7 @@ with pkgs; [
   cairo
   ipinfo
   batsignal
+  robo3t
   # unstable.dt-shell-color-scripts
   # usermount
   acpi
@@ -249,6 +250,8 @@ with pkgs; [
   # db
   sqlite
   pgcli
+  dbeaver
+  beekeeper-studio
 
   # playgorund
   rpiplay

@@ -14,10 +14,11 @@
   "super + e" = "emojis";
   "super + shift + f" = "flameshot gui";
   "super + shift + g" = "set-slack-status";
-  "super + shift + p" = "set-cpu-profile";
+  # "super + shift + p" = "set-cpu-profile";
+  "super + shift + p" = "pb_toggle";
 
   # Scrachpads
-  "super + shift + i" = "scpad";
+  "super + shift + t" = "scpad";
 
   # Windows management
   "super + {_,shift + }w" = "bspc node -{c,k}";

@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+main_home=$(xdotool search --name main-home getwindowpid)
+secondary_laptop=$(xdotool search --name secondary-laptop getwindowpid)
+main_laptop=$(xdotool search --name main-laptop getwindowpid)
+
+if [ -f /tmp/polybarhidden ]; then 
+  polybar-msg -p $main_home cmd toggle 
+  polybar-msg -p $secondary_laptop cmd toggle 
+  polybar-msg -p $main_laptop cmd toggle 
+
+  bspc config top_padding 50
+
+  rm /tmp/polybarhidden 
+else 
+  polybar-msg -p $main_home cmd toggle 
+  polybar-msg -p $secondary_laptop cmd toggle 
+  polybar-msg -p $main_laptop cmd toggle 
+
+  bspc config top_padding 0 
+
+  touch /tmp/polybarhidden 
+fi
+

@@ -38,13 +38,12 @@ with pkgs; {
 
     vSync = true;
     backend = "glx";
-    experimentalBackends = true;
 
     shadow = false;
     shadowExclude = [ ];
 
     activeOpacity = 1.0;
-    inactiveOpacity = 0.88;
+    inactiveOpacity = 0.90;
     opacityRules = [
       "100:class_g = 'Rofi'"
       "100:window_type = 'notification'"

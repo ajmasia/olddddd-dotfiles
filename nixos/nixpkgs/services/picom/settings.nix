@@ -8,7 +8,7 @@
   spawn-center-screen = true;
 
   # Extra opacity
-  frame-opacity = 0.88;
+  frame-opacity = 1;
   inactive-opacity-override = false;
   detect-client-opacity = true;
 
@@ -23,12 +23,14 @@
   round-borders = 1;
   rounded-corners-exclude = [
     "window_type = 'dock'"
-    "class_g = 'scpad'"
+    # "class_g = 'scpad'"
   ];
 
   # General
   refresh-rate = 0;
   use-damage = false;
   log-level = "warn";
+  experimental-backends = true;
+  xrender-sync-fence = true;
 }
 

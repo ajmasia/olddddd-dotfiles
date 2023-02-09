@@ -101,7 +101,7 @@ with pkgs; {
             sticky = true;
             state = "floating";
             center = true;
-            rectangle = "1920x1080+100+100";
+            rectangle = "1896x1056+100+100";
           };
         };
 
