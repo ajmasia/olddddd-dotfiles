@@ -12,8 +12,9 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 laptop_screen_state=$(bat /proc/acpi/button/lid/LID1/state | awk '{print $2}')
 is_external_monitor_connected=$(xrandr --query | grep 'HDMI-A-0 connected')
 
-echo $laptop_screen_state
-echo $is_external_monitor_connected
+# echo $laptop_screen_state
+# echo $is_external_monitor_connected
+pb_set-temp-path &
 
 if [[ $is_external_monitor_connected == "" ]]; then
   polybar -q main-laptop -c "$DIR"/config.ini & 

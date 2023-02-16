@@ -60,6 +60,8 @@ with pkgs; [
   conky
   kubectl
   kubectx
+  # lens
+  lens-last
   etcher
   di
   lfs
@@ -78,6 +80,7 @@ with pkgs; [
   # unstable.dt-shell-color-scripts
   # usermount
   acpi
+  lsof
   jrnl
   playerctl
   zscroll
@@ -231,6 +234,7 @@ with pkgs; [
   stylua
   selene
   black
+  # shfmt
   sumneko-lua-language-server
 
   # packages managers

@@ -197,9 +197,15 @@ in
 
     openvpn = {
       servers = {
-        genially = {
+        work-dev = {
           autoStart = false;
-          config = ''config /home/ajmasia/.config/vpn/genially_dev.ovpn'';
+          config = ''config /home/ajmasia/.config/vpn/5741013c6c2d30bffa6779fc2eecda6c.ovpn'';
+          updateResolvConf = true;
+        };
+
+        work-pre = {
+          autoStart = false;
+          config = ''config /home/ajmasia/.config/vpn/b3841d78f5f012fee5cee00837b3e63d.ovpn'';
           updateResolvConf = true;
         };
 

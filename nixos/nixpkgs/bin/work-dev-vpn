@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 check_genially_vpn_status() {
-  echo "$(systemctl is-active openvpn-genially.service)"
+  echo "$(systemctl is-active openvpn-work-dev.service)"
 }
 
 show_vpn_status() {
@@ -15,12 +15,12 @@ show_vpn_status() {
 }
 
 connect_genially_vpn() {
-  systemctl start openvpn-genially.service
+  systemctl start openvpn-work-dev.service
   notify-send "Genially VPN $(check_genially_vpn_status) 🟢"
 }
 
 disconnect_genially_vpn() {
-  systemctl stop openvpn-genially.service
+  systemctl stop openvpn-work-dev.service
   notify-send "Genially VPN $(check_genially_vpn_status) ⛔"
 }
 
@@ -31,7 +31,7 @@ case "$1" in
 
     if [[ $vpn_status = "inactive" ]]; then
       connect_genially_vpn
-      sleep 5 && xdg-open https://dashboard-sorrycypress.genially.com/
+      # sleep 5 && xdg-open https://dashboard-sorrycypress.genially.com/
     else
       disconnect_genially_vpn
     fi

@@ -13,7 +13,7 @@
   "alt + Tab" = "rofi -show window -theme ~/.config/rofi/themes/launcher.rasi &";
   "super + e" = "emojis";
   "super + shift + f" = "flameshot gui";
-  "super + shift + g" = "set-slack-status";
+  "super + shift + s" = "set-slack-status";
   # "super + shift + p" = "set-cpu-profile";
   "super + shift + p" = "pb_toggle";
 
