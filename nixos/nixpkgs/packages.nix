@@ -136,6 +136,8 @@ with pkgs; [
   kazam
   feh
   polybarFull
+  webcamoid
+
   # picom-jonaburg
   xautolock
   betterlockscreen
@@ -236,6 +238,7 @@ with pkgs; [
   black
   # shfmt
   sumneko-lua-language-server
+  rnix-lsp
 
   # packages managers
   unstable.cargo
@@ -247,6 +250,7 @@ with pkgs; [
   # nodePackages.prettier
   # nodePackages.typescript-language-server
   # nodePackages.vscode-langservers-extracted
+  nodePackages_latest.eslint_d
 
   # python packages
   # python39Packages.flake8
