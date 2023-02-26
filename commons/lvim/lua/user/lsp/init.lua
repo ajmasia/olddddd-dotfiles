@@ -60,3 +60,5 @@ linters.setup {
 
 -- lvim.lsp.float.border = "none"
 -- lvim.lsp.diagnostics.float.border = "none"
+
+

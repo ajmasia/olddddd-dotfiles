@@ -19,6 +19,7 @@ let
   # custom-nerdfonts = (pkgs.nerdfonts.override { 
   #   fonts = [ "FiraCode" "DroidSansMono" "Hack" "SourceCodePro" "CascadiaCode"]; 
   # });
+  customNodePackages = pkgs.callPackage ./node-packages { };
 in
 with pkgs; [
   # System
@@ -26,6 +27,7 @@ with pkgs; [
   pavucontrol
 
   # Tools
+  # ticktick
   bc
   exa
   fd
@@ -265,5 +267,9 @@ with pkgs; [
   rpiplay
 
   luajitPackages.luarocks
+  customNodePackages.autocannon
+  customNodePackages.fastify-cli
+
+  # insomnia
 ]
 

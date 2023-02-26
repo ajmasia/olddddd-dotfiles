@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+OPENED_NODES_ON_GSH_WS=$(bspc query -N -d II)
+OPENED_NODES_ON_VIM_=$(bspc query -N -d IV)
+OPENED_NODES_ON_WS_V=$(bspc query -N -d V)
+OPENED_NODES_ON_WS_VI=$(bspc query -N -d VI)
+OPENED_NODES_ON_WS_VII=$(bspc query -N -d VII)
+
+if [[ $OPENED_NODES_ON_DOC_WS != "" ]]; then
+  echo "Opps! Workspace is not empty"
+  exit 1
+fi
+
+case $1 in
+  -p | --preview)
+    bspc desktop -f III &
+    alacritty -e lvim -c "ObsidianToday" -c "ObsidianOpen" &
+    ;;
+  *)
+    bspc desktop -f III &
+    alacritty -e lvim -c "ObsidianToday" & 
+    ;;
+esac
+
+
+

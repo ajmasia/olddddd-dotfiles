@@ -14,6 +14,7 @@ lvim.builtin.which_key.mappings["t"] = {
 	q = { "<cmd>TroubleToggle quickfix<cr>", "quickfix" },
 	l = { "<cmd>TroubleToggle loclist<cr>", "loclist" },
 	r = { "<cmd>TroubleToggle lsp_references<cr>", "references" },
+  c = { "<cmd>lua require('copilot.suggestion').toggle_auto_trigger()<cr>", "Get Capabilities" },
 }
 
 lvim.builtin.which_key.mappings["o"] = {
@@ -45,4 +46,9 @@ lvim.builtin.which_key.mappings["l"]["f"] = {
 		require("lvim.lsp.utils").format({ timeout_ms = 2000 })
 	end,
 	"Format",
+}
+
+lvim.builtin.which_key.mappings["."]  = {
+  name = "Terminal",
+  t = {"<cmd>ToggleTerm<cr>", "Toggle term" }
 }

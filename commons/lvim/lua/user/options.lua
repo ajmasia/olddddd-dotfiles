@@ -12,7 +12,7 @@ vim.o.foldenable = true
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 
--- Activate/Deactivate plugins
+-- Activate/Deactivate core plugins
 lvim.builtin.alpha.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.bufferline.active = false

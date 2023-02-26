@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+OPENED_NODES_ON_CONF_WS=$(bspc query -N -d X)
+
+if [[ $OPENED_NODES_ON_CONF_WS != "" ]]; then
+  echo "Opps! Workspace is not empty"
+  exit 1
+fi
+
+case $1 in
+  -h | --home)
+    bspc desktop -f X &
+    alacritty -e lvim ~/.config/nixpkgs/home.nix &
+    ;;
+  -s | --system)
+    bspc desktop -f X &
+    alacritty -e lvim /etc/nixos/configuration.nix &
+    ;;
+  *)
+    bspc desktop -f X &
+    alacritty -e lvim ~/.config/nixpkgs/home.nix /etc/nixos/configuration.nix &
+    ;;
+esac
+
+
+
