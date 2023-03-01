@@ -117,6 +117,7 @@ with pkgs; {
           "solaar -w=hide -b=solaar"
           "batsignal -n BAT0 -c 20 -w 30 -f 98 -I ~/.local/share/custom-icons/battery.png"
           "sleep 2 && synology-drive"
+          "cbatticon"
         ];
 
         extraConfig = ''
@@ -128,6 +129,7 @@ with pkgs; {
           pkill batsignal
           pkill -f cloud-drive-con
           pkill -f cloud-drive* 
+          pkill cbatticon
           killall conky
 
           # Initialize monitors
@@ -171,9 +173,15 @@ with pkgs; {
       package = nordic;
     };
     iconTheme = {
-      name = "Papirus-Dark";
-      # package = numix-icon-theme;
-      package = papirus-icon-theme;
+      # name = "Papirus-Dark";
+      # name = "Tela-circle";
+      # name = "obsidian";
+      # name = "Vimix";
+      name = "Numix-Circle";
+      # package = papirus-icon-theme; 
+      # package = tela-circle-icon-theme;
+      # package = vimix-icon-theme;
+      package = numix-icon-theme-circle;
     };
   };
 }

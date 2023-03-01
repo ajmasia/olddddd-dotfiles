@@ -139,6 +139,7 @@ with pkgs; [
   feh
   polybarFull
   webcamoid
+  cbatticon
 
   # picom-jonaburg
   xautolock

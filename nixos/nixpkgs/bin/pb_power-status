@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+BAT=0
+AC_STATUS=0
+DESKTOP=1 
+
+if [ -d "/sys/class/power_supply/BAT0" ]; then
+  BAT=1 
+  DESKTOP=0
+  AC_STATUS=$(cat /sys/class/power_supply/AC0/online)
+fi
+
+if [[ ($BAT == "1" && $AC_STATUS == "1") || $DESKTOP == "1" ]]; then
+  echo ""
+fi
+  
+
