@@ -1,7 +1,7 @@
 { pkgs, lib, builtins }:
 
 let
-  unstablePackages = import <unstable> { };
+  unstable = import <unstable> { };
   HOME_PATH = builtins.getEnv "HOME";
 in
 with builtins; {
@@ -14,10 +14,12 @@ with builtins; {
 
     initExtra = ''
       # Init extra config
+      # Enable vim for the command line
+      set -o vi
       # PATH=~/.emacs.d/bin:$PATH
       export PATH="$HOME/.local/bin:$PATH"
       export SLACK_CLI_TOKEN=$(source ~/.env; echo $SLACK_CLI_TOKEN)
-      export EDITOR="nvim"
+      export EDITOR="vim"
 
       export DIRENV_LOG_FORMAT=
       eval "$(direnv hook bash)"
@@ -77,6 +79,8 @@ with builtins; {
     settings = {
       env = {
         WINIT_X11_SCALE_FACTOR = "1.05";
+        # don't work fine with neovim
+        # TERM = "xterm-256color";
       };
 
       class = {
@@ -148,10 +152,44 @@ with builtins; {
 
   starship = {
     enable = true;
+
+    package = unstable.starship;
+    
     enableBashIntegration = true;
 
     settings = {
       add_newline = false;
+
+      format = "$os$all";
+
+      character = {
+        success_symbol = "[➜](bold green)";
+        error_symbol = "[➜](bold red)";
+      };
+
+      os = { 
+        disabled = false;
+        style = "bold fg:#7AACD7";
+        symbols = {
+          NixOS = " ";
+        };
+      };
+
+      username = {
+        disabled = true;
+        style_user = "green";
+        style_root = "red";
+        format = "\\[[$user]($style)";
+        show_always = true;
+      };
+
+      hostname = {
+        disabled = true;
+        style = "green";
+        format = "[@](white)[$hostname]($style)\\] ";
+        ssh_only = false;
+      };
+
       line_break = {
         disabled = true;
       };
@@ -160,43 +198,32 @@ with builtins; {
         disabled = true;
       };
 
+      nodejs = {
+        format = "[ $version]($style) ";
+        style = "bold green";
+      };
+
       nix_shell = {
-        impure_msg = "i";
-        pure_msg = "p";
+        impure_msg = "[impure](red)";
+        pure_msg = "[pure](green)";
+        format = "on [$state (\\($name\\))shell]($style) ";
+        style = "bold fg:#7AACD7";
+      };
+
+      git_branch = {
+        symbol = "[]($style) ";
+      };
+
+      git_status = {
+        format = "[$all_status$ahead_behind]($style) ";
+      };
+
+      lua = {
+        format = "[$symbol $version]($style) ";
+        style = "bold blue";
+        symbol = "󰢱";
       };
     };
-
-    # settings = {
-    #   add_newline = false;
-    #   line_break = {
-    #     disabled = true;
-    #   };
-    #   # format = lib.concatStrings [
-    #   #   "[$username](red)"
-    #   # ];
-
-    #   nix_shell = {
-    #     style = "bold blue";
-    #     symbol = "❄️ ";
-    #     impure_msg = "[impure](bold red)";
-    #     pure_msg = "[pure](bold green)";
-    #     # format = "via [$symbol$state( \($name)\)]($style) ";
-    #   };
-
-    #   # username = {
-    #   #   style_user = "green";
-    #   #   style_root = "red bold";
-    #   #   format = "[$user]($style)";
-    #   #   disabled = false;
-    #   #   show_always = true;
-    #   # };
-
-    #   # hostname = {
-    #   #   disabled = false;
-    #   #   ssh_only = false;
-    #   #   format = "[@](red)[$hostname](green) ";
-    #   # };
-    # };
   };
 
   tmux = {

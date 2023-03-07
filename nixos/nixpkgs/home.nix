@@ -3,6 +3,8 @@
 let
   USER = builtins.getEnv "USER";
   HOME_PATH = builtins.getEnv "HOME";
+  dayTheme = "Nordic-Polar";
+  nightTheme = "Nordic";
 in
 with pkgs; {
   home = {
@@ -169,7 +171,7 @@ with pkgs; {
   gtk = {
     enable = true;
     theme = {
-      name = "Nordic";
+      name = dayTheme;
       package = nordic;
     };
     iconTheme = {

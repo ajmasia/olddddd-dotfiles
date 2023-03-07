@@ -135,9 +135,6 @@ in
             };
           };
         };
-        # gdm = {
-        #   enable = true;
-        # };
       };
 
       windowManager = {
@@ -231,8 +228,8 @@ in
     enable = true;
 
     cpuFreqGovernor = "ondemand";
-    powerUpCommands = "${awake}/bin/awake";
-    resumeCommands = "${awake}/bin/awake";
+    powerUpCommands = "sleep 10 && ${awake}/bin/awake &";
+    resumeCommands = "sleep 10 && ${awake}/bin/awake";
 
     powertop = {
       enable = true;
@@ -276,7 +273,7 @@ in
 
     virtualbox = {
       host = {
-        enable = true;
+        enable = false;
 
         enableExtensionPack = true;
       };

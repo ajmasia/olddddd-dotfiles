@@ -16,9 +16,9 @@ let
       sha256 = "1yan995h228v18b6hcjgvkbnaxwbbrink5if4ggvdans9mczcgfw";
     })
     { };
-  # custom-nerdfonts = (pkgs.nerdfonts.override { 
-  #   fonts = [ "FiraCode" "DroidSansMono" "Hack" "SourceCodePro" "CascadiaCode"]; 
-  # });
+  custom-nerdfonts = (pkgs.nerdfonts.override { 
+    fonts = [ "FiraCode" "DroidSansMono" "Hack" "SourceCodePro" "CascadiaCode"]; 
+  });
   customNodePackages = pkgs.callPackage ./node-packages { };
 in
 with pkgs; [
@@ -127,7 +127,7 @@ with pkgs; [
   sxiv
 
   # Fonst
-  nerdfonts
+  unstable.nerdfonts
   # google-fonts
   # custom-nerdfonts
   font-awesome_5
