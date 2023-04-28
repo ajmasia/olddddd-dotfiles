@@ -120,6 +120,8 @@ with pkgs; {
           "batsignal -n BAT0 -c 20 -w 30 -f 98 -I ~/.local/share/custom-icons/battery.png"
           "sleep 2 && synology-drive"
           "cbatticon"
+          # "sleep 2 && qsyncthingtray"
+          "bspc_initialize-monitors"
         ];
 
         extraConfig = ''
@@ -132,10 +134,8 @@ with pkgs; {
           pkill -f cloud-drive-con
           pkill -f cloud-drive* 
           pkill cbatticon
+          # pkill qsyncthingtray
           killall conky
-
-          # Initialize monitors
-          bspc_initialize-monitors
         '';
       };
     };
@@ -171,7 +171,7 @@ with pkgs; {
   gtk = {
     enable = true;
     theme = {
-      name = dayTheme;
+      name = nightTheme;
       package = nordic;
     };
     iconTheme = {

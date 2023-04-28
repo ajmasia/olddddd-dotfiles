@@ -11,4 +11,8 @@ else
     elif [ -f $tmp ]; then
         rm $tmp && xdo show "$winclass"
     fi
+
+    # sleep 0.5
+    # bspc config -w "$winclass" border_width 2
+    # bspc config -w "$winclass" focused_border_color "#e0af68"
 fi

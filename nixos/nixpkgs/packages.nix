@@ -96,8 +96,8 @@ with pkgs; [
   gh
 
   # Privacy
-  protonvpn-gui
-  protonvpn-cli
+  # protonvpn-gui
+  # protonvpn-cli
 
   unstable.yubioath-flutter
   yubikey-personalization
@@ -121,10 +121,17 @@ with pkgs; [
   nnn
 
   # Mail clients
-  mailspring
+  # mailspring
+  unstable.tutanota-desktop # Tutanota Desktop Client
+  unstable.protonmail-bridge # ProtonMail Bridge
+  thunderbird # Thunderbird Mail Client
 
   # File viewers
   sxiv
+  evince # PDF viewer
+
+  # File sync and backup
+  # insync-v3 // is broken
 
   # Fonst
   unstable.nerdfonts
@@ -140,6 +147,7 @@ with pkgs; [
   polybarFull
   webcamoid
   cbatticon
+  # qsyncthingtray
 
   # picom-jonaburg
   xautolock
@@ -169,6 +177,8 @@ with pkgs; [
   slack
   discord
   telegram-cli
+  element-desktop # Matrix client
+  signal-desktop # Signal messenger
 
   # Multimedia
   spotify
@@ -205,8 +215,9 @@ with pkgs; [
   # Development
   # editors
   # (emacsWithPackages (epkgs: [ epkgs.emacsql-sqlite ]))
-  unstable.neovim
-  unstable.vscode
+  neovim
+  # unstable.vscode
+  unstable.jetbrains.webstorm
   thonny
 
   # interprets
@@ -235,13 +246,9 @@ with pkgs; [
   gnumake
   cmake
 
-  # lsp
+  # LUA lsp
   stylua
-  selene
-  black
-  # shfmt
   sumneko-lua-language-server
-  rnix-lsp
 
   # packages managers
   unstable.cargo

@@ -5,7 +5,12 @@ import ../../../../commons/alias/commons.nix //
   # directories
   gmo = "cd ~/projects/genially/mono && gsh shell";
   gdb = "cd ~/projects/genially/dev-databases && gsh shell";
-  doc = "cd ~/synology-drive";
+  sd = "cd ~/synology_drive";
+  pr = "cd ~/projects";
+  rp = "cd ~/repos";
+  dw = "cd ~/downloads";
+  syn = "cd ~/synology-drive";
+
 
   # vpn
   gdev-vpn = "sudo openvpn ~/.config/vpn/genially_dev.ovpn";

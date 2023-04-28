@@ -183,5 +183,9 @@ with pkgs; {
   emacs = {
     enable = false;
   };
+
+  syncthing = {
+    enable = false;
+  };
 }
 

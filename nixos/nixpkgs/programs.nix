@@ -99,7 +99,7 @@ with builtins; {
       colors = {
         primary = {
           background = "#24283b";
-          foreground = "0xa9b1d6";
+          foreground = "#a9b1d6";
         };
         selection = {
           background = "#444444";
@@ -110,24 +110,24 @@ with builtins; {
           text = "#151515";
         };
         normal = {
-          black = "0x32344a";
-          blue = "0x7aa2f7";
-          cyan = "0x449dab";
-          green = "0x9ece6a";
-          magenta = "0xad8ee6";
-          red = "0xf7768e";
-          white = "0x787c99";
-          yellow = "0xe0af68";
+          black = "#ad8ee6";
+          blue = "#7aa2f7";
+          cyan = "#449dab";
+          green = "#9ece6a";
+          magenta = "#ad8ee6";
+          red = "#f7768e";
+          white = "#787c99";
+          yellow = "#e0af68";
         };
         bright = {
-          black = "0x444b6a";
-          blue = "0x7da6ff";
-          cyan = "0xbb9af7";
-          green = "0xb9f27c";
-          magenta = "0xbb9af7";
-          red = "0xff7a93";
-          white = "0xacb0d0";
-          yellow = "0xff9e64";
+          black = "#bb9af7";
+          blue = "#7da6ff";
+          cyan = "#bb9af7";
+          green = "#b9f27c";
+          magenta = "#bb9af7";
+          red = "#ff7a93";
+          white = "#acb0d0";
+          yellow = "#ff9e64";
         };
       };
 
@@ -308,7 +308,7 @@ with builtins; {
   };
 
   kitty = {
-    enable = true;
+    enable = false;
 
     theme = "Tokyo Night Storm";
     settings = {
@@ -338,6 +338,12 @@ with builtins; {
 
   emacs = {
     enable = false;
+  };
+
+  vscode = {
+    enable = true;
+
+    package = unstable.vscode;
   };
 }
 

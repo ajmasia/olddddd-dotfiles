@@ -1,0 +1,142 @@
+#! /usr/bin/env bash
+
+# Copyright (c) 2023 Antonio José Masiá. All rights reserved.
+# This script is licensed under the MIT License.
+# For the full license text, see https://opensource.org/licenses/MIT
+
+SCRIPT_NAME="ostool"
+USER_NAME=$2
+USER_IMAGE_PATH=$3
+ICON_DIR="/var/lib/AccountsService/icons"
+USER_DIR="/var/lib/AccountsService/users"
+ICON_PATH="$ICON_DIR/$USER_NAME"
+USER_FILE="$USER_DIR/$USER_NAME"
+ICON_LINE="Icon=$ICON_PATH"
+
+COLOR_OFF='\033[0m' # Text Reset
+GREEN='\033[0;32m'  # Green
+YELLOW='\033[0;33m' # Yellow
+RED='\033[0;31m'    # Red
+
+copy_icon() {
+	sudo cp -rf $USER_IMAGE_PATH $ICON_PATH
+	sudo ls -la $ICON_PATH
+}
+
+backup_user_file() {
+	sudo cp -rf $USER_FILE "$USER_FILE.bak"
+	sudo ls -la "$USER_FILE.bak"
+	printf "${GREEN}Account service settings backup created successfully for ${YELLOW}$USER_NAME${COLOR_OFF} user\n"
+}
+
+add_user_avatar_icon() {
+	# Check if the icon exists and ask if it should be replaced
+	if [ -e "$ICON_PATH" ]; then
+		read -p "The icon already exists. Do you want to replace it? [Y/n]: " REPLACE_ICON
+
+		case "$REPLACE_ICON" in
+		[Yy]* | "")
+			copy_icon
+			printf "${GREEN}Icon updated successfully${COLOR_OFF}\n"
+			;;
+		[Nn]*)
+			printf "${YELLOW}Operation canceled\n"
+			exit 1
+			;;
+		*)
+			printf "${RED}Invalid input. Operation canceled\n"
+			exit 1
+			;;
+		esac
+	else
+		copy_icon
+		printf "${GREEN}Icon added successfully${COLOR_OFF}\n"
+	fi
+}
+
+set_user_avatar() {
+	# Check if the icon line exists and ask if it should be changed
+	if grep -q "$ICON_LINE" "$USER_FILE"; then
+		read -p "The icon line already exists in the user file. Do you want to change it? [Y/n]: " REPLACE_LINE
+
+		case "$REPLACE_LINE" in
+		[Yy]* | "")
+			backup_user_file
+			sudo sed -i "s|^Icon=.*|$ICON_LINE|" $USER_FILE
+			sudo bat $USER_FILE
+
+			printf "${GREEN}Profile picture updated successfully${COLOR_OFF}\n"
+			;;
+		[Nn]*)
+			printf "${YELLOW}Operation canceled\n"
+			exit 1
+			;;
+		*)
+			printf "${RED}Invalid input. Operation canceled\n"
+			exit 1
+			;;
+		esac
+	else
+		backup_user_file
+		sudo echo "$ICON_LINE" >>$USER_FILE
+		sudo bat $USER_FILE
+
+		printf "${GREN}Profile picture added successfully${COLOR_OFF}\n"
+	fi
+}
+
+check_sua_params() {
+	if [ -z "$USER_NAME" ] || [ -z "$USER_IMAGE_PATH" ]; then
+		printf "${RED}Error: Missing input parameters\n"
+
+		exit 1
+	fi
+}
+
+check_sudo() {
+	if [ "$EUID" -ne 0 ]; then
+		printf "${RED}Error: Please run this script as root\n"
+
+		exit 1
+	fi
+}
+
+show_help() {
+	echo
+	printf "${GREEN}NixOS Tools  ${COLOR_OFF}\n\n"
+	printf "${GREEN}Usage: ${COLOR_OFF}\n  ${SCRIPT_NAME} [OPTIONS] [USERNAME] [IMAGE_PATH]${COLOR_OFF}\n\n"
+
+	printf "${GREEN}This script is used to perform tasks over NixOS${COLOR_OFF}\n\n"
+
+	printf "${GREEN}Options:${COLOR_OFF}\n"
+	printf "${YELLOW}%-30s${COLOR_OFF}" "  -h, -help"
+	printf "Show this help message and exit\n"
+	printf "${YELLOW}%-30s${COLOR_OFF}" "  -sua, --set-user-avatar"
+	printf "Set the user's profile picture\n\n"
+
+	printf "${GREEN}Arguments:${COLOR_OFF}\n"
+	printf "${YELLOW}%-30s${COLOR_OFF}" "  USERNAME"
+	printf "The username of the account you want to update\n"
+	printf "${YELLOW}%-30s${COLOR_OFF}" "  IMAGE_PATH"
+	printf "The path to the image file you want to use as the profile picture\n\n"
+
+	printf "${GREEN}Examples:${COLOR_OFF}\n"
+	printf "  ${SCRIPT_NAME} -h\n"
+	printf "  ${SCRIPT_NAME} -sua john /path/to/image.png\n\n"
+}
+
+case "$1" in
+-h | -help)
+	show_help
+	;;
+-sua | --set-user-avatar)
+	printf "${GREEN}Updating avatar for ${YELLOW}$USER_NAME${COLOR_OFF} user ...\n"
+	check_sudo
+	check_sua_params
+	add_user_avatar_icon
+	set_user_avatar
+	;;
+*)
+	show_help
+	;;
+esac
