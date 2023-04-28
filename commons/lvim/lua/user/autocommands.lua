@@ -4,5 +4,6 @@
 --     vim.cmd [[
 --       set filetype=jsx
 --     ]]
---   end,
+--     end,
 -- })
+

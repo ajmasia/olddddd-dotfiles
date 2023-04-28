@@ -146,8 +146,8 @@ lvim.plugins = {
     "epwalsh/obsidian.nvim",
     config = function()
       require("obsidian").setup {
-        dir = "~/brain",
-        use_advanced_uri = true,
+        dir = "~/synology_shared/obsidian/brain",
+        -- use_advanced_uri = true,
         daily_notes = {
           folder = "dailies",
         },
@@ -185,4 +185,14 @@ lvim.plugins = {
   --   end,
   -- },
   -- { "zbirenbaum/copilot-cmp", after = { "copilot.lua", "nvim-cmp" } },
+  -- {
+  --   "ThePrimeagen/refactoring.nvim",
+  --   requires = {
+  --     { "nvim-lua/plenary.nvim" },
+  --     { "nvim-treesitter/nvim-treesitter" }
+  --   },
+  --   config = function()
+  --     require("refactoring").setup({})
+  --   end,
+  -- },
 }

@@ -4,6 +4,7 @@
 
 { config, pkgs, ... }:
 let
+  unstable = import <unstable> { };
   # scripts = import ./scripts.nix { pkgs = pkgs; };
   secrets = import ./secrets.nix;
 
@@ -91,11 +92,12 @@ in
       enable = true;
     };
 
-    pam.yubico = {
-      enable = true;
-      debug = false;
-      mode = "challenge-response";
-    };
+    # PAM (Pluggable Authentication Modules) for Yubikey
+    # pam.yubico = {
+    #   enable = true;
+    #   debug = false;
+    #   mode = "challenge-response";
+    # };
 
     sudo = {
       enable = true;
@@ -118,9 +120,10 @@ in
       enable = true;
     };
 
-    # Needed to some apps like blueman-manager save their options
+    # Use the system-wide dconf database with D-Bus
     dbus.packages = [ pkgs.dconf ];
 
+    # Needed to some apps like blueman-manager or networkmanager to save their options
     gnome.gnome-keyring.enable = true;
 
     xserver = {
@@ -128,13 +131,10 @@ in
       autorun = true;
 
       displayManager = {
-        lightdm = {
-          greeters = {
-            enso = {
-              enable = true;
-            };
-          };
+        gdm = {
+          enable = true;
         };
+        defaultSession = "none+bspwm";
       };
 
       windowManager = {
@@ -168,10 +168,12 @@ in
       drivers = [ pkgs.hplip ];
     };
 
+    # Zeroconf protocol implementation for service discovery
     avahi = {
       enable = true;
     };
 
+    # PC/SC daemon for smart card readers. Needed for Yubikey
     pcscd = {
       enable = true;
     };
@@ -217,9 +219,14 @@ in
       };
     };
 
-    # Daemon for delivering ACPI events
+    # Daemon for ACPI (Advanced Configuration and Power Interface) events
     acpid = {
+      enable = false;
+    };
+
+    mullvad-vpn = {
       enable = true;
+      package = unstable.mullvad-vpn;
     };
   };
 
@@ -339,7 +346,7 @@ in
   };
 
   xdg = {
-    # Enable XDG desktop integration
+    # Enable D-Bus communication for sandboxed applications
     portal = {
       enable = true;
     };

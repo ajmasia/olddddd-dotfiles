@@ -1,6 +1,6 @@
 lvim.lsp.installer.setup.automatic_installation.exclude = { "sumneko_lua", "nix", "eslint_d", "prettier" }
 
-lvim.lsp.diagnostics.signs.values = {
+  lvim.lsp.diagnostics.signs.values = {
   { name = "DiagnosticSignError", text = lvim.icons.diagnostics.BoldError },
   { name = "DiagnosticSignWarn", text = lvim.icons.diagnostics.BoldWarning },
   { name = "DiagnosticSignHint", text = lvim.icons.diagnostics.BoldHint },
@@ -25,6 +25,7 @@ require("lvim.lsp.manager").setup("emmet_ls", {
     },
   },
 })
+
 
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
