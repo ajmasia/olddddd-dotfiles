@@ -154,7 +154,7 @@ with builtins; {
     enable = true;
 
     package = unstable.starship;
-    
+
     enableBashIntegration = true;
 
     settings = {
@@ -167,7 +167,7 @@ with builtins; {
         error_symbol = "[➜](bold red)";
       };
 
-      os = { 
+      os = {
         disabled = false;
         style = "bold fg:#7AACD7";
         symbols = {
@@ -345,5 +345,10 @@ with builtins; {
 
     package = unstable.vscode;
   };
+
+  /* eww = { */
+  /*   enable = true; */
+  /*   configDir = ./xdg/eww; */
+  /* }; */
 }
 

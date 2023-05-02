@@ -1,0 +1,8 @@
+(defwindow bar :monitor 0 :wm-ignore false :hexpand "false" :vexpand "false" :windowtype "desktop"
+  :geometry (geometry :x "6" :y "6" :height "32" :width "32")
+  (profile))
+
+(defwidget profile[]
+  (box :class "profile-container" :orientation "v" :vexpand "false" :hexpand "false"
+    (image :class "profile" :image-width "32" :path "/home/ajmasia/repos/dotfiles/avatars/ajmasia.png")))
+

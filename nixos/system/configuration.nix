@@ -33,7 +33,7 @@ in
     };
 
     plymouth = {
-      enable = true;
+      enable = false;
     };
   };
 
@@ -280,7 +280,7 @@ in
 
     virtualbox = {
       host = {
-        enable = false;
+        enable = true;
 
         enableExtensionPack = true;
       };

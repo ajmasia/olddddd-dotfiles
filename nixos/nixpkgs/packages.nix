@@ -16,8 +16,8 @@ let
       sha256 = "1yan995h228v18b6hcjgvkbnaxwbbrink5if4ggvdans9mczcgfw";
     })
     { };
-  custom-nerdfonts = (pkgs.nerdfonts.override { 
-    fonts = [ "FiraCode" "DroidSansMono" "Hack" "SourceCodePro" "CascadiaCode"]; 
+  custom-nerdfonts = (pkgs.nerdfonts.override {
+    fonts = [ "FiraCode" "DroidSansMono" "Hack" "SourceCodePro" "CascadiaCode" ];
   });
   customNodePackages = pkgs.callPackage ./node-packages { };
 in
@@ -91,6 +91,7 @@ with pkgs; [
   xorg.xwininfo
   xdotool
   xdo
+  bottom # A cross-platform graphical process/system monitor with a customizable interface and a multitude of features
 
   github-desktop
   gh
@@ -278,6 +279,8 @@ with pkgs; [
   customNodePackages.autocannon
   customNodePackages.fastify-cli
 
-  # insomnia
+  # playgorund
+  eww
+
 ]
 
