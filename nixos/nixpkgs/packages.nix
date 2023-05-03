@@ -96,10 +96,6 @@ with pkgs; [
   github-desktop
   gh
 
-  # Privacy
-  # protonvpn-gui
-  # protonvpn-cli
-
   unstable.yubioath-flutter
   yubikey-personalization
   yubikey-manager
@@ -123,9 +119,9 @@ with pkgs; [
 
   # Mail clients
   # mailspring
-  unstable.tutanota-desktop # Tutanota Desktop Client
   unstable.protonmail-bridge # ProtonMail Bridge
   thunderbird # Thunderbird Mail Client
+  evolution # Evolution Mail Client
 
   # File viewers
   sxiv

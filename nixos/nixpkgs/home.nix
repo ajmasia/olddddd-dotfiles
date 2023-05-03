@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
 let
+  unstable = import <unstable> { };
+
   USER = builtins.getEnv "USER";
   HOME_PATH = builtins.getEnv "HOME";
   dayTheme = "Nordic-Polar";
@@ -105,6 +107,10 @@ with pkgs; {
             center = true;
             rectangle = "1896x1056+100+100";
           };
+          "Evolution:evolution-mail-preview" = {
+            state = "floating";
+            center = true;
+          };
         };
 
         startupPrograms = [
@@ -164,6 +170,21 @@ with pkgs; {
 
       Install = {
         WantedBy = [ "graphical-session.target" ];
+      };
+    };
+
+    protonmail-bridge = {
+      Unit = {
+        Description = "Protonmail Bridge";
+        After = [ "network.target" ];
+      };
+      Service = {
+        Restart = "always";
+        Environment = "PATH=${pkgs.gnome3.gnome-keyring}/bin";
+        ExecStart = "${unstable.protonmail-bridge}/bin/protonmail-bridge --no-window --noninteractive";
+      };
+      Install = {
+        WantedBy = [ "default.target" ];
       };
     };
   };
