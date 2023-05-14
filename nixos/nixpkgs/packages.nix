@@ -7,19 +7,19 @@ let
       nodejs-16_x
     ];
   });
-  nixpkgs_for_insync3 = with pkgs; callPackage
-    (fetchFromGitHub {
-      name = "nixpkgs";
-      owner = "NixOS";
-      repo = "nixpkgs";
-      rev = "b49473e6679c733f917254b786bfac42339875eb";
-      sha256 = "1yan995h228v18b6hcjgvkbnaxwbbrink5if4ggvdans9mczcgfw";
-    })
-    { };
+  #  nixpkgs_for_insync3 = with pkgs; callPackage
+  #    (fetchFromGitHub {
+  #      name = "nixpkgs";
+  #      owner = "NixOS";
+  #      repo = "nixpkgs";
+  #      rev = "b49473e6679c733f917254b786bfac42339875eb";
+  #      sha256 = "1yan995h228v18b6hcjgvkbnaxwbbrink5if4ggvdans9mczcgfw";
+  #    })
+  #    { };
   custom-nerdfonts = (pkgs.nerdfonts.override {
     fonts = [ "FiraCode" "DroidSansMono" "Hack" "SourceCodePro" "CascadiaCode" ];
   });
-  customNodePackages = pkgs.callPackage ./node-packages { };
+  # customNodePackages = pkgs.callPackage ./node-packages { };
 in
 with pkgs; [
   # System
@@ -92,6 +92,7 @@ with pkgs; [
   xdotool
   xdo
   bottom # A cross-platform graphical process/system monitor with a customizable interface and a multitude of features
+  opensc # Smart card framework for PKCS#11 modules
 
   github-desktop
   gh
@@ -128,7 +129,8 @@ with pkgs; [
   evince # PDF viewer
 
   # File sync and backup
-  # insync-v3 // is broken
+  # unstable.insync-v3 # Google Drive client (broken)
+  # insync_3_8_5
 
   # Fonst
   unstable.nerdfonts
@@ -212,7 +214,7 @@ with pkgs; [
   # Development
   # editors
   # (emacsWithPackages (epkgs: [ epkgs.emacsql-sqlite ]))
-  neovim
+  unstable.neovim
   # unstable.vscode
   unstable.jetbrains.webstorm
   thonny
@@ -272,8 +274,8 @@ with pkgs; [
   rpiplay
 
   luajitPackages.luarocks
-  customNodePackages.autocannon
-  customNodePackages.fastify-cli
+  # customNodePackages.autocannon
+  # customNodePackages.fastify-cli
 
   # playgorund
   eww

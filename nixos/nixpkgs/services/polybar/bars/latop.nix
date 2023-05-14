@@ -8,7 +8,7 @@ let
   fonts = builtins.readFile ../utils/fonts.ini;
 
   settings = ''
-    monitor = eDP
+    monitor = eDP-1
     monitor-fallback =
     monitor-strict = false
 

@@ -721,7 +721,7 @@ let
       version = "2.1.1";
       src = fetchurl {
         url = "https://registry.npmjs.org/is-extglob/-/is-extglob-2.1.1.tgz";
-        sha512 = "SbKbANkN603Vi4jEZv49LeVJMn4yGwsbzZworEoyEiutsN3nJYdbO36zfhGJ6QEDpOZIFkDtnq5JRxmvl3jsoQ==";
+        sha512 = "SbKbANkN603Vi4jEZv49LeVJMn4yGwsbzZworEoyEiutsN3nJYdbO36zfhGJ6QeDP-1OZIFkDtnq5JRxmvl3jsoQ==";
       };
     };
     "is-fullwidth-code-point-3.0.0" = {

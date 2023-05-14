@@ -8,13 +8,13 @@
 SSID_NAME=$(nmcli -t -f name,device connection show --active | grep wlp1s0 | cut -d\: -f1)
 
 if [[ "${SSID_NAME}" != "" ]]; then
-	if  [[ $1 = "-i" ]]; then
-    echo "  ${SSID_NAME}"
+	if [[ $1 = "-i" ]]; then
+		echo "  ${SSID_NAME}" | cut -c 1-12
 	else
-    echo "${SSID_NAME}"
+		echo "${SSID_NAME}" | cut -c 1-12
 	fi
 else
-echo "Not Connected"
+	echo "Not Connected"
 fi
 
 exit

@@ -129,6 +129,7 @@ in
     xserver = {
       enable = true;
       autorun = true;
+      videoDrivers = [ "displaylink" "modesetting" ];
 
       displayManager = {
         gdm = {
