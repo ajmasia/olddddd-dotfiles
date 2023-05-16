@@ -21,9 +21,9 @@
     # The geometry of the window:
     width = 400;
     height = 300;
-    offset = "12x55";
+    offset = "14x65";
     origin = "top-right";
-    notification_limit = 5;
+    notification_limit = 12;
 
     # Show how many messages are currently hidden (because of geometry).
     indicate_hidden = "yes";
@@ -80,7 +80,7 @@
 
     ### Text ###
 
-    font = "Fire Code Nerd Font 12";
+    font = "Ubuntu Mono 12";
 
     # The spacing between lines.  If the height is smaller than the
     # font height, it will get raised to the font height.
@@ -207,7 +207,7 @@
     # corners.
     # The radius will be automatically lowered if it exceeds half of the
     # notification height to avoid clipping text and/or icons.
-    corner_radius = 10;
+    corner_radius = 8;
 
     ### Legacy
 
@@ -271,19 +271,19 @@
   urgency_low = {
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#303036";
+    background = "#242424E6";
     foreground = "#fffaff";
-    timeout = 5;
+    timeout = 8;
     # Icon for notifications with low urgency, uncomment to enable
     #icon = /path/to/icon
   };
 
   urgency_normal = {
-    background = "#050401";
+    background = "#242424E6";
     foreground = "#fffaff";
-    frame_color = "#303036";
+    frame_color = "#000000";
     frame_width = 1;
-    timeout = 5;
+    timeout = 8;
     # Icon for notifications with normal urgency, uncomment to enable
     #icon = /path/to/icon
   };
@@ -292,16 +292,10 @@
     background = "#fc5130";
     foreground = "#fffaff";
     frame_color = "#303036";
-    timeout = 0;
+    timeout = 8;
     # Icon for notifications with critical urgency, uncomment to enable
     #icon = /path/to/icon
   };
-
-  # script-test = {
-  #   summary = "*";
-  #   script = "/home/ajmasia/.nix-profile/bin/dunst-sound";
-  # };
-  
   # Every section that isn't one of the above is interpreted as a rules to
   # override settings for certain messages.
   #

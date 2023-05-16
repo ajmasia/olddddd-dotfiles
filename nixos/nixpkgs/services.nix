@@ -128,7 +128,7 @@ with pkgs; {
     rules =
       let
         LAPTOP_SCREEN = "eDP-1";
-        HOME_SCREEN = "DVI-I-1-1";
+        HOME_SCREEN = "HDMI-1";
       in
       [
         {

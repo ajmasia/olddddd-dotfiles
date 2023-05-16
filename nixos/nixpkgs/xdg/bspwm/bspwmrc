@@ -66,7 +66,7 @@ bspc rule -a Slack desktop='^4'
 bspc rule -a TelegramDesktop desktop='^3'
 
 # monitors
-is_external_monitor_connected=$(xrandr --query | grep 'DVI-I-1-1 connected')
+is_external_monitor_connected=$(xrandr --query | grep 'HDMI-1 connected')
 
 if [[ $is_external_monitor_connected == "" ]]; then
   bspc monitor eDP-1 -d I II III IV V VI VII VIII
@@ -75,7 +75,7 @@ if [[ $is_external_monitor_connected == "" ]]; then
   bspc rule -a Slack -o desktop='^8' && /home/ajmasia/.nix-profile/bin/slack 
 else
   bspc monitor eDP-1 -d VII VIII IX X
-  bspc monitor DVI-I-1-1 -f -d I II III IV V VI
+  bspc monitor HDMI-1 -f -d I II III IV V VI
   bspc rule -a TelegramDesktop -o desktop='^3' && /home/ajmasia/.nix-profile/bin/telegram-desktop &
   bspc rule -a Slack -o desktop='^4' && /home/ajmasia/.nix-profile/bin/slack &
   bspc rule -a Alacritty -o desktop='^5' && /home/ajmasia/.nix-profile/bin/alacritty &
