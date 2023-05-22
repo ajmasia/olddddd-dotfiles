@@ -1,45 +1,42 @@
 #!/usr/bin/env bash
 
 check_genially_vpn_status() {
-  echo "$(systemctl is-active openvpn-work-dev.service)"
+	echo "$(systemctl is-active openvpn-work-dev.service)"
 }
 
 show_vpn_status() {
-  vpn_status=$(check_genially_vpn_status)
+	vpn_status=$(check_genially_vpn_status)
 
-  if [[ $vpn_status = "active" ]]; then
-    echo "%{B#21252b}%{F#fbd065}歷%{B- F-}"
-  else
-    echo "%{B#21252b}%{F#868686}歷%{B- F-}"
-  fi
+	if [[ $vpn_status = "active" ]]; then
+		echo "%{B#21252b}%{F#fbd065}󰒍%{B- F-}"
+	else
+		echo "%{B#21252b}%{F#868686}󰒍%{B- F-}"
+	fi
 }
 
 connect_genially_vpn() {
-  systemctl start openvpn-work-dev.service
-  notify-send "Genially VPN $(check_genially_vpn_status) 🟢"
+	systemctl start openvpn-work-dev.service
+	notify-send "Genially VPN $(check_genially_vpn_status) 🟢"
 }
 
 disconnect_genially_vpn() {
-  systemctl stop openvpn-work-dev.service
-  notify-send "Genially VPN $(check_genially_vpn_status) ⛔"
+	systemctl stop openvpn-work-dev.service
+	notify-send "Genially VPN $(check_genially_vpn_status) ⛔"
 }
 
-
 case "$1" in
-  --toggle)
-    vpn_status=$(check_genially_vpn_status)
+--toggle)
+	vpn_status=$(check_genially_vpn_status)
 
-    if [[ $vpn_status = "inactive" ]]; then
-      connect_genially_vpn
-      # sleep 5 && xdg-open https://dashboard-sorrycypress.genially.com/
-    else
-      disconnect_genially_vpn
-    fi
+	if [[ $vpn_status = "inactive" ]]; then
+		connect_genially_vpn
+		# sleep 5 && xdg-open https://dashboard-sorrycypress.genially.com/
+	else
+		disconnect_genially_vpn
+	fi
 
-    ;;
-  *)
-    show_vpn_status 
-    ;;
+	;;
+*)
+	show_vpn_status
+	;;
 esac
-
-

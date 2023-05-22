@@ -10,14 +10,14 @@ check_dependences() {
 }
 
 show_current_cpu_profile() {
-  check_dependences
+	check_dependences
 
-  if [[ $CCLK_BOOST_SETPOINT == "50.000" ]]; then
-    echo "%{B#21252b}%{F#e06c75}%{B- F-}"
+	if [[ $CCLK_BOOST_SETPOINT == "50.000" ]]; then
+		echo "%{B#21252b}%{F#e06c75}󰈐%{B- F-}"
 
-  else
-    echo "%{B#21252b}%{F#98c379}%{B- F-}"
-  fi
+	else
+		echo "%{B#21252b}%{F#98c379}󰈐%{B- F-}"
+	fi
 }
 
 show_current_cpu_profile

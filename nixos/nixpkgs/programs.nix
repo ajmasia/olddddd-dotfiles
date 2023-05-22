@@ -247,21 +247,6 @@ with builtins; {
     '';
   };
 
-  rofi = {
-    enable = true;
-    theme = "launcher.rasi";
-    # extraConfig = {
-    #   "show-icons" = true;
-    #   "icon-theme" = "Papirus";
-    #   "display-drun" = "";
-    #   "drum-display-format" = "{name}";
-    #   "display-history" = false;
-    #   "fullscreen" = false;
-    #   "hide-scrollbar" = false;
-    #   "sidebar-mode" = false;
-    # };
-  };
-
   vim = {
     enable = true;
     plugins = with pkgs.vimPlugins; [
@@ -308,12 +293,17 @@ with builtins; {
   };
 
   kitty = {
-    enable = false;
+    enable = true;
+
+    package = unstable.kitty;
 
     theme = "Tokyo Night Storm";
     settings = {
-      font_family = "Hack Nerd Font";
+      font_family = "Hack Nerd Font Regular";
       font_size = 13;
+      font_bold = "auto";
+      font_italic = "auto";
+      font_italic_bold = "auto";
       window_padding_width = 6;
       window_border_width = 0;
       placement_strategy = "center";

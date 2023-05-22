@@ -205,9 +205,9 @@ with pkgs; [
   pdfarranger
   _1password
   _1password-gui
-  # unstable.synology-drive-client
-  synology_drive_client_12920
-  # nixpkgs_for_insync3.insync-v3
+  unstable.synology-drive-client
+  # unstable.synology_drive_client_12920
+  unstable.insync
   # inkdrop
   libreoffice
 

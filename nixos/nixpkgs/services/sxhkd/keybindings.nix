@@ -6,13 +6,12 @@
   "super + Escape" = "pkill -USR1 -x sxhkd";
 
   # App launchers
-  "super + @space" = "rofi -show drun -theme ~/.config/rofi/themes/launcher.rasi &";
+  "super + @space" = "rofi -show drun -show-icons &";
   "super + {_,alt +}Return" = "{alacritty,open-floating-window alacritty}";
   "super + alt + t" = "telegram-desktop";
   "super + alt + s" = "slack-desktop";
 
   # rofi windows switcher
-  "alt + Tab" = "rofi -show window -theme ~/.config/rofi/themes/launcher.rasi &";
   "super + e" = "emojis";
   "super + shift + f" = "flameshot gui";
   "super + shift + s" = "set-slack-status";
