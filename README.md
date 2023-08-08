@@ -1,5 +1,6 @@
 <p align="center">
-  <img src="https://assets.cdn.prod.twilio.com/original_images/7iwai15WuuZ-1YLS6UzvVdC4vtbpjLMIoG8kABoHmrNLMLRwOxNJIsM4IFe20iQmGgZ48Co2rb42Xj" alt="Developer Roadmap" height="96">
+  <img src="https://icons.iconarchive.com/icons/dtafalonso/android-l/512/Settings-L-icon.png" alt="Dotfiles" height="120">
+  <h2 align="center">Dotfiles</h2>
   <p align="center">All my configuration files in a rolling way</p>
 </p>
 
