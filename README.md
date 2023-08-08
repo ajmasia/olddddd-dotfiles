@@ -1,11 +1,7 @@
 <p align="center">
-  <a href="http://github.com/kamranahmedse/developer-roadmap">
-    <img src="https://iconarchive.com/download/i86477/grafikartes/flat-retro-modern/settings.ico" alt="Developer Roadmap" width="96" height="96">
-  </a>
-  <h2 align="center">Dotfiles</h2>
+  <img src="https://assets.cdn.prod.twilio.com/original_images/7iwai15WuuZ-1YLS6UzvVdC4vtbpjLMIoG8kABoHmrNLMLRwOxNJIsM4IFe20iQmGgZ48Co2rb42Xj" alt="Developer Roadmap" height="96">
   <p align="center">All my configuration files in a rolling way</p>
 </p>
-
 
 # Why this repo exists
 
@@ -20,10 +16,10 @@ Currently I usually use different machines, both for work and for personal use. 
 
 # Directory structure
 
- - `/commons` contains all possible shared configs.
- - `/macos` contains my MacOS configs.
- - `/nixos` contains my NixOS configuration for work
- - `/wallpapers` contains my favourite wallpapers
+- `/commons` contains all possible shared configs.
+- `/macos` contains my MacOS configs.
+- `/nixos` contains my NixOS configuration for work
+- `/wallpapers` contains my favourite wallpapers
 
 # Todo
 
