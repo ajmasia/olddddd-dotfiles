@@ -145,10 +145,11 @@ in
       };
 
       layout = "us";
-      xkbVariant = "altgr-intl";
+      xkbVariant = "altgr-intl"; # for the international keyboard
 
       libinput = {
         enable = true;
+
         touchpad = {
           naturalScrolling = true;
           tapping = true;
@@ -158,6 +159,7 @@ in
         };
       };
     };
+
 
     blueman.enable = true;
     cron.enable = true;
@@ -281,7 +283,7 @@ in
 
     virtualbox = {
       host = {
-        enable = true;
+        enable = false;
 
         enableExtensionPack = true;
       };

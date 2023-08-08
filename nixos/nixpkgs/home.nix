@@ -119,12 +119,13 @@ with pkgs; {
           "~/.config/polybar/launch.sh"
           "pgrep -x sxhkd > /dev/null || sxhkd"
           "xsetroot -cursor_name left_ptr"
-          "feh --bg-fill ~/.config/wallpapers/nordzy_wave_pink_3840.png"
+          # "fusuma -d"
+          "feh --bg-fill ~/.config/wallpapers/wallpaper_bigsur-macos_light.jpg"
           "~/.config/conky/Mimosa_DBlue/start.sh"
           "xautolock -time 12 -locker \"xscreensaver-command -deactivate; sleep 5; betterlockscreen -l\" -notify 15 -notifier \"notify-send 'Locker' 'Locking screen in 15 seconds' -t 4000\" -killtime 10 -killer \"systemctl suspend\""
           "solaar -w=hide -b=solaar"
           "batsignal -n BAT0 -c 20 -w 30 -f 98 -I ~/.local/share/custom-icons/battery.png"
-          "sleep 2 && synology-drive"
+          "sleep 3 && synology-drive"
           "cbatticon"
           # "sleep 2 && qsyncthingtray"
           "bspc_initialize-monitors"
@@ -135,6 +136,7 @@ with pkgs; {
           pkill polybar
           pkill sxhkd
           pkill xautolock
+          # pkill fusuma
           pkill solaar
           pkill batsignal
           pkill -f cloud-drive-con

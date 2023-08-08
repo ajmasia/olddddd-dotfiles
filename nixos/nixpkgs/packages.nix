@@ -93,6 +93,7 @@ with pkgs; [
   xdo
   bottom # A cross-platform graphical process/system monitor with a customizable interface and a multitude of features
   opensc # Smart card framework for PKCS#11 modules
+  # fusuma # mouse gesture recognizer for linux
 
   github-desktop
   gh
@@ -120,9 +121,9 @@ with pkgs; [
 
   # Mail clients
   # mailspring
-  unstable.protonmail-bridge # ProtonMail Bridge
-  thunderbird # Thunderbird Mail Client
-  evolution # Evolution Mail Client
+  # unstable.protonmail-bridge # ProtonMail Bridge
+  # thunderbird # Thunderbird Mail Client
+  # evolution # Evolution Mail Client
 
   # File viewers
   sxiv
@@ -169,7 +170,7 @@ with pkgs; [
   #chromium
   unstable.google-chrome
   firefox
-  brave
+  # brave
 
   # Comunications
   tdesktop
@@ -184,7 +185,7 @@ with pkgs; [
   pamix
   cava
   vlc
-  handbrake
+  # handbrake
 
 
   # Graphical editors
@@ -197,8 +198,8 @@ with pkgs; [
   # Productivity
   timewarrior
   calibre
-  todoist
-  todoist-electron
+  # todoist
+  # todoist-electron
   bitwarden
   bitwarden-cli
   unstable.obsidian
@@ -207,16 +208,18 @@ with pkgs; [
   _1password-gui
   unstable.synology-drive-client
   # unstable.synology_drive_client_12920
-  unstable.insync
+  # unstable.insync
   # inkdrop
-  libreoffice
+  # libreoffice
+  pandoc # A universal document converter
+  tectonic # A modernized, complete, self-contained TeX/LaTeX engine, powered by XeTeX and TeXLive
 
   # Development
   # editors
   # (emacsWithPackages (epkgs: [ epkgs.emacsql-sqlite ]))
   unstable.neovim
   # unstable.vscode
-  unstable.jetbrains.webstorm
+  # unstable.jetbrains.webstorm
   thonny
 
   # interprets
@@ -268,7 +271,7 @@ with pkgs; [
   sqlite
   pgcli
   dbeaver
-  beekeeper-studio
+  # beekeeper-studio
 
   # playgorund
   rpiplay
@@ -279,6 +282,5 @@ with pkgs; [
 
   # playgorund
   eww
-
 ]
 

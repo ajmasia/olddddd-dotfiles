@@ -187,5 +187,40 @@ with pkgs; {
   syncthing = {
     enable = false;
   };
+
+  fusuma = {
+    enable = true;
+
+    extraPackages = with pkgs; [ coreutils xdotool ];
+
+    settings = {
+      swipe = {
+        "3" = {
+          left = {
+            command = "xdotool key super+Left";
+          };
+
+          right = {
+            command = "xdotool key super+Right";
+          };
+
+          up = {
+            command = "xdotool key super+Shift+t";
+          };
+
+          down = {
+            command = "xdotool key super+Shift+p";
+          };
+        };
+      };
+      threshold = {
+        swipe = 0.4;
+      };
+
+      interval = {
+        swipe = 0.8;
+      };
+    };
+  };
 }
 
