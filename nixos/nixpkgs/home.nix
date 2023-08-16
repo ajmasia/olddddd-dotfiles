@@ -67,10 +67,22 @@ with pkgs; {
             focus = true;
           };
           "Slack" = {
-            desktop = "^1";
+            sticky = true;
+            state = "floating";
+            center = true;
+            rectangle = "1896x1056+100+100";
           };
           "TelegramDesktop" = {
-            desktop = "^1";
+            sticky = true;
+            state = "floating";
+            center = true;
+            rectangle = "1896x1056+100+100";
+          };
+          "1Password" = {
+            sticky = true;
+            state = "floating";
+            center = true;
+            rectangle = "1896x1056+100+100";
           };
           "Nm-connection-editor" = {
             state = "floating";
