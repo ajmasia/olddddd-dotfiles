@@ -16,12 +16,12 @@ show_vpn_status() {
 
 connect_genially_vpn() {
 	systemctl start openvpn-work-dev.service
-	notify-send "Genially VPN $(check_genially_vpn_status) 🟢"
+	notify-send "Networking: VPN" "Genially connection $(check_genially_vpn_status) 🟢"
 }
 
 disconnect_genially_vpn() {
 	systemctl stop openvpn-work-dev.service
-	notify-send "Genially VPN $(check_genially_vpn_status) ⛔"
+	notify-send "Networking: VPN" "Genially connection $(check_genially_vpn_status) ⛔"
 }
 
 case "$1" in

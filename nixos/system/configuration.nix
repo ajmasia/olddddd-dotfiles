@@ -87,6 +87,9 @@ in
     };
   };
 
+  networking.firewall.allowedTCPPorts = [ 7000 7100 ];
+  networking.firewall.allowedUDPPorts = [ 6000 6001 7011 ];
+
   security = {
     polkit = {
       enable = true;
@@ -129,7 +132,7 @@ in
     xserver = {
       enable = true;
       autorun = true;
-      videoDrivers = [ "displaylink" "modesetting" ];
+      videoDrivers = [ "modesetting" ];
 
       displayManager = {
         gdm = {
@@ -174,6 +177,14 @@ in
     # Zeroconf protocol implementation for service discovery
     avahi = {
       enable = true;
+
+      nssmdns = true; # printing
+      publish = {
+        enable = true;
+        addresses = true;
+        workstation = true;
+        userServices = true;
+      };
     };
 
     # PC/SC daemon for smart card readers. Needed for Yubikey

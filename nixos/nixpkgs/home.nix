@@ -67,16 +67,18 @@ with pkgs; {
             focus = true;
           };
           "Slack" = {
-            sticky = true;
-            state = "floating";
-            center = true;
-            rectangle = "1896x1056+100+100";
+            desktop = "^1";
+            # sticky = true;
+            # state = "floating";
+            # center = true;
+            # rectangle = "1896x1056+100+100";
           };
           "TelegramDesktop" = {
-            sticky = true;
-            state = "floating";
-            center = true;
-            rectangle = "1896x1056+100+100";
+            desktop = "^1";
+            # sticky = true;
+            # state = "floating";
+            # center = true;
+            # rectangle = "1896x1056+100+100";
           };
           "1Password" = {
             sticky = true;
@@ -128,11 +130,11 @@ with pkgs; {
         startupPrograms = [
           "# Startup programs"
           "systemctl --user restart picom.service"
+          "feh --bg-fill ~/.config/wallpapers/wallpaper_bigsur-macos_light.jpg"
           "~/.config/polybar/launch.sh"
           "pgrep -x sxhkd > /dev/null || sxhkd"
           "xsetroot -cursor_name left_ptr"
           # "fusuma -d"
-          "feh --bg-fill ~/.config/wallpapers/wallpaper_bigsur-macos_light.jpg"
           "~/.config/conky/Mimosa_DBlue/start.sh"
           "xautolock -time 12 -locker \"xscreensaver-command -deactivate; sleep 5; betterlockscreen -l\" -notify 15 -notifier \"notify-send 'Locker' 'Locking screen in 15 seconds' -t 4000\" -killtime 10 -killer \"systemctl suspend\""
           "solaar -w=hide -b=solaar"

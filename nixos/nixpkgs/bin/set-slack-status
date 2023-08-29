@@ -1,138 +1,139 @@
 #!/usr/bin/env bash
 
 MONO_REPO_PATH=~/projects/genially/mono/
-export SLACK_CLI_TOKEN=$(source ~/.env; echo $SLACK_CLI_TOKEN)
+export SLACK_CLI_TOKEN=$(
+	source ~/.env
+	echo $SLACK_CLI_TOKEN
+)
 
 run_slack() {
-  nix-shell \
-    --packages slack-cli jq fzy rofi \
-    --run "slack $* | jq .ok"
+	nix-shell \
+		--packages slack-cli jq fzy rofi \
+		--run "slack $* | jq .ok"
 }
 
 clear_status() {
-  run_slack "status" "clear"
+	run_slack "status" "clear"
 }
 
 set_status() {
-  result=$(run_slack "status" "edit" "\"$1\"" "\"$2\"")
-  [ "$result" = "true" ] && notify-send "Slack status set to: $1 $2"
-  [ "$result" != "true" ] && notify-send -u critical "Slack status set failed"
+	result=$(run_slack "status" "edit" "\"$1\"" "\"$2\"")
+	[ "$result" = "true" ] && notify-send "Slack" "Slack status set to: $1 $2"
+	[ "$result" != "true" ] && notify-send -u critical "Slack" "Slack status set failed"
 }
 
 send_slack_message() {
-  result=$(run_slack "chat" "send" "\"$1\"" "\"$2\"")
-  [ "$result" = "true" ] && notify-send "Slack message sent to: $2"
-  [ "$result" != "true" ] && notify-send -u critical "Slack message send failed"
+	result=$(run_slack "chat" "send" "\"$1\"" "\"$2\"")
+	[ "$result" = "true" ] && notify-send "Slack" "Slack message sent to: $2"
+	[ "$result" != "true" ] && notify-send -u critical "Slack" "Slack message send failed"
 }
 
 set_active() {
-  run_slack "presence" "active"
+	run_slack "presence" "active"
 }
 
 set_away() {
-  run_slack "presence" "away"
+	run_slack "presence" "away"
 }
 
 tm_checkin() {
-  timew start "genially"
+	timew start "genially"
 }
 
 tm_pause() {
-  timew stop "genially"
-  timew start "pause"
+	timew stop "genially"
+	timew start "pause"
 }
 
 tm_back() {
-  timew stop "pause"
-  timew continue "genially"
+	timew stop "pause"
+	timew continue "genially"
 }
 
 tm_checkout() {
-  timew stop "genially"
+	timew stop "genially"
 }
-
 
 SELECTED=$(echo -e "Check in\nWorking on\nReviewing PRs\nBreakfast\nCooking\nLunch\nMeeting\nPause\nCheck out\nBack\nCheck out weekend\nWorking out\nDoctor\nFamily" | rofi -dmenu -matching fuzzy -p 'Set your Slack status to' -sort -levenshtein-sort)
 
 case $SELECTED in
-  "Check in") 
-    set_active
-    set_status "Comenzando" ":rocket:"
-    tm_checkin
-    ;;
+"Check in")
+	set_active
+	set_status "Comenzando" ":rocket:"
+	tm_checkin
+	;;
 
-  "Check out")
-    set_status "Mañana más y mejor" ":wave:"
-    tm_checkout
-    set_away
-    ;;
+"Check out")
+	set_status "Mañana más y mejor" ":wave:"
+	tm_checkout
+	set_away
+	;;
 
-  "Check out weekend")
-    set_status "Buen fin de semana" ":wave:"
-    tm_checkout
-    set_away
-    ;;
+"Check out weekend")
+	set_status "Buen fin de semana" ":wave:"
+	tm_checkout
+	set_away
+	;;
 
-  "Working on") 
-    set_status "Trabajando en: $(git -C $MONO_REPO_PATH branch --show-current)" ":git-branch:"
-    ;;
+"Working on")
+	set_status "Trabajando en $(git -C $MONO_REPO_PATH branch --show-current)" ":git-branch:"
+	;;
 
-  "Reviewing PRs")
-    set_status "Revisando PRs" ":bulb:"
-    ;;
+"Reviewing PRs")
+	set_status "Revisando PRs" ":bulb:"
+	;;
 
-  "Meeting")
-    set_status "Reunido" ":calendar:"
-    ;;
+"Meeting")
+	set_status "Reunido" ":calendar:"
+	;;
 
-  "Pause") 
-    set_away
-    set_status "Estoy un rato ausente" ":stopwatch:"
-    tm_pause 
-    ;;
+"Pause")
+	set_away
+	set_status "Estoy un rato ausente" ":stopwatch:"
+	tm_pause
+	;;
 
-  "Breakfast")
-    set_status "Desayunando" ":sandwich:"
-    ;;
+"Breakfast")
+	set_status "Desayunando" ":sandwich:"
+	;;
 
-  "Working out")
-    set_away
-    set_status "Entrenando" ":man-cartwheeling:"
-    tm_pause
-    ;;
+"Working out")
+	set_away
+	set_status "Entrenando" ":man-cartwheeling:"
+	tm_pause
+	;;
 
-  "Lunch")
-    set_status "Almorzando" ":yum:"
-    set_away
-    tm_pause
-    ;;
-    
-  "Doctor")
-    set_status "En el médico" ":stethoscope:"
-    set_away
-    tm_pause
-    ;;
+"Lunch")
+	set_status "Almorzando" ":yum:"
+	set_away
+	tm_pause
+	;;
 
-  "Family")
-    set_status "Resolviendo un asunto familiar" ":family:"
-    set_away
-    tm_pause
-    ;;
+"Doctor")
+	set_status "En el médico" ":stethoscope:"
+	set_away
+	tm_pause
+	;;
 
-  "Back") 
-    clear_status
-    set_active
-    set_status "Trabajando en: $(git -C $MONO_REPO_PATH branch --show-current)" ":git-branch:"
-    tm_back 
-    ;;
+"Family")
+	set_status "Resolviendo un asunto familiar" ":family:"
+	set_away
+	tm_pause
+	;;
 
-  # more cases...
-  "") 
-    clear_status 
-    ;;
+"Back")
+	clear_status
+	set_active
+	set_status "Trabajando en $(git -C $MONO_REPO_PATH branch --show-current)" ":git-branch:"
+	tm_back
+	;;
 
-  *) 
-    echo "Options: Check in | Check out | Check out weekend | Working on | Working out | Breakfast | Doctor | Family | Lunch | Meeting | Pause | Back"
-    ;;
+# more cases...
+"")
+	clear_status
+	;;
+
+*)
+	echo "Options: Check in | Check out | Check out weekend | Working on | Working out | Breakfast | Doctor | Family | Lunch | Meeting | Pause | Back"
+	;;
 esac
-

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+LOGFILE="/var/log/mi_aplicacion.log"
+
+# Función para registrar mensajes
+log_message() {
+	local MESSAGE="$1"
+	local TIMESTAMP=$(date +"[%Y-%m-%d %H:%M] -")
+	echo "$TIMESTAMP $MESSAGE" >>$LOGFILE
+}
+
+log_message $1

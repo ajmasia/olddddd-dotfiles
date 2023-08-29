@@ -282,5 +282,8 @@ with pkgs; [
 
   # playgorund
   eww
+
+  espanso # Cross-platform Text Expander written in Rust
+  baobab
 ]
 
