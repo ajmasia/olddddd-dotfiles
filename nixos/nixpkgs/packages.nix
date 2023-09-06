@@ -285,5 +285,8 @@ with pkgs; [
 
   espanso # Cross-platform Text Expander written in Rust
   baobab
+
+
+  unstable.todoist-electron # Todoist client
 ]
 

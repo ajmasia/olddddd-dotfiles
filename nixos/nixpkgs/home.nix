@@ -131,7 +131,6 @@ with pkgs; {
           "# Startup programs"
           "systemctl --user restart picom.service"
           "feh --bg-fill ~/.config/wallpapers/wallpaper_bigsur-macos_light.jpg"
-          "~/.config/polybar/launch.sh"
           "pgrep -x sxhkd > /dev/null || sxhkd"
           "xsetroot -cursor_name left_ptr"
           # "fusuma -d"
@@ -143,6 +142,7 @@ with pkgs; {
           "cbatticon"
           # "sleep 2 && qsyncthingtray"
           "bspc_initialize-monitors"
+          "~/.config/polybar/launch.sh"
         ];
 
         extraConfig = ''

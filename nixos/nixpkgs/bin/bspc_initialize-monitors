@@ -4,9 +4,6 @@
 laptop_screen_state=$(cat /proc/acpi/button/lid/LID1/state | awk '{print $2}')
 is_external_monitor_connected=$(xrandr --query | grep 'HDMI-1 connected' | awk '{print $1 " " $2}')
 
-echo $is_external_monitor_connected
-echo $laptop_screen_state
-
 if [[ $is_external_monitor_connected != "HDMI-1 connected" && $laptop_screen_state == "open" ]]; then
 	bspc monitor eDP-1 -d I II III IV V VI VII VIII
 	# bspc desktop I -l monocle

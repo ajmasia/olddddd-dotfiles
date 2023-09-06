@@ -12,7 +12,7 @@
   "super + alt + s" = "slack-desktop";
 
   # rofi windows switcher
-  "super + e" = "emojis";
+  "super + e" = "rofi -modi emoji -show emoji &";
   "super + shift + f" = "flameshot gui";
   "super + shift + s" = "set-slack-status";
   # "super + shift + p" = "set-cpu-profile";

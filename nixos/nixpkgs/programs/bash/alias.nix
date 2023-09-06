@@ -16,7 +16,7 @@ import ../../../../commons/alias/commons.nix //
   gdev-vpn = "sudo openvpn ~/.config/vpn/genially_dev.ovpn";
 
   # apps 
-  bazecor = "appimage-run ~/.local/share/app-images/Bazecor-0.3.3.AppImage";
+  bazecor = "appimage-run ~/.local/share/app-images/Bazecor-1.0.0.AppImage";
 
   # genially project
   grp = "yarn clean:modules && yarn && gsh cli builder --all";

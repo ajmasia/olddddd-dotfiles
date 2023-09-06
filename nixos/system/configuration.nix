@@ -137,7 +137,9 @@ in
       displayManager = {
         gdm = {
           enable = true;
+          wayland = false;
         };
+
         defaultSession = "none+bspwm";
       };
 
@@ -335,6 +337,12 @@ in
       awake
       awake-udev
     ];
+  };
+
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+    };
   };
 
   nixpkgs = {
