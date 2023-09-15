@@ -8,8 +8,8 @@
   # App launchers
   "super + @space" = "rofi -show drun -show-icons &";
   "super + {_,alt +}Return" = "{alacritty,open-floating-window alacritty}";
-  "super + alt + t" = "telegram-desktop";
-  "super + alt + s" = "slack-desktop";
+  # "super + alt + t" = "telegram-desktop";
+  # "super + alt + s" = "slack-desktop";
 
   # rofi windows switcher
   "super + e" = "rofi -modi emoji -show emoji &";
@@ -62,6 +62,6 @@
   "XF86AudioMute" = "vol mute";
 
   # System management
-  "super + alt + p" = "power-menu &";
+  # "super + alt + p" = "power-menu &";
 }
 

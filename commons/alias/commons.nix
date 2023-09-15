@@ -1,7 +1,7 @@
 {
   # Edit system and user configs
-  hme = "cd ~/.config/nixpkgs/ && nvim";
-  sce = "cd /etc/nixos && nvim";
+  hme = "cd ~/.config/nixpkgs/ && ed";
+  sce = "ed /etc/nixos/configuration.nix";
 
   # Switch configurations
   hms = "home-manager switch";
@@ -14,7 +14,7 @@
   tree = "l --tree --color=always";
   gtree = "tree -l --git | less -r";
   sb = "for i in $(seq 1 10); do time zsh -i -c exit; done";
-  vim = "nvim";
+  # vim = "nvim";
   hm = "home-manager";
 
   swd = "cd $(find ~/ -type d -print | fzf)";

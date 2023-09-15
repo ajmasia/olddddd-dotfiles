@@ -5,6 +5,7 @@ import ../../../../commons/alias/commons.nix //
   # directories
   gmo = "cd ~/projects/genially/mono && gsh shell";
   gdb = "cd ~/projects/genially/dev-databases && gsh shell";
+  ged = "cd ~/projects/genially/mono && gsh run ed";
   sd = "cd ~/synology_drive";
   pr = "cd ~/projects";
   rp = "cd ~/repos";
@@ -25,5 +26,9 @@ import ../../../../commons/alias/commons.nix //
   r3t = "nix-shell -p robo3t --run robo3t &";
   calc = "env GTK_THEME=Adwaita ~/.nix-profile/bin/libreoffice --calc &";
   base = "env GTK_THEME=Adwaita ~/.nix-profile/bin/libreoffice --base &";
+
+  # nvim
+  ed = "nvim-starter default";
+  edl = "NVIM_APPNAME=nvim-learning nvim";
 }
 

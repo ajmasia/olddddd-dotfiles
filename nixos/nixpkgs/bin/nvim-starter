@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+# ANSI color codes
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+GREEN='\033[0;32m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+CLEAR='\033[0m'
+
+DEFAULT_INSTANCE=nvim-default
+
+show_help() {
+	echo -e "Usage: ${YELLOW}nvim-starter ${PURPLE}[COMMAND]${CYAN} [NVIM_OPTIONS...]${CLEAR}"
+	echo
+	echo "Available commands: (no command start nvim natively)"
+	echo -e "  ${PURPLE}sel, select${CLEAR}     Show a selector to choose the Neovim configuration"
+	echo -e "  ${PURPLE}def, default${CLEAR}    Start the default instance of Neovim"
+	echo -e "  ${PURPLE}help${CLEAR}            Display this help message"
+}
+
+select_config() {
+	local items=("default" "nvim" "nvim-learning")
+	local config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config: " --height=~50% --layout=reverse --exit-0)
+
+	if [[ -z $config ]]; then
+		echo "${GREEN}Nothing selected${CLEAR}"
+		exit 0
+	elif [[ $config == "default" ]]; then
+		config=$DEFAULT_INSTANCE
+	fi
+
+	NVIM_APPNAME=$config nvim "$@"
+}
+
+default_exec() {
+	# Default behavior (no script commds)
+	nvim "$@"
+	exit 0
+}
+
+[[ $# -eq 0 ]] && default_exec
+
+while [[ $# -gt 0 ]]; do
+	key="$1"
+
+	case $key in
+	help)
+		show_help
+		exit 0
+		;;
+	sel | select)
+		shift # remove the -s or --select
+		select_config "$@"
+		exit 0
+		;;
+	def | default)
+		shift # remove the -d or --default
+		NVIM_APPNAME=$DEFAULT_INSTANCE nvim "$@"
+		exit 0
+		;;
+	*)
+		default_exec
+		;;
+	esac
+done

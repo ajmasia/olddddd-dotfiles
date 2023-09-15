@@ -169,7 +169,7 @@ with pkgs; [
   # Browsers
   #chromium
   unstable.google-chrome
-  firefox
+  unstable.firefox
   # brave
 
   # Comunications
