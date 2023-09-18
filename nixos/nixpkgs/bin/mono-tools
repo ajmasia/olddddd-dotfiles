@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # TODO: Improve CLI to support concatenated args like -ci or -ib
+# TODO: Add script to GSH o specific nix-shell
 
 # ANSI color codes
 RED='\033[0;31m'
@@ -64,7 +65,7 @@ show_help() {
 	echo -e "  ${PURPLE}-a, --all${CLEAR}         Clean modules, install dependencies and build all"
 	echo -e "  ${PURPLE}-h, --help${CLEAR}        Show help"
 	echo
-	echo -e "${YELLOW}IMPORTANT: ${CLEAR}If you use GSH please run this sccript from shell inside"
+	echo -e "${YELLOW}IMPORTANT: ${CLEAR}ensure that the development environment is correctly configured or use GSH Shell"
 }
 
 setElapsedTime() {
@@ -129,7 +130,7 @@ if [[ -n ${ACTIONS["restarting all project"]} ]]; then
 fi
 
 for OPTION in "${SORTED_ACTIONS[@]}"; do
-	printf "$OPTION"
+	print_with_lolcat "$OPTION"
 
 	START_TIME="$(date -u +%s)"
 
