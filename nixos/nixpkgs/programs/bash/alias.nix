@@ -28,7 +28,8 @@ import ../../../../commons/alias/commons.nix //
   base = "env GTK_THEME=Adwaita ~/.nix-profile/bin/libreoffice --base &";
 
   # nvim
-  ed = "nvim-starter default";
-  edl = "NVIM_APPNAME=nvim-learning nvim";
+  nv = "nvim-starter default";
+  nvs = "nvim-starter";
+  nvp = "NVIM_APPNAME=nvim-learning nvim";
 }
 

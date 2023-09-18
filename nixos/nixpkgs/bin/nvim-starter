@@ -24,7 +24,7 @@ select_config() {
 	local config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config: " --height=~50% --layout=reverse --exit-0)
 
 	if [[ -z $config ]]; then
-		echo "${GREEN}Nothing selected${CLEAR}"
+		echo -e "${YELLOW}Oops! Nothing selected!${YELLOW}"
 		exit 0
 	elif [[ $config == "default" ]]; then
 		config=$DEFAULT_INSTANCE

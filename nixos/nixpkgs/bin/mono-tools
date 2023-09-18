@@ -1,0 +1,147 @@
+#!/usr/bin/env bash
+
+# TODO: Improve CLI to support concatenated args like -ci or -ib
+
+# ANSI color codes
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+GREEN='\033[0;32m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+CLEAR='\033[0m'
+
+# define here your mono repo path
+REPO_PATH=$HOME/projects/genially/mono
+
+CURRENT_PATH=$(pwd)
+INITIAL_ARGS_COUNT=$#
+
+#
+declare -A TIMING
+declare -a SORTED_TIMES
+declare -A ACTIONS
+declare -a SORTED_ACTIONS
+
+# Utilitary functions
+join_commands() {
+	local -n array=$1
+	local CONCATENATED_COMAND=$(printf " && %s" "${array[@]}")
+
+	echo ${CONCATENATED_COMAND:3}
+}
+
+handle_sigint() {
+	echo -e "\n${RED}Exiting...${CLEAR}"
+	exit 0
+}
+
+print_with_lolcat() {
+	if command -v lolcat >/dev/null 2>&1; then
+		echo "$@" | lolcat
+	else
+		echo "$@"
+	fi
+}
+
+# CLI commads definition
+# add here all commads you want to execute in -a, -all option
+ALL_COMMANDS=("yarn clean:modules" "yarn" "yarn b:deps")
+
+# define here all new options in format ("descritpion" "command")
+CLEAN_OPTION=("cleaning current modules" "yarn clean:modules")
+INSTALL_OPTION=("installing dependencies" "yarn")
+BUILD_OPTION=("building project" "yarn b:deps")
+ALL_OPTION=("restarting all project" "$(join_commands ALL_COMMANDS)")
+
+# CLI functions
+show_help() {
+	echo -e "Usage: ${YELLOW}mono-tools ${PURPLE}[OPTIONS]${CYAN}"
+	echo
+	echo -e "Available options: ${CLEAR}(executed by order of entry)"
+	echo -e "  ${PURPLE}-c, --clean${CLEAR}       Clean current modules"
+	echo -e "  ${PURPLE}-i, --install${CLEAR}     Install all dependencies"
+	echo -e "  ${PURPLE}-b, --build${CLEAR}       Build all"
+	echo -e "  ${PURPLE}-a, --all${CLEAR}         Clean modules, install dependencies and build all"
+	echo -e "  ${PURPLE}-h, --help${CLEAR}        Show help"
+	echo
+	echo -e "${YELLOW}IMPORTANT: ${CLEAR}If you use GSH please run this sccript from shell inside"
+}
+
+setElapsedTime() {
+	elapsed="$(($1 - $2))"
+	h=$(($elapsed / 3600))
+	m=$((($elapsed % 3600) / 60))
+	s=$(($elapsed % 60))
+	local TIME=$(printf "%02d:%02d:%02d" $h $m $s)
+	local OPTION=$3
+	TIMING[$OPTION]=$TIME
+	SORTED_TIMES+=("$OPTION")
+}
+
+exec_action() {
+	local MESSAGE="$1"
+	local COMMAND="$2"
+
+	ACTIONS[$MESSAGE]=$COMMAND
+	SORTED_ACTIONS+=("$MESSAGE")
+}
+
+# Main script
+trap "handle_sigint" SIGINT
+
+while [[ $# -gt 0 ]]; do
+	KEY=$1
+	case $KEY in
+	-c | --clean)
+		exec_action "${CLEAN_OPTION[0]}" "${CLEAN_OPTION[1]}"
+		;;
+	-i | --install)
+		exec_action "${INSTALL_OPTION[0]}" "${INSTALL_OPTION[1]}"
+		;;
+	-b | --build)
+		exec_action "${BUILD_OPTION[0]}" "${BUILD_OPTION[1]}"
+		;;
+	-a | --all)
+		exec_action "${ALL_OPTION[0]}" "${ALL_OPTION[1]}"
+		;;
+	-h | --help)
+		show_help
+		exit 0
+		;;
+	*)
+		show_help
+		exit 1
+		;;
+	esac
+	shift
+done
+
+print_with_lolcat "Genially mono restart tools"
+
+if [[ $INITIAL_ARGS_COUNT -eq 0 ]]; then
+	show_help
+fi
+
+if [[ -n ${ACTIONS["restarting all project"]} ]]; then
+	ACTIONS=()
+	SORTED_ACTIONS=()
+	exec_action "${ALL_OPTION[0]}" "${ALL_OPTION[1]}"
+fi
+
+for OPTION in "${SORTED_ACTIONS[@]}"; do
+	printf "$OPTION"
+
+	START_TIME="$(date -u +%s)"
+
+	cd $REPO_PATH
+	eval ${ACTIONS[$OPTION]}
+	cd $CURRENT_PATH
+
+	END_TIME="$(date -u +%s)"
+
+	setElapsedTime $END_TIME $START_TIME "$OPTION"
+done
+
+for TIME in "${SORTED_TIMES[@]}"; do
+	echo -e "${GREEN}TIME $TIME: ${RED}${TIMING[$TIME]}${CLEAR}"
+done

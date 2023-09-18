@@ -45,6 +45,8 @@
   "super + {_,shift + }{h,j,k,l}" = "bspc node -{f,s} {west,south,north,east}";
   # focus the node for the given path jump
   "super + {p,b,comma,period}" = "bspc node -f @{parent,brother,first,second}";
+  # change windows focus
+  "super + {h,j,k,l}" = "bspc node -f {west,south,north,east}";
 
   # Desktops management
   "super + {Left,Right}" = "bspc desktop -f {prev,next}";
