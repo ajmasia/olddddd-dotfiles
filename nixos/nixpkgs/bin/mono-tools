@@ -38,9 +38,9 @@ handle_sigint() {
 
 print_with_lolcat() {
 	if command -v lolcat >/dev/null 2>&1; then
-		echo "$@" | lolcat
+		echo -e "$@" | lolcat
 	else
-		echo "$@"
+		echo -e "$@"
 	fi
 }
 
@@ -90,6 +90,8 @@ exec_action() {
 # Main script
 trap "handle_sigint" SIGINT
 
+print_with_lolcat "Genially mono tools\n"
+
 while [[ $# -gt 0 ]]; do
 	KEY=$1
 	case $KEY in
@@ -111,13 +113,11 @@ while [[ $# -gt 0 ]]; do
 		;;
 	*)
 		show_help
-		exit 1
+		exit 0
 		;;
 	esac
 	shift
 done
-
-print_with_lolcat "Genially mono restart tools"
 
 if [[ $INITIAL_ARGS_COUNT -eq 0 ]]; then
 	show_help

@@ -1,6 +1,6 @@
 {
   # Edit system and user configs
-  hme = "cd ~/.config/nixpkgs/ && ed";
+  hme = "cd ~/.config/nixpkgs/ && nv";
   sce = "ed /etc/nixos/configuration.nix";
 
   # Switch configurations
