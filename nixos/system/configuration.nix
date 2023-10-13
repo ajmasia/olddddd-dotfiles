@@ -87,7 +87,7 @@ in
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 7000 7100 ];
+  networking.firewall.allowedTCPPorts = [ 7000 7100 11111 ];
   networking.firewall.allowedUDPPorts = [ 6000 6001 7011 ];
 
   security = {
@@ -133,6 +133,11 @@ in
       enable = true;
       autorun = true;
       videoDrivers = [ "modesetting" ];
+
+      xrandrHeads = [
+        "HDMI-1"
+        { output = "DVI-0"; primary = true; }
+      ];
 
       displayManager = {
         gdm = {
@@ -203,6 +208,9 @@ in
         # This config optimize the battery power
         SUBSYSTEM=="power_supply", KERNEL=="AC0", DRIVER=="", ATTR{online}=="1", RUN+="${awake-udev}/bin/awake-udev"
         SUBSYSTEM=="power_supply", KERNEL=="AC0", DRIVER=="", ATTR{online}=="0", RUN+="${awake-udev}/bin/awake-udev"
+
+        # Laptop screen
+        # ACTION=="change", SUBSYSTEM=="button", ENV{BUTTON}=="lid", RUN+="/path/to/your/script.sh"
       '';
     };
 

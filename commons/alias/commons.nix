@@ -1,7 +1,7 @@
 {
   # Edit system and user configs
-  hme = "cd ~/.config/nixpkgs/ && nv";
-  sce = "ed /etc/nixos/configuration.nix";
+  hme = "cd ~/.config/nixpkgs/ && nvr";
+  sce = "nv /etc/nixos/configuration.nix";
 
   # Switch configurations
   hms = "home-manager switch";
@@ -21,5 +21,7 @@
 
   mdisk = "udisksctl mount -b /dev/disk/by-label/$(ls /dev/disk/by-label | fzf | awk -F'->' '{print $1}')";
   udisk = "udisksctl unmount -b /dev/disk/by-label/$(ls /dev/disk/by-label | fzf | awk -F'->' '{print $1}')";
+
+  cl = "calc_func() { echo \$1 | bc; }; calc_func";
 }
 
