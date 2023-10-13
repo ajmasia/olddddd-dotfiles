@@ -346,5 +346,8 @@ with builtins; {
   /*   enable = true; */
   /*   configDir = ./xdg/eww; */
   /* }; */
+  qutebrowser = {
+    enable = true;
+  };
 }
 

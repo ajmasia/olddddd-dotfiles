@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-# TODO: Improve CLI to support concatenated args like -ci or -ib
 # TODO: Add script to GSH o specific nix-shell
 
 # ANSI color codes
@@ -87,41 +86,52 @@ exec_action() {
 	SORTED_ACTIONS+=("$MESSAGE")
 }
 
-# Main script
-trap "handle_sigint" SIGINT
-
-print_with_lolcat "Genially mono tools\n"
-
-while [[ $# -gt 0 ]]; do
-	KEY=$1
-	case $KEY in
-	-c | --clean)
+handle_option() {
+	local OPT="$1"
+	case "$OPT" in
+	c | --clean)
 		exec_action "${CLEAN_OPTION[0]}" "${CLEAN_OPTION[1]}"
 		;;
-	-i | --install)
+	i | --install)
 		exec_action "${INSTALL_OPTION[0]}" "${INSTALL_OPTION[1]}"
 		;;
-	-b | --build)
+	b | --build)
 		exec_action "${BUILD_OPTION[0]}" "${BUILD_OPTION[1]}"
 		;;
-	-a | --all)
+	a | --all)
 		exec_action "${ALL_OPTION[0]}" "${ALL_OPTION[1]}"
 		;;
-	-h | --help)
+	h | --help)
 		show_help
 		exit 0
 		;;
 	*)
 		show_help
-		exit 0
+		exit 1
 		;;
 	esac
-	shift
-done
+}
+
+# Main script
+trap "handle_sigint" SIGINT
+
+print_with_lolcat "Genially mono tools"
 
 if [[ $INITIAL_ARGS_COUNT -eq 0 ]]; then
 	show_help
 fi
+
+for arg in "$@"; do
+	if [[ $arg == --* ]]; then
+		handle_option "$arg"
+	elif [[ $arg == -* ]]; then
+		# Elimina el guion inicial y procesa cada caracter
+		for ((i = 1; i < ${#arg}; i++)); do
+			handle_option "${arg:$i:1}"
+		done
+	fi
+	shift
+done
 
 if [[ -n ${ACTIONS["restarting all project"]} ]]; then
 	ACTIONS=()

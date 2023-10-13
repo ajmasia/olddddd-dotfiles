@@ -8,8 +8,11 @@
   # App launchers
   "super + @space" = "rofi -show drun -show-icons &";
   "super + {_,alt +}Return" = "{alacritty,open-floating-window alacritty}";
-  # "super + alt + t" = "telegram-desktop";
-  # "super + alt + s" = "slack-desktop";
+  "super + shift + alt + t" = "telegram-desktop";
+  "super + shift + alt + s" = "slack";
+  "super + shift + alt + a" = "pavucontrol";
+  "super + shift + alt + g" = "google-chrome-stable";
+  "super + shift + alt + f" = "firefox";
 
   # rofi windows switcher
   "super + e" = "rofi -modi emoji -show emoji &";
@@ -20,6 +23,7 @@
 
   # Scrachpads
   "super + shift + t" = "scpad";
+  # "super + shift + <" = "set-slack-status && bspc node -t floating -n Slack";
 
   # Windows management
   "super + {_,shift + }w" = "bspc node -{c,k}";

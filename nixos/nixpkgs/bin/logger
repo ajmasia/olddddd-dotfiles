@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
 
-LOGFILE="/var/log/mi_aplicacion.log"
+if [ $# -lt 2 ]; then
+	echo "Use: $0 <app> <message>"
+	exit 1
+fi
 
-# Función para registrar mensajes
-log_message() {
-	local MESSAGE="$1"
-	local TIMESTAMP=$(date +"[%Y-%m-%d %H:%M] -")
-	echo "$TIMESTAMP $MESSAGE" >>$LOGFILE
-}
+TIMESTAMP=$(date +"[%Y-%m-%d %H:%M]")
 
-log_message $1
+# Obtiene el nombre de la aplicación y el mensaje
+APP="$1"
+MESSAGE="$2"
+LOG_FILE="$HOME/.config/$APP.log"
+
+mkdir -p "$(dirname "$log_file")"
+
+echo "$TIMESTAMP [$APP] - $MESSAGE" >>"$LOG_FILE"

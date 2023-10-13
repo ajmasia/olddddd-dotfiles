@@ -8,7 +8,7 @@ PURPLE='\033[0;35m'
 CYAN='\033[0;36m'
 CLEAR='\033[0m'
 
-DEFAULT_INSTANCE=nvim-default
+DEFAULT_INSTANCE=nvim-rolling
 
 show_help() {
 	echo -e "Usage: ${YELLOW}nvim-starter ${PURPLE}[COMMAND]${CYAN} [NVIM_OPTIONS...]${CLEAR}"
@@ -20,7 +20,7 @@ show_help() {
 }
 
 select_config() {
-	local items=("default" "nvim" "nvim-learning")
+	local items=("default" "nvim" "nvim-playground" "nvim-custom" "lazyvim" "nvim-rolling" "nvim-lazyvim-clean")
 	local config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config: " --height=~50% --layout=reverse --exit-0)
 
 	if [[ -z $config ]]; then

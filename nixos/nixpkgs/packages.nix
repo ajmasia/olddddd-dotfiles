@@ -247,6 +247,7 @@ with pkgs; [
   gcc
   gnumake
   cmake
+  swift # Swift programming language toolchain
 
   # LUA lsp
   stylua
@@ -283,7 +284,7 @@ with pkgs; [
   # playgorund
   eww
 
-  espanso # Cross-platform Text Expander written in Rust
+  # espanso # Cross-platform Text Expander written in Rust
   baobab
 
 

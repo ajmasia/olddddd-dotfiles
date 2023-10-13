@@ -222,5 +222,24 @@ with pkgs; {
       };
     };
   };
-}
 
+  espanso = {
+    enable = true;
+    settings = {
+      matches = [
+        {
+          trigger = ":gm";
+          replace = "antoniomasia@genially.com";
+        }
+        {
+          trigger = ":im";
+          replace = "antoniojosemasia@icloud.com";
+        }
+        {
+          trigger = ":dm";
+          replace = "ajmasia.dev@icloud.com";
+        }
+      ];
+    };
+  };
+}

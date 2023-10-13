@@ -1,18 +1,14 @@
 #!/bin/sh
 
-winclass="$(xdotool search --class scpad)";
+winclass="$(xdotool search --class scpad)"
 tmp=~/tmp/scpad
 
 if [ -z "$winclass" ]; then
-    alacritty --class scpad
+	alacritty --class scpad
 else
-    if [ ! -f $tmp ]; then
-        touch $tmp && xdo hide "$winclass"
-    elif [ -f $tmp ]; then
-        rm $tmp && xdo show "$winclass"
-    fi
-
-    # sleep 0.5
-    # bspc config -w "$winclass" border_width 2
-    # bspc config -w "$winclass" focused_border_color "#e0af68"
+	if [ ! -f $tmp ]; then
+		touch $tmp && xdo hide "$winclass"
+	elif [ -f $tmp ]; then
+		rm $tmp && xdo show "$winclass"
+	fi
 fi

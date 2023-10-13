@@ -17,7 +17,7 @@ import ../../../../commons/alias/commons.nix //
   gdev-vpn = "sudo openvpn ~/.config/vpn/genially_dev.ovpn";
 
   # apps 
-  bazecor = "appimage-run ~/.local/share/app-images/Bazecor-1.0.0.AppImage";
+  bazecor = "appimage-run ~/.local/share/app-images/Bazecor-1.3.0-x86_64.AppImage";
 
   # genially project
   grp = "yarn clean:modules && yarn && gsh cli builder --all";
@@ -30,6 +30,9 @@ import ../../../../commons/alias/commons.nix //
   # nvim
   nv = "nvim-starter default";
   nvs = "nvim-starter";
-  nvp = "NVIM_APPNAME=nvim-learning nvim";
+  nvp = "NVIM_APPNAME=nvim-playground nvim";
+  nvc = "NVIM_APPNAME=nvim-custom nvim";
+  nvl = "NVIM_APPNAME=lazyvim nvim";
+  nvr = "NVIM_APPNAME=nvim-rolling nvim";
 }
 

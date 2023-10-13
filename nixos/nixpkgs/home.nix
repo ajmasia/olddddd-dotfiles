@@ -29,6 +29,27 @@ with pkgs; {
     file = (import ./files.nix) { };
   };
 
+  accounts.email = {
+    accounts.genially = {
+      address = "antoniomasia@genially.com";
+
+      himalaya.enable = true;
+      imap = {
+        host = "imap.gmail.com";
+        tls.enable = true;
+      };
+
+      offlineimap = {
+        enable = true;
+        extraConfig.account.autorefresh = 10;
+      };
+
+      #passwordCommand = "get_pass gmail";
+      primary = true;
+      realName = "Antonio José Masiá";
+    };
+  };
+
   xsession = {
     enable = true;
 
@@ -68,17 +89,17 @@ with pkgs; {
           };
           "Slack" = {
             desktop = "^1";
-            # sticky = true;
-            # state = "floating";
-            # center = true;
-            # rectangle = "1896x1056+100+100";
+            sticky = true;
+            state = "floating";
+            center = true;
+            rectangle = "1896x1056+100+100";
           };
           "TelegramDesktop" = {
             desktop = "^1";
-            # sticky = true;
-            # state = "floating";
-            # center = true;
-            # rectangle = "1896x1056+100+100";
+            sticky = true;
+            state = "floating";
+            center = true;
+            rectangle = "1896x1056+100+100";
           };
           "1Password" = {
             sticky = true;
@@ -130,7 +151,6 @@ with pkgs; {
         startupPrograms = [
           "# Startup programs"
           "systemctl --user restart picom.service"
-          "feh --bg-fill ~/.config/wallpapers/wallpaper_bigsur-macos_light.jpg"
           "pgrep -x sxhkd > /dev/null || sxhkd"
           "xsetroot -cursor_name left_ptr"
           # "fusuma -d"
@@ -142,6 +162,7 @@ with pkgs; {
           "cbatticon"
           # "sleep 2 && qsyncthingtray"
           "bspc_initialize-monitors"
+          "feh --bg-fill ~/.config/wallpapers/wallpaper_bigsur-macos_light.jpg"
           "~/.config/polybar/launch.sh"
         ];
 
