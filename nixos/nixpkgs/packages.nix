@@ -210,7 +210,7 @@ with pkgs; [
   # unstable.synology_drive_client_12920
   # unstable.insync
   # inkdrop
-  # libreoffice
+  unstable.libreoffice
   pandoc # A universal document converter
   tectonic # A modernized, complete, self-contained TeX/LaTeX engine, powered by XeTeX and TeXLive
 
