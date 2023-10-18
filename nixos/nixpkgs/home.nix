@@ -225,6 +225,22 @@ with pkgs; {
       };
     };
   };
+  systemd.user.services.my-lid-watcher = {
+    Unit = {
+      Description = "Mi servicio para observar los cambios de LID";
+      Wants = [ "lid-switch.target" ];
+      After = [ "lid-switch.target" ];
+    };
+
+    Service = {
+      ExecStart = "${pkgs.runtimeShell} DISPLAY=:0 ${pkgs.libnotify}/bin/notify-send 'LID CHANGE'";
+      RemainAfterExit = true;
+    };
+
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };
 
   gtk = {
     enable = true;

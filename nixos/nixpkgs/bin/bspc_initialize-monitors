@@ -16,11 +16,15 @@ if [[ $is_external_monitor_connected != "HDMI-1 connected" && $laptop_screen_sta
 	# bspc desktop I -l monocle
 	bspc monitor HDMI-1 -r
 	notify-send "Monitors" "Laptop mode"
+
+	exit 0
 elif [[ $is_external_monitor_connected == "HDMI-1 connected" && $laptop_screen_state == "open" ]]; then
 	bspc monitor eDP-1 -d I II
 	bspc monitor HDMI-1 -f -d III IV V VI VII VIII IX X
 	bspc desktop I -l monocle
 	notify-send "Monitors" "Slimbook screen and Dell monitor connected"
+
+	exit 0
 else
 	bspc monitor HDMI-1 -d I II III IV V VI VII VIII
 	bspc monitor eDP-1 -r
