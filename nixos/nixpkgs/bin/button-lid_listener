@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+acpi_listen | while IFS= read -r LINE; do
+	if echo $LINE | grep -q 'button/lid'; then
+		STATE=$(echo $LINE | awk '{print $NF}')
+
+		bspc wm -r
+	fi
+done

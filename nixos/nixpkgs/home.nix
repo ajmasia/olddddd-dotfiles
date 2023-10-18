@@ -162,8 +162,9 @@ with pkgs; {
           "cbatticon"
           # "sleep 2 && qsyncthingtray"
           "bspc_initialize-monitors"
-          "feh --bg-fill ~/.config/wallpapers/wallpaper_bigsur-macos_light.jpg"
+          # "feh --bg-fill ~/.config/wallpapers/wallpaper_bigsur-macos_light.jpg"
           "~/.config/polybar/launch.sh"
+          "button-lid_listener"
         ];
 
         extraConfig = ''
@@ -179,6 +180,7 @@ with pkgs; {
           pkill cbatticon
           # pkill qsyncthingtray
           killall conky
+          pkill -f button-lid_listener
         '';
       };
     };

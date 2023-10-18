@@ -81,7 +81,7 @@ with pkgs; [
   robo3t
   # unstable.dt-shell-color-scripts
   # usermount
-  acpi
+  acpid
   lsof
   jrnl
   playerctl

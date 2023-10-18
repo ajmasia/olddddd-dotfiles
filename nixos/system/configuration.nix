@@ -21,6 +21,8 @@ in
 
   boot = {
     kernel.sysctl."kernel.sysrq" = 1;
+
+    kernelParams = [ "video=HDMI-1:e" ]; # Asegúrate de usar el identificador correcto para tu monitor
     loader = {
       timeout = 1;
       systemd-boot = {
@@ -140,9 +142,12 @@ in
       ];
 
       displayManager = {
-        gdm = {
+        # gdm = {
+        #   enable = true;
+        #   wayland = false;
+        # };
+        lightdm = {
           enable = true;
-          wayland = false;
         };
 
         defaultSession = "none+bspwm";
@@ -245,7 +250,7 @@ in
 
     # Daemon for ACPI (Advanced Configuration and Power Interface) events
     acpid = {
-      enable = false;
+      enable = true;
     };
 
     mullvad-vpn = {
