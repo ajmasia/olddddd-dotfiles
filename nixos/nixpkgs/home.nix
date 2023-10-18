@@ -150,6 +150,7 @@ with pkgs; {
 
         startupPrograms = [
           "# Startup programs"
+          # "feh --bg-fill ~/.config/wallpapers/wallpaper_bigsur-macos_light.jpg"
           "systemctl --user restart picom.service"
           "pgrep -x sxhkd > /dev/null || sxhkd"
           "xsetroot -cursor_name left_ptr"
@@ -162,7 +163,6 @@ with pkgs; {
           "cbatticon"
           # "sleep 2 && qsyncthingtray"
           "bspc_initialize-monitors"
-          # "feh --bg-fill ~/.config/wallpapers/wallpaper_bigsur-macos_light.jpg"
           "~/.config/polybar/launch.sh"
           "button-lid_listener"
         ];

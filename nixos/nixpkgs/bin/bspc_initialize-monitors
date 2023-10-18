@@ -5,6 +5,7 @@ laptop_screen_state=$(cat /proc/acpi/button/lid/LID1/state | awk '{print $2}')
 is_external_monitor_connected=$(xrandr --query | grep 'HDMI-1 connected' | awk '{print $1 " " $2}')
 
 setMonitors() {
+	feh --bg-fill ~/.config/wallpapers/wallpaper_bigsur-macos_light.jpg
 
 	case $1 in
 	laptop)
@@ -32,8 +33,6 @@ setMonitors() {
 		notify-send "Monitors" "Dell monitor connected"
 		;;
 	esac
-
-	feh --bg-fill ~/.config/wallpapers/wallpaper_bigsur-macos_light.jpg
 }
 
 logger bspwm $laptop_screen_state
