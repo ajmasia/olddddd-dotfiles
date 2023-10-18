@@ -21,7 +21,6 @@ in
 
   boot = {
     kernel.sysctl."kernel.sysrq" = 1;
-
     loader = {
       timeout = 1;
       systemd-boot = {
