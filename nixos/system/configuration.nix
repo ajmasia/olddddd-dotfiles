@@ -22,7 +22,7 @@ in
   boot = {
     kernel.sysctl."kernel.sysrq" = 1;
 
-    kernelParams = [ "video=HDMI-1:e" ]; # Asegúrate de usar el identificador correcto para tu monitor
+    kernelParams = [ "video=HDMI-1:e" ];
     loader = {
       timeout = 1;
       systemd-boot = {
@@ -142,13 +142,13 @@ in
       ];
 
       displayManager = {
-        # gdm = {
-        #   enable = true;
-        #   wayland = false;
-        # };
-        lightdm = {
+        gdm = {
           enable = true;
+          wayland = false;
         };
+        # lightdm = {
+        #   enable = true;
+        # };
 
         defaultSession = "none+bspwm";
       };
@@ -250,7 +250,7 @@ in
 
     # Daemon for ACPI (Advanced Configuration and Power Interface) events
     acpid = {
-      enable = true;
+      enable = false;
     };
 
     mullvad-vpn = {
@@ -388,6 +388,94 @@ in
   };
 
   # systemd.services.wg-quick-garage-vpn.wantedBy = pkgs.lib.mkForce [ ];
+
+  # TODO: improve this config
+  systemd.tmpfiles.rules = [
+    "L+ /run/gdm/.config/monitors.xml - - - - ${pkgs.writeText "gdm-monitors.xml" ''
+      <!-- this should all be copied from your ~/.config/monitors.xml -->
+      <monitors version="2">
+
+        <configuration>
+          <logicalmonitor>
+            <x>1920</x>
+            <y>0</y>
+            <scale>1</scale>
+            <primary>yes</primary>
+            <monitor>
+              <monitorspec>
+                <connector>HDMI-1</connector>
+                <vendor>DEL</vendor>
+                <product>DELL U2520D</product>
+                <serial>5VYP823</serial>
+              </monitorspec>
+              <mode>
+                <width>2560</width>
+                <height>1440</height>
+                <rate>59.950550079345703</rate>
+              </mode>
+            </monitor>
+          </logicalmonitor>
+          <logicalmonitor>
+            <x>0</x>
+            <y>0</y>
+            <scale>1</scale>
+            <monitor>
+              <monitorspec>
+                <connector>eDP-1</connector>
+                <vendor>CMN</vendor>
+                <product>0x14d5</product>
+                <serial>0x00000000</serial>
+              </monitorspec>
+              <mode>
+                <width>1920</width>
+                <height>1080</height>
+                <rate>60.007850646972656</rate>
+              </mode>
+            </monitor>
+          </logicalmonitor>
+        </configuration>
+        <configuration>
+          <logicalmonitor>
+            <x>0</x>
+            <y>245</y>
+            <scale>1</scale>
+            <monitor>
+              <monitorspec>
+                <connector>eDP</connector>
+                <vendor>CMN</vendor>
+                <product>0x14d5</product>
+                <serial>0x00000000</serial>
+              </monitorspec>
+              <mode>
+                <width>1920</width>
+                <height>1080</height>
+                <rate>60.007850646972656</rate>
+              </mode>
+            </monitor>
+          </logicalmonitor>
+          <logicalmonitor>
+            <x>1920</x>
+            <y>0</y>
+            <scale>1</scale>
+            <primary>yes</primary>
+            <monitor>
+              <monitorspec>
+                <connector>HDMI-A-0</connector>
+                <vendor>DEL</vendor>
+                <product>DELL U2518D</product>
+                <serial>3C4YP777B50L</serial>
+              </monitorspec>
+              <mode>
+                <width>2560</width>
+                <height>1440</height>
+                <rate>59.950550079345703</rate>
+              </mode>
+            </monitor>
+          </logicalmonitor>
+        </configuration>
+      </monitors>
+    ''}"
+  ];
 
   system = {
     stateVersion = "21.11";

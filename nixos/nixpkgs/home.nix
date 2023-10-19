@@ -164,7 +164,7 @@ with pkgs; {
           # "sleep 2 && qsyncthingtray"
           "bspc_initialize-monitors"
           "~/.config/polybar/launch.sh"
-          "button-lid_listener"
+          # "button-lid_listener"
         ];
 
         extraConfig = ''
@@ -180,7 +180,7 @@ with pkgs; {
           pkill cbatticon
           # pkill qsyncthingtray
           killall conky
-          pkill -f button-lid_listener
+          # pkill -f button-lid_listener
         '';
       };
     };
