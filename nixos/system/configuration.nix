@@ -22,7 +22,6 @@ in
   boot = {
     kernel.sysctl."kernel.sysrq" = 1;
 
-    kernelParams = [ "video=HDMI-1:e" ];
     loader = {
       timeout = 1;
       systemd-boot = {
@@ -250,7 +249,7 @@ in
 
     # Daemon for ACPI (Advanced Configuration and Power Interface) events
     acpid = {
-      enable = false;
+      enable = true;
     };
 
     mullvad-vpn = {
