@@ -156,7 +156,8 @@ with pkgs; {
           "xsetroot -cursor_name left_ptr"
           # "fusuma -d"
           "~/.config/conky/Mimosa_DBlue/start.sh"
-          "xautolock -time 12 -locker \"xscreensaver-command -deactivate; sleep 5; betterlockscreen -l\" -notify 15 -notifier \"notify-send 'Locker' 'Locking screen in 15 seconds' -t 4000\" -killtime 10 -killer \"systemctl suspend\""
+          # "xautolock -time 12 -locker \"xscreensaver-command -deactivate; sleep 5; betterlockscreen -l\" -notify 15 -notifier \"notify-send 'Locker' 'Locking screen in 15 seconds' -t 4000\" -killtime 10 -killer \"systemctl suspend\""
+          "xautolock -time 12 -locker \"xscreensaver-command -deactivate; sleep 5; i3lock-fancy\" -notify 15 -notifier \"notify-send 'Locker' 'Locking screen in 15 seconds' -t 4000\" -killtime 10 -killer \"systemctl suspend\""
           "solaar -w=hide -b=solaar"
           "batsignal -n BAT0 -c 20 -w 30 -f 98 -I ~/.local/share/custom-icons/battery.png"
           "sleep 3 && synology-drive"
@@ -164,7 +165,7 @@ with pkgs; {
           # "sleep 2 && qsyncthingtray"
           "bspc_initialize-monitors"
           "~/.config/polybar/launch.sh"
-          # "button-lid_listener"
+          "button-lid_listener"
         ];
 
         extraConfig = ''
@@ -180,7 +181,7 @@ with pkgs; {
           pkill cbatticon
           # pkill qsyncthingtray
           killall conky
-          # pkill -f button-lid_listener
+          pkill -f button-lid_listener
         '';
       };
     };

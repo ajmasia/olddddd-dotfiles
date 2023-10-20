@@ -151,7 +151,9 @@ with pkgs; [
 
   # picom-jonaburg
   xautolock
-  betterlockscreen
+  # betterlockscreen
+  i3lock-fancy
+
   lxappearance # Configuring the theme and fonts of gtk applications
   libsForQt5.qt5ct # Qt5 Configuration Tool
   gnome.gnome-disk-utility
