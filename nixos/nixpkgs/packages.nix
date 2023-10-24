@@ -289,7 +289,7 @@ with pkgs; [
   # espanso # Cross-platform Text Expander written in Rust
   baobab
 
-
   unstable.todoist-electron # Todoist client
+  cypress # Fast, easy and reliable testing for anything that runs in a browser.
 ]
 
