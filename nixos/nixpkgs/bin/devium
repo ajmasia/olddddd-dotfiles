@@ -1,0 +1,47 @@
+#!/bin/sh
+
+PROFILE_DIR=$HOME/tmp
+DEV_PROFILE=dev-profile
+DEV_PROFILE_BACKUP=$DEV_PROFILE.tar.gz
+BROWSER="nix run nixpkgs#chromium -- --auto-open-devtools-for-tabs --user-data-dir=$DEV_PROFILE" #--disable-web-security
+CMD=$(basename "$0")
+
+# Start fresh
+startFresh() {
+  echo "restoring saved profile and launching browser..."
+  rm -rf $DEV_PROFILE
+  [ -f $DEV_PROFILE_BACKUP ] && tar xf $DEV_PROFILE_BACKUP -C "$PROFILE_DIR"
+  $BROWSER
+}
+
+# Save current profile
+saveProfile() {
+  echo "saving current profile..."
+  [ -f $DEV_PROFILE_BACKUP ] && mv $DEV_PROFILE_BACKUP "$PROFILE_DIR/old.tar.gz"
+  tar zcf $DEV_PROFILE_BACKUP $DEV_PROFILE && notify-send "Devium" "Profile saved successfully"
+}
+
+# Run without resetting profile:
+keep() {
+  echo "launching with saved profile..."
+  $BROWSER
+}
+
+showUsage() {
+  echo -e "Usage:\n\
+    $CMD    restore saved profile and start browser\n\n\
+    $CMD [keep|save|help]\n\n\
+    keep    use last version (don't reset profile)\n\
+    save    save current profile\n\
+    help    show this help"
+}
+
+cd "$PROFILE_DIR" || return
+
+case "$1" in
+  keep) keep ;;
+  save) saveProfile ;;
+  "") startFresh ;;
+  *) showUsage ;;
+esac
+

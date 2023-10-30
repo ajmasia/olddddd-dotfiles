@@ -29,27 +29,6 @@ with pkgs; {
     file = (import ./files.nix) { };
   };
 
-  accounts.email = {
-    accounts.genially = {
-      address = "antoniomasia@genially.com";
-
-      himalaya.enable = true;
-      imap = {
-        host = "imap.gmail.com";
-        tls.enable = true;
-      };
-
-      offlineimap = {
-        enable = true;
-        extraConfig.account.autorefresh = 10;
-      };
-
-      #passwordCommand = "get_pass gmail";
-      primary = true;
-      realName = "Antonio José Masiá";
-    };
-  };
-
   xsession = {
     enable = true;
 

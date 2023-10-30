@@ -3,7 +3,7 @@ self: super: {
     (fetchGit {
       url = "git@github.com:Genially/gsh";
       ref = "refs/heads/main";
-      rev = "994b65064f7858e56d192089dc6481021f178bbe";
+      rev = "25bf31d3e3a2a0baf3797f7b182b3c3e6bd4d29a";
     })
     { };
 }

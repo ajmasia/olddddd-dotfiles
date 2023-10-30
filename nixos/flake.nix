@@ -29,18 +29,21 @@
 
           modules = [
             home-manager.nixosModules.home-manager
-            ./nixos/system/hardware-configuration.nix
-            ./nixos/system/configuration.nix
+            ./system/hardware-configuration.nix
+            ./system/configuration.nix
             inputs.amd-controller.module
           ];
         };
       };
-      home-manager = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.${system};
 
-        modules = [
-          ./nixos/nixpkgs/home.nix
-        ];
+      home-manager = {
+        ajmasia = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.${system};
+
+          modules = [
+            ./nixpkgs/home.nix
+          ];
+        };
       };
     };
 }
